@@ -2,7 +2,7 @@ extends Area2D
 
 const GRAVITY = 500
 
-var player
+var player: KinematicBody2D
 var linear_vel = Vector2.ZERO
 var _disabled = false
 
