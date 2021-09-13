@@ -30,3 +30,7 @@ func _physics_process(delta: float) -> void:
 		elif _second_jump:
 			linear_vel.y = -JUMPFORCE
 			_second_jump = false
+
+
+func set_player_name(new_name: String) -> void:
+	$DirectionNode/Label.set_text(new_name)
