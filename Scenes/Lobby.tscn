@@ -50,12 +50,15 @@ text = "IP Address:"
 align = 2
 valign = 1
 
-[node name="IPAdress" type="LineEdit" parent="Connect"]
+[node name="IPAddress" type="LineEdit" parent="Connect"]
 margin_left = 247.068
 margin_top = 161.045
 margin_right = 534.068
 margin_bottom = 205.045
 text = "127.0.0.1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="JoinButton" type="Button" parent="Connect"]
 anchor_left = 0.5
