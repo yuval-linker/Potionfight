@@ -12,8 +12,11 @@ onready var sprite: Sprite = $Sprite
 onready var collision: CollisionShape2D = $CollisionShape2D
 
 func _ready() -> void:
+# warning-ignore:return_value_discarded
 	connect("body_entered", self, "_on_body_entered")
+# warning-ignore:return_value_discarded
 	cooldown.connect("timeout", self, "_on_cooldown_finished")
+# warning-ignore:return_value_discarded
 	visibility_notify.connect("screen_exited", self, "_on_screen_exited")
 
 func _physics_process(delta: float) -> void:
