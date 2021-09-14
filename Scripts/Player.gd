@@ -106,6 +106,7 @@ remotesync func throw(potion_name: String, spawn_pos: Vector2, cursor_pos: Vecto
 	potion.set_name(potion_name)
 	potion.player = get_node("../" + str(by_who))
 	potion.position = spawn_pos
+# warning-ignore:unused_variable
 	var force = (cursor_pos - spawn_pos).normalized() * THROWFORCE
 	potion.throw(force)
 	$"../..".add_child(potion)
