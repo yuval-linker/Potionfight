@@ -6,7 +6,7 @@ var SPEED = 500
 var ACCELERATION = 200
 var JUMPFORCE = 300
 var THROWFORCE = 600
-
+var MAX_HP = 100
 # classes
 var Potion = preload("res://Items/Potions/Scenes/Potion.tscn")
 
@@ -26,12 +26,16 @@ puppet var _equipped
 
 var _second_jump = true
 var potion_index = 0
+var current_hp
+var basic_dmg = 10
+var isAttacking = false
 
 func _ready() -> void:
 	$AnimationTree.active = true
 	direction_timer.connect("timeout", self, "on_direction_timeout")
 	puppet_pos = position
 	_equipped = Potion
+	current_hp = MAX_HP
 
 func _physics_process(delta: float) -> void:
 	if is_network_master():
@@ -95,6 +99,10 @@ func _physics_process(delta: float) -> void:
 		else:
 			playback.travel("falling")
 
+#OntHit 
+func OnHit(dmg):
+	current_hp -= dmg
+	
 
 # throws a potion
 # potion_name is a unique potion name (nodes need unique names)
@@ -120,3 +128,11 @@ master func on_direction_timeout() -> void:
 		_facing_right = true
 	if Input.is_action_pressed("left") and _facing_right:
 		_facing_right = false
+
+#When you attack someone
+func _on_BasicAttackHitBox_area_entered(area):
+	pass # Replace with function body.
+
+#When you are being attacked
+func _on_HitBox_area_entered(area):
+	OnHit(basic_dmg) # Replace with function body.
