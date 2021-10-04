@@ -14,6 +14,7 @@ var player_name = "This Player"
 # format id->name
 var players = {}
 var players_ready = []
+var player_nodes = {}
 
 # signals for lobby GUI
 signal player_list_changed()
@@ -81,6 +82,7 @@ remote func pre_start_game(spawn_points):
 		else:
 			player.set_player_name(players[p_id])
 		
+		player_nodes[p_id] = player
 		level.get_node("Players").add_child(player)
 	
 	# Set up hud or score things here
