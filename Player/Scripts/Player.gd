@@ -18,7 +18,8 @@ onready var directionNode = $DirectionNode
 onready var nameNode = $DirectionNode/NameNode
 
 # puppet vars
-puppet var linear_vel: Vector2 = Vector2.ZERO
+var linear_vel: Vector2 = Vector2.ZERO
+puppet var puppet_vel: Vector2 = Vector2.ZERO
 puppet var _facing_right: bool = true
 puppet var on_floor: bool = true
 puppet var puppet_pos: Vector2
@@ -75,11 +76,12 @@ func _physics_process(delta: float) -> void:
 			rpc("throw", potion_name, spawn_pos, cursor_pos, get_tree().get_network_unique_id())
 		
 		rset("puppet_pos", position)
-		rset("lineal_vel", linear_vel)
+		rset("puppet_vel", linear_vel)
 		rset("_facing_right", _facing_right)
 		rset("on_floor", on_floor)
 	else:
 		position = puppet_pos
+		linear_vel = puppet_vel
 	
 	directionNode.scale.x = 1 if _facing_right else -1
 	nameNode.scale.x = directionNode.scale.x
