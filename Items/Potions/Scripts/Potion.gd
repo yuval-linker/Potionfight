@@ -5,6 +5,7 @@ const GRAVITY = 500
 var player: KinematicBody2D
 var linear_vel = Vector2.ZERO
 var _disabled = false
+export(int) var damage = 10
 
 onready var cooldown: Timer = $CooldownTimer
 onready var visibility_notify: VisibilityNotifier2D = $VisibilityNotifier2D
@@ -30,6 +31,15 @@ func drink() -> void:
 	disable()
 	cooldown.start()
 
+# Override this function to apply an effect while damaging an enemy
+func damage_enemy(enemy) -> void:
+	enemy.damaged(player, damage, global_position.x)
+
+# Override this function to do a special effect
+# when colliding with a platform
+func env_effect(platform) -> void:
+	return
+
 func disable() -> void:
 	sprite.visible = false
 	collision.disabled = true
@@ -40,14 +50,22 @@ func enable() -> void:
 	collision.disabled = false
 	_disabled = false
 
+func _destroy():
+	queue_free()
+
 # Signal callbacks
 func _on_body_entered(body: Node) -> void:
-	if body != player:
-		queue_free()
+	if body == player:
+		return
+	if body.is_in_group("player"):
+		damage_enemy(body)
+	elif body.is_in_group("platform"):
+		env_effect(body)
+	_destroy()
 
 func _on_screen_exited() -> void:
 	if not _disabled:
-		queue_free()
+		_destroy()
 
 func _on_cooldown_finished() -> void:
-	queue_free()
+	_destroy()

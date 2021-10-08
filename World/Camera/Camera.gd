@@ -11,7 +11,7 @@ func _ready() -> void:
 	# So that its the last thing to be processed
 	set_process_priority(1000)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var new_pos = Vector2.ZERO
 	var bounds: Rect2
 	for p in Gamestate.player_nodes.values():

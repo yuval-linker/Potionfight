@@ -11,15 +11,22 @@ onready var playerList = $Players/List
 
 
 func _ready() -> void:
+# warning-ignore:return_value_discarded
 	Gamestate.connect("connection_failed", self, "_on_connection_failed")
+# warning-ignore:return_value_discarded
 	Gamestate.connect("connection_succeeded", self, "_on_connection_success")
+# warning-ignore:return_value_discarded
 	Gamestate.connect("player_list_changed", self, "refresh_lobby")
+# warning-ignore:return_value_discarded
 	Gamestate.connect("game_ended", self, "_on_game_ended")
+# warning-ignore:return_value_discarded
 	Gamestate.connect("game_error", self, "_on_game_error")
 	
 	host.connect("pressed", self, "_on_host_pressed")
 	join.connect("pressed", self, "_on_join_pressed")
+# warning-ignore:return_value_discarded
 	$Players/StartButton.connect("pressed", self, "_on_start_pressed")
+# warning-ignore:return_value_discarded
 	$Players/LinkButton.connect("pressed", self, "_on_find_public_ip_pressed")
 	
 	if OS.has_environment("USERNAME"):
@@ -100,4 +107,5 @@ func _on_start_pressed():
 
 
 func _on_find_public_ip_pressed():
+# warning-ignore:return_value_discarded
 	OS.shell_open("https://icanhazip.com/")
