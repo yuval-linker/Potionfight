@@ -6,6 +6,7 @@ var SPEED = 500
 var ACCELERATION = 200
 var JUMPFORCE = 300
 var THROWFORCE = 600
+const HIT_SPEED = 250
 
 # classes
 var Potion = preload("res://Items/Potions/Scenes/Potion.tscn")
@@ -13,20 +14,26 @@ var Potion = preload("res://Items/Potions/Scenes/Potion.tscn")
 # onready vars
 onready var direction_timer = $DirecitonTimer
 onready var spawner = $DirectionNode/PotionSpawn
-onready var playback = $AnimationTree["parameters/playback"]
+onready var playback: AnimationNodeStateMachinePlayback = $AnimationTree["parameters/playback"]
 onready var directionNode = $DirectionNode
 onready var nameNode = $DirectionNode/NameNode
 
 # puppet vars
-var linear_vel: Vector2 = Vector2.ZERO
 puppet var puppet_vel: Vector2 = Vector2.ZERO
 puppet var _facing_right: bool = true
 puppet var on_floor: bool = true
 puppet var puppet_pos: Vector2
+puppet var puppet_crouching: bool = false
 puppet var _equipped
+export(bool) puppet var throwing = false
 
+var linear_vel: Vector2 = Vector2.ZERO
+var crouching: bool = false
+var health = 200
 var _second_jump = true
 var potion_index = 0
+
+signal continue_throwing
 
 func _ready() -> void:
 	$AnimationTree.active = true
@@ -59,38 +66,43 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_pressed("right") and not Input.is_action_pressed("left") and not _facing_right and direction_timer.is_stopped():
 			_facing_right = true
 		
-		# Throw a potion
-		if Input.is_action_just_pressed("throw"):
-			var potion_name = get_name() + str(potion_index)
-			potion_index += 1 % 50 # rare to throw more than 50 potions at a time
-			var cursor_pos = get_global_mouse_position()
-			var spawn_pos = spawner.global_position
-			if cursor_pos.x < global_position.x and _facing_right:
-				_facing_right = false
-				spawn_pos.x -= 2*spawner.position.x
-				direction_timer.start()
-			elif cursor_pos.x > global_position.x and not _facing_right:
-				_facing_right = true
-				spawn_pos.x += 2*spawner.position.x
-				direction_timer.start()
-			rpc("throw", potion_name, spawn_pos, cursor_pos, get_tree().get_network_unique_id())
+		crouching = Input.is_action_pressed("crouch")
 		
-		rset("puppet_pos", position)
-		rset("puppet_vel", linear_vel)
-		rset("_facing_right", _facing_right)
-		rset("on_floor", on_floor)
+		# Throw a potion
+		if Input.is_action_just_pressed("throw") and not throwing:
+			var potion_name = get_name() + str(potion_index)
+			potion_index += 1
+			potion_index = potion_index % 50 # rare to throw more than 50 potions at a time
+			rpc("throw", potion_name, get_global_mouse_position(), get_tree().get_network_unique_id())
+		
+		rset_unreliable("puppet_pos", position)
+		rset_unreliable("puppet_vel", linear_vel)
+		rset_unreliable("_facing_right", _facing_right)
+		rset_unreliable("on_floor", on_floor)
+		rset_unreliable("puppet_crouching", crouching)
 	else:
 		position = puppet_pos
 		linear_vel = puppet_vel
+		crouching = puppet_crouching
 	
 	directionNode.scale.x = 1 if _facing_right else -1
 	nameNode.scale.x = directionNode.scale.x
 	
+	# Dont go into any animation if throwing
+	if throwing:
+		return
+	
 	if on_floor:
 		if abs(linear_vel.x) > 10:
-			playback.travel("run")
+			if crouching:
+				playback.travel("crouch_walk")
+			else:
+				playback.travel("run")
 		else:
-			playback.travel("idle")
+			if crouching:
+				playback.travel("crouch_idle")
+			else:
+				playback.travel("idle")
 	else:
 		if linear_vel.y <= 0:
 			playback.travel("jumping")
@@ -103,16 +115,46 @@ func _physics_process(delta: float) -> void:
 # spawn_pos is the spawn position
 # cursor_pos is the cursor position at the moment of the throw
 # by_who is the unique identifier of the player thar throwed the potion
-remotesync func throw(potion_name: String, spawn_pos: Vector2, cursor_pos: Vector2, by_who: int):
+remotesync func throw(potion_name: String, cursor_pos: Vector2, by_who: int):
+	throwing = true
+	if on_floor:
+		playback.travel("throw")
+	else:
+		playback.travel("air_throw")
 	var potion = _equipped.instance()
 	potion.set_name(potion_name)
 	potion.player = get_node("../" + str(by_who))
+	yield(self, "continue_throwing")
+	var spawn_pos = spawner.global_position
+	if cursor_pos.x < global_position.x and _facing_right:
+		_facing_right = false
+		spawn_pos.x -= 2*spawner.position.x
+		direction_timer.start()
+	if cursor_pos.x > global_position.x and not _facing_right:
+		_facing_right = true
+		spawn_pos.x += 2*spawner.position.x
+		direction_timer.start()
 	potion.position = spawn_pos
-# warning-ignore:unused_variable
 	var force = (cursor_pos - spawn_pos).normalized() * THROWFORCE
 	potion.throw(force)
-	$"../..".add_child(potion)
+	get_node("../..").add_child(potion)
 
+# the master of the player is the one in charge to tell everyone
+# that he was hit
+master func damaged(_by_who, dmg:int, dmg_pos: float) -> void:
+	var dir = sign(global_position.x - dmg_pos)
+	linear_vel.x = dir*HIT_SPEED
+	rpc("get_hurt", dmg)
+
+# func that gets executed on every client
+# it updates the health and plays the animation
+remotesync func get_hurt(dmg: int) -> void:
+	health -= dmg
+	# here we can emit a signal that health has changed
+	if on_floor:
+		playback.travel("hit")
+	else:
+		playback.travel("air_hit")
 
 func set_player_name(new_name: String) -> void:
 	$DirectionNode/NameNode/NameLabel.set_text(new_name)

@@ -18,7 +18,9 @@ position = Vector2( 872.703, 380.243 )
 
 [node name="Players" type="Node" parent="."]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=[
+"platform",
+]]
 position = Vector2( 71.6149, 458.877 )
 
 [node name="Sprite" type="Sprite" parent="StaticBody2D"]
