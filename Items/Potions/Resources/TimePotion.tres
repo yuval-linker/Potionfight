@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Items/Scripts/Item.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+name = "Time potion"
+tier = 0
+stackable = true
+max_stack_size = 3
+type = 1

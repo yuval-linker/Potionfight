@@ -1,0 +1,31 @@
+{
+	"Potion": {
+		"Identifier": [
+			"BoxingPotion",
+			"FirePotion",
+			"GravityPotion",
+			"SpacePotion",
+			"TimePotion",
+			"YingYangPotion"
+		],
+		"Path": {
+			"Resource": ["res://Items/Potions/Resources", ".tres"],
+			"Scene": ["res://Items/Potions/Scenes", ".tscn"],
+			"Recipe": ["res://Items/Potions/Recipes", ".tres"]
+		}
+	},
+	"Plant": {
+		"Identifier": [
+			"ApplePlant",
+			"ChiliPlant",
+			"DarknessPlant",
+			"GlovePlant",
+			"SandClockPlant",
+			"VoidPlant"
+		],
+		"Path": {
+			"Resource": ["res://Items/Plants/Resources", ".tres"],
+			"Scene": ["res://Items/Plants/Scenes", ".tscn"]
+		}
+	}
+}

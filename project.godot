@@ -8,6 +8,40 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Resource",
+"class": "InventoryResource",
+"language": "GDScript",
+"path": "res://Inventory/Scripts/Inventory.gd"
+}, {
+"base": "Resource",
+"class": "ItemResource",
+"language": "GDScript",
+"path": "res://Items/Scripts/Item.gd"
+}, {
+"base": "InventoryResource",
+"class": "PlantsInventoryResource",
+"language": "GDScript",
+"path": "res://Inventory/Scripts/PlantsInventory.gd"
+}, {
+"base": "InventoryResource",
+"class": "PotionsInventoryResource",
+"language": "GDScript",
+"path": "res://Inventory/Scripts/PotionsInventory.gd"
+}, {
+"base": "Resource",
+"class": "RecipeResource",
+"language": "GDScript",
+"path": "res://Items/Potions/Scripts/Recipe.gd"
+} ]
+_global_script_class_icons={
+"InventoryResource": "",
+"ItemResource": "",
+"PlantsInventoryResource": "",
+"PotionsInventoryResource": "",
+"RecipeResource": ""
+}
+
 [application]
 
 config/name="Potionfight"
@@ -17,6 +51,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Gamestate="*res://Managers/Gamestate.gd"
+EntityDatabase="*res://Managers/EntityDatabase.gd"
 
 [debug]
 
