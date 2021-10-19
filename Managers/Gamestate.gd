@@ -81,7 +81,7 @@ remote func pre_start_game(spawn_points):
 			player.set_player_name(player_name)
 		else:
 			player.set_player_name(players[p_id])
-		
+			
 		player_nodes[p_id] = player
 		level.get_node("Players").add_child(player)
 	
