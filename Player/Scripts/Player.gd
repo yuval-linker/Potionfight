@@ -20,6 +20,9 @@ onready var playback: AnimationNodeStateMachinePlayback = $AnimationTree["parame
 onready var directionNode = $DirectionNode
 onready var nameNode = $DirectionNode/NameNode
 
+var potions_inventory
+var plants_inventory
+
 # puppet vars
 puppet var puppet_vel: Vector2 = Vector2.ZERO
 puppet var _facing_right: bool = true
@@ -40,6 +43,9 @@ var potion_index = 0
 signal continue_throwing
 
 func _ready() -> void:
+	if self.is_network_master():
+		potions_inventory = PotionsInventoryResource.new()
+		plants_inventory = PlantsInventoryResource.new()
 	$AnimationTree.active = true
 	direction_timer.connect("timeout", self, "on_direction_timeout")
 	puppet_pos = position
@@ -88,6 +94,11 @@ func _physics_process(delta: float) -> void:
 		rset_unreliable("_facing_right", _facing_right)
 		rset_unreliable("on_floor", on_floor)
 		rset_unreliable("puppet_crouching", crouching)
+		
+		# DEBUG
+		if Input.is_action_just_pressed("crouch"):
+			print(len(plants_inventory.get_items()))
+		
 	else:
 		position = puppet_pos
 		linear_vel = puppet_vel
@@ -173,8 +184,6 @@ remotesync func get_hurt(dmg: int) -> void:
 		pass
 		#insert death animation
 	
-	
-	
 
 func set_player_name(new_name: String) -> void:
 	$DirectionNode/NameNode/NameLabel.set_text(new_name)
@@ -186,6 +195,15 @@ master func on_direction_timeout() -> void:
 		_facing_right = false
 
 
+master func pick_up_plant(params: Dictionary) -> void:
+	var node_name = params.node_name
+
+	var remaining_q = plants_inventory.add_item(
+		params.plant_id,
+		params.quantity
+	)
+	var plant_scene = get_node("/root/Level/Plants/%s" % node_name)
+	plant_scene.rpc_id(1, "handle_pick_up", remaining_q)
 
 func _on_Punch_body_entered(body):
 	if body.is_in_group("player"):
@@ -193,3 +211,4 @@ func _on_Punch_body_entered(body):
 			body.damaged(self, self.BASICATTACK, global_position.x)
 		else:
 			print("cant hurt itself")
+

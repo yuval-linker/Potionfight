@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Items/Potions/Scripts/Recipe.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+input_ids = [ "VoidPlant" ]
+input_quantities = [ 1 ]
+output_id = "SpacePotion"
+output_quantity = 1
