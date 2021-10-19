@@ -6,6 +6,8 @@ var SPEED = 500
 var ACCELERATION = 200
 var JUMPFORCE = 300
 var THROWFORCE = 600
+var MAXHEALTH = 100
+var BASICATTACK = 5
 const HIT_SPEED = 250
 
 # classes
@@ -32,7 +34,9 @@ export(bool) puppet var throwing = false
 
 var linear_vel: Vector2 = Vector2.ZERO
 var crouching: bool = false
-var health = 200
+var punching: bool = false
+var health = MAXHEALTH
+var player: KinematicBody2D
 var _second_jump = true
 var potion_index = 0
 
@@ -73,6 +77,10 @@ func _physics_process(delta: float) -> void:
 			_facing_right = true
 		
 		crouching = Input.is_action_pressed("crouch")
+		punching = Input.is_action_pressed("punch")
+		
+		if Input.is_action_just_pressed("punch"):
+			rpc("_on_Punch_body_entered", player)
 		
 		# Throw a potion
 		if Input.is_action_just_pressed("throw") and not throwing:
@@ -107,11 +115,15 @@ func _physics_process(delta: float) -> void:
 		if abs(linear_vel.x) > 10:
 			if crouching:
 				playback.travel("crouch_walk")
+			if punching:
+				playback.travel("basic_attack")
 			else:
 				playback.travel("run")
 		else:
 			if crouching:
 				playback.travel("crouch_idle")
+			if punching:
+				playback.travel("basic_attack")
 			else:
 				playback.travel("idle")
 	else:
@@ -160,12 +172,18 @@ master func damaged(_by_who, dmg:int, dmg_pos: float) -> void:
 # func that gets executed on every client
 # it updates the health and plays the animation
 remotesync func get_hurt(dmg: int) -> void:
-	health -= dmg
-	# here we can emit a signal that health has changed
-	if on_floor:
-		playback.travel("hit")
+	if health > 0:
+		health -= dmg
+		# here we can emit a signal that health has changed
+		$HPBar.set_hp_value(health - dmg)
+		if on_floor:
+			playback.travel("hit")
+		else:
+			playback.travel("air_hit")
 	else:
-		playback.travel("air_hit")
+		pass
+		#insert death animation
+	
 
 func set_player_name(new_name: String) -> void:
 	$DirectionNode/NameNode/NameLabel.set_text(new_name)
@@ -176,6 +194,7 @@ master func on_direction_timeout() -> void:
 	if Input.is_action_pressed("left") and _facing_right:
 		_facing_right = false
 
+
 master func pick_up_plant(params: Dictionary) -> void:
 	var node_name = params.node_name
 
@@ -185,3 +204,11 @@ master func pick_up_plant(params: Dictionary) -> void:
 	)
 	var plant_scene = get_node("/root/Level/Plants/%s" % node_name)
 	plant_scene.rpc_id(1, "handle_pick_up", remaining_q)
+
+func _on_Punch_body_entered(body):
+	if body.is_in_group("player"):
+		if body != self:
+			body.damaged(self, self.BASICATTACK, global_position.x)
+		else:
+			print("cant hurt itself")
+
