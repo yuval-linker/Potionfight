@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/magic cliffs.ogg-b983e79bbfe04e915b3999760e9adec8.oggstr"
+
+[deps]
+
+source_file="res://World/Stages/ExampleStage/Assets/Magic-Cliffs-Environment/Magic-Cliffs-Environment/magic cliffs music/magic cliffs.ogg"
+dest_files=[ "res://.import/magic cliffs.ogg-b983e79bbfe04e915b3999760e9adec8.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
