@@ -1,13 +1,14 @@
 extends KinematicBody2D
 
 # constants
-var GRAVITY = 500
-var SPEED = 500
-var ACCELERATION = 200
-var JUMPFORCE = 300
-var THROWFORCE = 600
-var MAXHEALTH = 100
-var BASICATTACK = 5
+const GRAVITY = 700
+const SPEED = 270
+const SPEED_PENALTY = 0.5
+const ACCELERATION = 100
+const JUMPFORCE = 300
+const THROWFORCE = 500
+const MAXHEALTH = 100
+const BASICATTACK = 5
 const HIT_SPEED = 250
 
 # classes
@@ -19,6 +20,7 @@ onready var spawner = $DirectionNode/PotionSpawn
 onready var playback: AnimationNodeStateMachinePlayback = $AnimationTree["parameters/playback"]
 onready var directionNode = $DirectionNode
 onready var nameNode = $DirectionNode/NameNode
+onready var hpBar = $HPBar
 
 var potions_inventory
 var plants_inventory
@@ -29,12 +31,14 @@ puppet var _facing_right: bool = true
 puppet var on_floor: bool = true
 puppet var puppet_pos: Vector2
 puppet var puppet_crouching: bool = false
+puppet var puppet_punching: bool = false
 puppet var _equipped
 export(bool) puppet var throwing = false
 
 var linear_vel: Vector2 = Vector2.ZERO
 var crouching: bool = false
-var punching: bool = false
+export(bool) var invinsible = false
+export(bool) var punching = false
 var health = MAXHEALTH
 var player: KinematicBody2D
 var _second_jump = true
@@ -76,11 +80,13 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_pressed("right") and not Input.is_action_pressed("left") and not _facing_right and direction_timer.is_stopped():
 			_facing_right = true
 		
-		crouching = Input.is_action_pressed("crouch")
-		punching = Input.is_action_pressed("punch")
-		
 		if Input.is_action_just_pressed("punch"):
-			rpc("_on_Punch_body_entered", player)
+			punching = true
+		
+		crouching = Input.is_action_pressed("crouch")
+		
+#		if Input.is_action_just_pressed("punch"):
+#			rpc("_on_Punch_body_entered", player)
 		
 		# Throw a potion
 		if Input.is_action_just_pressed("throw") and not throwing:
@@ -94,39 +100,44 @@ func _physics_process(delta: float) -> void:
 		rset_unreliable("_facing_right", _facing_right)
 		rset_unreliable("on_floor", on_floor)
 		rset_unreliable("puppet_crouching", crouching)
-		
-		# DEBUG
-		if Input.is_action_just_pressed("crouch"):
-			print(len(plants_inventory.get_items()))
+		rset("puppet_punching", punching)
 		
 	else:
 		position = puppet_pos
 		linear_vel = puppet_vel
 		crouching = puppet_crouching
+		punching = puppet_punching
 	
 	directionNode.scale.x = 1 if _facing_right else -1
 	nameNode.scale.x = directionNode.scale.x
 	
+	
 	# Dont go into any animation if throwing
-	if throwing:
+	if throwing or invinsible:
 		return
 	
+	
 	if on_floor:
+		if punching:
+			playback.travel("basic_attack")
+			return
 		if abs(linear_vel.x) > 10:
 			if crouching:
 				playback.travel("crouch_walk")
-			if punching:
-				playback.travel("basic_attack")
 			else:
 				playback.travel("run")
 		else:
-			if crouching:
-				playback.travel("crouch_idle")
 			if punching:
 				playback.travel("basic_attack")
+				return
+			if crouching:
+				playback.travel("crouch_idle")
 			else:
 				playback.travel("idle")
 	else:
+		if punching:
+			playback.travel("air_punch")
+			return
 		if linear_vel.y <= 0:
 			playback.travel("jumping")
 		else:
@@ -162,20 +173,27 @@ remotesync func throw(potion_name: String, cursor_pos: Vector2, by_who: int):
 	potion.throw(force)
 	get_node("../..").add_child(potion)
 
+remotesync func punch():
+	playback.travel("punch")
+
 # the master of the player is the one in charge to tell everyone
 # that he was hit
 master func damaged(_by_who, dmg:int, dmg_pos: float) -> void:
+	if invinsible:
+		return
 	var dir = sign(global_position.x - dmg_pos)
 	linear_vel.x = dir*HIT_SPEED
+	print(linear_vel.x)
 	rpc("get_hurt", dmg)
 
 # func that gets executed on every client
 # it updates the health and plays the animation
 remotesync func get_hurt(dmg: int) -> void:
+	invinsible = true
 	if health > 0:
 		health -= dmg
 		# here we can emit a signal that health has changed
-		$HPBar.set_hp_value(health - dmg)
+		hpBar.set_hp_value(health - dmg)
 		if on_floor:
 			playback.travel("hit")
 		else:
@@ -183,7 +201,6 @@ remotesync func get_hurt(dmg: int) -> void:
 	else:
 		pass
 		#insert death animation
-	
 
 func set_player_name(new_name: String) -> void:
 	$DirectionNode/NameNode/NameLabel.set_text(new_name)
@@ -205,10 +222,7 @@ master func pick_up_plant(params: Dictionary) -> void:
 	var plant_scene = get_node("/root/Level/Plants/%s" % node_name)
 	plant_scene.rpc_id(1, "handle_pick_up", remaining_q)
 
-func _on_Punch_body_entered(body):
-	if body.is_in_group("player"):
-		if body != self:
-			body.damaged(self, self.BASICATTACK, global_position.x)
-		else:
-			print("cant hurt itself")
+remotesync func _on_Punch_body_entered(body):
+	if body and body.is_in_group("player") and body != self:
+		body.damaged(self, self.BASICATTACK, global_position.x)
 
