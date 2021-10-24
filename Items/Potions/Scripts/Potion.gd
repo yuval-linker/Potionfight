@@ -3,8 +3,9 @@ extends Area2D
 const GRAVITY = 500
 
 var player: KinematicBody2D
-var linear_vel = Vector2.ZERO
-var _disabled = false
+var linear_vel: Vector2 = Vector2.ZERO
+var _disabled: bool = false
+var throw_origin: Vector2
 export(int) var damage = 10
 
 onready var cooldown: Timer = $CooldownTimer
@@ -26,6 +27,7 @@ func _physics_process(delta: float) -> void:
 
 func throw(direction: Vector2) -> void:
 	linear_vel = direction
+	throw_origin = global_position
 
 func drink() -> void:
 	disable()
@@ -33,7 +35,7 @@ func drink() -> void:
 
 # Override this function to apply an effect while damaging an enemy
 func damage_enemy(enemy) -> void:
-	enemy.damaged(player, damage, global_position.x)
+	enemy.damaged(player, damage, throw_origin.x)
 
 # Override this function to do a special effect
 # when colliding with a platform

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/magic cliffs.mp3-2408d17778c65eba03dee539e46f068f.mp3str"
+
+[deps]
+
+source_file="res://World/Stages/ExampleStage/Assets/Magic-Cliffs-Environment/Magic-Cliffs-Environment/magic cliffs music/magic cliffs.mp3"
+dest_files=[ "res://.import/magic cliffs.mp3-2408d17778c65eba03dee539e46f068f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

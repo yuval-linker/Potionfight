@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/magic cliffs.wav-049eca4ca428100355eff1cfed6f1b66.sample"
+
+[deps]
+
+source_file="res://World/Stages/ExampleStage/Assets/Magic-Cliffs-Environment/Magic-Cliffs-Environment/magic cliffs music/magic cliffs.wav"
+dest_files=[ "res://.import/magic cliffs.wav-049eca4ca428100355eff1cfed6f1b66.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
