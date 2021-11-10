@@ -11,7 +11,7 @@ master var pick_up_quantity
 onready var collision_shape = $CollisionShape2D
 
 func _ready() -> void:
-	self.connect("body_entered", self, "_on_body_entered")
+	connect("body_entered", self, "_on_body_entered")
 	
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("player") and body.is_network_master():

@@ -8,3 +8,4 @@ export(ItemTier) var tier
 export(bool) var stackable = false
 export(int) var max_stack_size = 1
 export(int, "Plant", "Potion") var type
+export(Texture) var image

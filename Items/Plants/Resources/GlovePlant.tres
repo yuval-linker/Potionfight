@@ -1,6 +1,7 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://Items/Scripts/Item.gd" type="Script" id=1]
+[ext_resource path="res://Items/Plants/Assets/Alchemy Plants Vector Icons/PNG/shadow/48.png" type="Texture" id=2]
 
 [resource]
 script = ExtResource( 1 )
@@ -9,3 +10,4 @@ tier = 2
 stackable = false
 max_stack_size = 1
 type = 0
+image = ExtResource( 2 )

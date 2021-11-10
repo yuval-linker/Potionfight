@@ -85,9 +85,8 @@ remote func pre_start_game(spawn_points):
 		player_nodes[p_id] = player
 		level.get_node("Players").add_child(player)
 	
-	# Set up hud or score things here
-	#
-	#
+	var inventory = level.get_node("GUI/Inventory")
+	inventory.set_player(player_nodes[get_tree().get_network_unique_id()])
 	
 	# Tell server we are ready to start
 	if not get_tree().is_network_server():
