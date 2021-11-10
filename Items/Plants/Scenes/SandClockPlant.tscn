@@ -1,10 +1,11 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Items/Plants/Scripts/SandClockPlant.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Items/Plants/Assets/Alchemy Plants Vector Icons/PNG/shadow/46.png" type="Texture" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 8 )
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 5.35441
+height = 2.41854
 
 [node name="SandClockPlant" type="Area2D"]
 script = ExtResource( 1 )
@@ -13,5 +14,5 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.25, 0.25 )
+scale = Vector2( 0.063, 0.063 )
 texture = ExtResource( 2 )
