@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Inventory/Scripts/PlantsInventory.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Player/Scripts/Player.gd"
+}, {
 "base": "InventoryResource",
 "class": "PotionsInventoryResource",
 "language": "GDScript",
@@ -44,6 +49,7 @@ _global_script_class_icons={
 "ItemResource": "",
 "Plant": "",
 "PlantsInventoryResource": "",
+"Player": "",
 "PotionsInventoryResource": "",
 "RecipeResource": ""
 }

@@ -1,3 +1,4 @@
+class_name Player
 extends KinematicBody2D
 
 # constants
@@ -22,8 +23,8 @@ onready var directionNode = $DirectionNode
 onready var nameNode = $DirectionNode/NameNode
 onready var hpBar = $HPBar
 
-var potions_inventory
-var plants_inventory
+var potions_inventory: PotionsInventoryResource
+var plants_inventory: PlantsInventoryResource
 
 # puppet vars
 puppet var puppet_vel: Vector2 = Vector2.ZERO
@@ -170,8 +171,8 @@ remotesync func throw(potion_name: String, cursor_pos: Vector2, by_who: int):
 		direction_timer.start()
 	potion.position = spawn_pos
 	var force = (cursor_pos - spawn_pos).normalized() * THROWFORCE
-	potion.throw(force)
 	get_node("../..").add_child(potion)
+	potion.throw(force)
 
 remotesync func punch():
 	playback.travel("punch")

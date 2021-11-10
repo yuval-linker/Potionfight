@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://World/Stages/ExampleStage/Assets/Grassy_Mountains_Parallax_Background-vnitti/layers/sky.png" type="Texture" id=1]
 [ext_resource path="res://World/CommonScripts/Camera/Camera.gd" type="Script" id=2]
@@ -8,7 +8,10 @@
 [ext_resource path="res://World/Stages/ExampleStage/Assets/Grassy_Mountains_Parallax_Background-vnitti/layers/hill.png" type="Texture" id=6]
 [ext_resource path="res://World/Stages/ExampleStage/Assets/Grassy_Mountains_Parallax_Background-vnitti/layers/clouds_mid.png" type="Texture" id=7]
 [ext_resource path="res://World/Stages/ExampleStage/Assets/Grassy_Mountains_Parallax_Background-vnitti/layers/grassy_mountains.png" type="Texture" id=8]
+[ext_resource path="res://Inventory/GUI/Scenes/Inventory.tscn" type="PackedScene" id=9]
 [ext_resource path="res://World/Stages/ExampleStage/Assets/Magic-Cliffs-Environment/Magic-Cliffs-Environment/PNG/tileset.png" type="Texture" id=10]
+[ext_resource path="res://Items/Plants/Scenes/VoidPlant.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Items/Plants/Scenes/SandClockPlant.tscn" type="PackedScene" id=12]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 32, 0, 32, 0, 16, 16, 16 )
@@ -490,21 +493,13 @@ position = Vector2( 520, 328 )
 [node name="ApplePlant6" parent="Plants" instance=ExtResource( 3 )]
 position = Vector2( 419.317, 300.072 )
 
-[node name="ApplePlant7" parent="Plants" instance=ExtResource( 3 )]
-position = Vector2( 560.341, 316.066 )
+[node name="SandClockPlant" parent="Plants" instance=ExtResource( 12 )]
+position = Vector2( 568, 288 )
 
-[node name="ApplePlant8" parent="Plants" instance=ExtResource( 3 )]
-position = Vector2( 576, 264 )
+[node name="VoidPlant" parent="Plants" instance=ExtResource( 11 )]
+position = Vector2( 472, 280 )
 
-[node name="ApplePlant9" parent="Plants" instance=ExtResource( 3 )]
-position = Vector2( 305.9, 308.611 )
-
-[node name="ApplePlant10" parent="Plants" instance=ExtResource( 3 )]
-position = Vector2( 486.967, 304.201 )
-
-[node name="TileMap" type="TileMap" parent="." groups=[
-"platform",
-]]
+[node name="TileMap" type="TileMap" parent="." groups=["platform"]]
 tile_set = SubResource( 19 )
 cell_size = Vector2( 16, 16 )
 show_collision = true
@@ -514,6 +509,10 @@ tile_data = PoolIntArray( 917524, 17, 0, 917544, 17, 0, 1376273, 3, 0, 1376275, 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 scale = Vector2( 2.7, 2.8 )
@@ -521,6 +520,10 @@ texture = ExtResource( 1 )
 centered = false
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
 scale = Vector2( 2.7, 2.8 )
@@ -528,6 +531,10 @@ texture = ExtResource( 4 )
 centered = false
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
 scale = Vector2( 2.7, 2.8 )
@@ -535,6 +542,10 @@ texture = ExtResource( 8 )
 centered = false
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer4"]
 scale = Vector2( 2.7, 2.8 )
@@ -542,6 +553,10 @@ texture = ExtResource( 7 )
 centered = false
 
 [node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer5"]
 scale = Vector2( 2.7, 2.8 )
@@ -549,8 +564,22 @@ texture = ExtResource( 6 )
 centered = false
 
 [node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground"]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer6"]
 scale = Vector2( 2.7, 2.8 )
 texture = ExtResource( 5 )
 centered = false
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="Inventory" parent="GUI" instance=ExtResource( 9 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+margin_left = -178.0
+margin_top = -62.0
+margin_right = 178.0
