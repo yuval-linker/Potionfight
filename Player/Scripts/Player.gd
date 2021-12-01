@@ -14,6 +14,7 @@ const HIT_SPEED = 250
 
 # classes
 var Potion = preload("res://Items/Potions/Scenes/Potion.tscn")
+var SpacePotion = preload("res://Items/Potions/Scenes/SpacePotion.tscn")
 
 # onready vars
 onready var direction_timer = $DirecitonTimer
@@ -22,6 +23,8 @@ onready var playback: AnimationNodeStateMachinePlayback = $AnimationTree["parame
 onready var directionNode = $DirectionNode
 onready var nameNode = $DirectionNode/NameNode
 onready var hpBar = $HPBar
+onready var upCast: RayCast2D = $UpCast
+onready var downCast: RayCast2D = $DownCast
 
 var potions_inventory: PotionsInventoryResource
 var plants_inventory: PlantsInventoryResource
@@ -33,6 +36,7 @@ puppet var on_floor: bool = true
 puppet var puppet_pos: Vector2
 puppet var puppet_crouching: bool = false
 puppet var puppet_punching: bool = false
+puppet var puppet_tangible: bool = true
 puppet var _equipped
 export(bool) puppet var throwing = false
 
@@ -43,6 +47,7 @@ export(bool) var punching = false
 var health = MAXHEALTH
 var player: KinematicBody2D
 var _second_jump = true
+var _tangible = true
 var potion_index = 0
 
 signal continue_throwing
@@ -54,7 +59,7 @@ func _ready() -> void:
 	$AnimationTree.active = true
 	direction_timer.connect("timeout", self, "on_direction_timeout")
 	puppet_pos = position
-	_equipped = Potion
+	_equipped = SpacePotion
 
 func _physics_process(delta: float) -> void:
 	if is_network_master():
@@ -66,6 +71,18 @@ func _physics_process(delta: float) -> void:
 		# Movement
 		linear_vel.x = move_toward(linear_vel.x, target_vel * SPEED, ACCELERATION)
 		linear_vel.y += GRAVITY * delta
+		
+		if upCast.enabled and upCast.is_colliding():
+			var platform = upCast.get_collider() as TileMap
+			print("Go Down")
+			position.y += 1 if platform else 0
+		elif downCast.enabled and downCast.is_colliding():
+			var platform = downCast.get_collider() as TileMap
+			print("Go Up")
+			position.y -= 1 if platform else 0
+		elif not upCast.is_colliding() and upCast.enabled and not downCast.is_colliding() and downCast.enabled:
+			print("disable")
+			disable_raycasts()
 		
 		_second_jump = _second_jump or on_floor
 		# Jump
@@ -81,7 +98,7 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_pressed("right") and not Input.is_action_pressed("left") and not _facing_right and direction_timer.is_stopped():
 			_facing_right = true
 		
-		if Input.is_action_just_pressed("punch"):
+		if _tangible and Input.is_action_just_pressed("punch"):
 			punching = true
 		
 		crouching = Input.is_action_pressed("crouch")
@@ -90,11 +107,17 @@ func _physics_process(delta: float) -> void:
 #			rpc("_on_Punch_body_entered", player)
 		
 		# Throw a potion
-		if Input.is_action_just_pressed("throw") and not throwing:
+		if Input.is_action_just_pressed("throw") and not throwing and _tangible:
 			var potion_name = get_name() + str(potion_index)
 			potion_index += 1
 			potion_index = potion_index % 50 # rare to throw more than 50 potions at a time
 			rpc("throw", potion_name, get_global_mouse_position(), get_tree().get_network_unique_id())
+		
+		if _tangible and Input.is_action_just_pressed("drink"):
+			var potion_name = get_name() + str(potion_index)
+			potion_index += 1
+			potion_index = potion_index % 50
+			drink(potion_name)
 		
 		rset_unreliable("puppet_pos", position)
 		rset_unreliable("puppet_vel", linear_vel)
@@ -174,6 +197,14 @@ remotesync func throw(potion_name: String, cursor_pos: Vector2, by_who: int):
 	get_node("../..").add_child(potion)
 	potion.throw(force)
 
+master func drink(potion_name):
+	var potion = _equipped.instance()
+	potion.player = self
+	potion.set_name(potion_name)
+	get_node("../..").add_child(potion)
+	potion.drink()
+	
+
 remotesync func punch():
 	playback.travel("punch")
 
@@ -212,6 +243,37 @@ master func on_direction_timeout() -> void:
 	if Input.is_action_pressed("left") and _facing_right:
 		_facing_right = false
 
+master func enable_raycasts() -> void:
+	upCast.enabled = true
+	downCast.enabled = true
+
+master func disable_raycasts() -> void:
+	upCast.enabled = false
+	downCast.enabled = false
+
+master func make_intangible()->void:
+	_tangible = false
+	rpc("make_transparent")
+
+master func make_tangible()->void:
+	_tangible = true
+	rpc("make_opaque")
+
+remotesync func make_transparent()->void:
+	modulate.a = 0.5
+	set_collision_layer_bit(0, 0)
+	set_collision_layer_bit(5, 1)
+	set_collision_mask_bit(0, 0)
+	set_collision_mask_bit(2, 0)
+	set_collision_mask_bit(3, 0)
+
+remotesync func make_opaque()->void:
+	modulate.a = 1
+	set_collision_layer_bit(0, 1)
+	set_collision_layer_bit(5, 0)
+	set_collision_mask_bit(0, 1)
+	set_collision_mask_bit(2, 1)
+	set_collision_mask_bit(3, 1)
 
 master func pick_up_plant(params: Dictionary) -> void:
 	var node_name = params.node_name
