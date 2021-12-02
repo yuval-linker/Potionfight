@@ -12,11 +12,15 @@ const MAXHEALTH = 100
 const BASICATTACK = 5
 const HIT_SPEED = 250
 const ATTACK_BUFF_CAP = 25
+const JUMP_BUFF_CAP = 400
 
 # classes
 var Potion = preload("res://Items/Potions/Scenes/Potion.tscn")
 var SpacePotion = preload("res://Items/Potions/Scenes/SpacePotion.tscn")
 var BoxingPotion = load("res://Items/Potions/Scenes/BoxingPotion.tscn")
+var GravityPotion = preload("res://Items/Potions/Scenes/GravityPotion.tscn")
+
+var JumpParticles = preload("res://Particles/JumpParticles.tscn")
 
 # onready vars
 onready var direction_timer = $DirecitonTimer
@@ -28,6 +32,7 @@ onready var hpBar = $HPBar
 onready var upCast: RayCast2D = $UpCast
 onready var downCast: RayCast2D = $DownCast
 onready var stunParticles: Particles2D = $DirectionNode/StunParticles
+onready var jumpSpawn: Position2D = $DirectionNode/JumpParticleSpawn
 
 var potions_inventory: PotionsInventoryResource
 var plants_inventory: PlantsInventoryResource
@@ -40,6 +45,7 @@ puppet var puppet_pos: Vector2
 puppet var puppet_crouching: bool = false
 puppet var puppet_punching: bool = false
 puppet var puppet_stunned: bool = false
+puppet var puppet_jump_buffed: bool = false
 puppet var _equipped
 export(bool) puppet var throwing = false
 
@@ -53,7 +59,10 @@ var _second_jump = true
 var _tangible = true
 var _stunned = false
 var punch_attack = BASICATTACK
+var modified_jump_force = JUMPFORCE
+var jump_buffed = false
 var potion_index = 0
+var particle_index = 0
 
 signal continue_throwing
 
@@ -65,7 +74,7 @@ func _ready() -> void:
 	$DirectionNode/Punch/CollisionShape2D.disabled = true
 	direction_timer.connect("timeout", self, "on_direction_timeout")
 	puppet_pos = position
-	_equipped = BoxingPotion
+	_equipped = GravityPotion
 
 func _physics_process(delta: float) -> void:
 	if is_network_master():
@@ -86,9 +95,9 @@ func _physics_process(delta: float) -> void:
 			# Jump
 			if Input.is_action_just_pressed("jump"):
 				if on_floor:
-					linear_vel.y = -JUMPFORCE
+					linear_vel.y = -modified_jump_force
 				elif _second_jump:
-					linear_vel.y = -JUMPFORCE
+					linear_vel.y = -modified_jump_force
 					_second_jump = false
 			
 			if Input.is_action_pressed("left") and not Input.is_action_pressed("right") and _facing_right and direction_timer.is_stopped():
@@ -113,6 +122,8 @@ func _physics_process(delta: float) -> void:
 		
 		crouching = Input.is_action_pressed("crouch") and not _stunned
 		
+		if Input.is_action_just_pressed("change"):
+			_equipped = Potion if _equipped == GravityPotion else GravityPotion
 #		if Input.is_action_just_pressed("punch"):
 #			rpc("_on_Punch_body_entered", player)
 		
@@ -135,6 +146,7 @@ func _physics_process(delta: float) -> void:
 		rset_unreliable("on_floor", on_floor)
 		rset_unreliable("puppet_crouching", crouching)
 		rset_unreliable("puppet_stunned", _stunned)
+		rset_unreliable("puppet_jump_buffed", jump_buffed)
 		rset("puppet_punching", punching)
 		
 	else:
@@ -143,6 +155,7 @@ func _physics_process(delta: float) -> void:
 		crouching = puppet_crouching
 		punching = puppet_punching
 		_stunned = puppet_stunned
+		jump_buffed = puppet_jump_buffed
 	
 	directionNode.scale.x = 1 if _facing_right else -1
 	nameNode.scale.x = directionNode.scale.x
@@ -182,6 +195,8 @@ func _physics_process(delta: float) -> void:
 			return
 		if linear_vel.y <= 0:
 			playback.travel("jumping")
+			if jump_buffed:
+				spawn_jump_particles()
 		else:
 			playback.travel("falling")
 
@@ -228,12 +243,12 @@ remotesync func punch():
 
 # the master of the player is the one in charge to tell everyone
 # that he was hit
-master func damaged(_by_who, dmg:int, dmg_pos: float) -> void:
+master func damaged(_by_who, dmg:int, dmg_pos: float, hit_speed: int = HIT_SPEED) -> void:
 	if invinsible:
 		return
 	recover()
 	var dir = sign(global_position.x - dmg_pos)
-	linear_vel.x = dir*HIT_SPEED
+	linear_vel.x = dir*hit_speed
 	print(dmg)
 	rpc("get_hurt", dmg)
 
@@ -292,6 +307,14 @@ master func recover()->void:
 	_stunned = false
 	rpc("disable_stun_particle")
 
+master func light_body(modifier: int)->void:
+	modified_jump_force = min(modified_jump_force + modifier, JUMP_BUFF_CAP)
+	jump_buffed = true
+
+master func heavy_body(modifier: int)->void:
+	modified_jump_force = max(modified_jump_force - modifier, JUMPFORCE)
+	jump_buffed = false
+
 remotesync func make_transparent()->void:
 	modulate.a = 0.5
 	set_collision_layer_bit(0, 0)
@@ -313,6 +336,14 @@ remotesync func enable_stun_particle()->void:
 
 remotesync func disable_stun_particle()->void:
 	stunParticles.emitting = false
+	
+func spawn_jump_particles()->void:
+	var particles = JumpParticles.instance()
+	particles.position = jumpSpawn.global_position
+	particles.set_name(get_name() + "_Jump" + str(particle_index))
+	get_node("../..").add_child(particles)
+	particle_index += 1
+	particle_index = particle_index % 50
 
 master func pick_up_plant(params: Dictionary) -> void:
 	var node_name = params.node_name

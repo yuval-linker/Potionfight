@@ -1175,6 +1175,9 @@ __meta__ = {
 position = Vector2( 0, -21.4188 )
 emitting = false
 
+[node name="JumpParticleSpawn" type="Position2D" parent="DirectionNode"]
+position = Vector2( 0, 16.9834 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.495378, 4.13849 )
 shape = SubResource( 2 )

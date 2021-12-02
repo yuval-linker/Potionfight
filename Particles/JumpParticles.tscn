@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Particles/Scripts/JumpParticles.gd" type="Script" id=1]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 2
+emission_box_extents = Vector3( 5, 1, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 5, 0 )
+gravity = Vector3( 0, 40, 0 )
+initial_velocity = 20.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+tangential_accel = 2.0
+damping = 70.0
+scale = 0.5
+scale_random = 0.4
+color = Color( 0, 100, 100, 0.54 )
+
+[node name="Particles2D" type="Particles2D"]
+emitting = false
+amount = 15
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 1 )
+script = ExtResource( 1 )
