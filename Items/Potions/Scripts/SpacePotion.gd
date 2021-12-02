@@ -8,10 +8,11 @@ func drink() -> void:
 	# Make player intangible with collision layers and masks
 
 # Teleport player to position
-func env_effect(platform)->void:
+func env_effect(platform)->bool:
 	player.enable_raycasts()
 	player.position = position
 	player.position.y -= 16
+	return true
 	
 
 func _on_cooldown_finished() -> void:

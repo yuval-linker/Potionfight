@@ -11,10 +11,12 @@ const THROWFORCE = 500
 const MAXHEALTH = 100
 const BASICATTACK = 5
 const HIT_SPEED = 250
+const ATTACK_BUFF_CAP = 25
 
 # classes
 var Potion = preload("res://Items/Potions/Scenes/Potion.tscn")
 var SpacePotion = preload("res://Items/Potions/Scenes/SpacePotion.tscn")
+var BoxingPotion = load("res://Items/Potions/Scenes/BoxingPotion.tscn")
 
 # onready vars
 onready var direction_timer = $DirecitonTimer
@@ -48,6 +50,8 @@ var health = MAXHEALTH
 var player: KinematicBody2D
 var _second_jump = true
 var _tangible = true
+var _stunned = false
+var punch_attack = BASICATTACK
 var potion_index = 0
 
 signal continue_throwing
@@ -59,18 +63,36 @@ func _ready() -> void:
 	$AnimationTree.active = true
 	direction_timer.connect("timeout", self, "on_direction_timeout")
 	puppet_pos = position
-	_equipped = SpacePotion
+	_equipped = BoxingPotion
 
 func _physics_process(delta: float) -> void:
 	if is_network_master():
 		linear_vel = move_and_slide(linear_vel, Vector2.UP)
 		on_floor = is_on_floor()
 		
+		var can_action = not _stunned and _tangible
 		var target_vel = Input.get_action_strength("right") - Input.get_action_strength("left")
+		target_vel = target_vel if not _stunned else 0
 		
-		# Movement
 		linear_vel.x = move_toward(linear_vel.x, target_vel * SPEED, ACCELERATION)
 		linear_vel.y += GRAVITY * delta
+		if not _stunned:
+			
+			# Movement
+		
+			_second_jump = _second_jump or on_floor
+			# Jump
+			if Input.is_action_just_pressed("jump"):
+				if on_floor:
+					linear_vel.y = -JUMPFORCE
+				elif _second_jump:
+					linear_vel.y = -JUMPFORCE
+					_second_jump = false
+			
+			if Input.is_action_pressed("left") and not Input.is_action_pressed("right") and _facing_right and direction_timer.is_stopped():
+				_facing_right = false
+			if Input.is_action_pressed("right") and not Input.is_action_pressed("left") and not _facing_right and direction_timer.is_stopped():
+				_facing_right = true
 		
 		if upCast.enabled and upCast.is_colliding():
 			var platform = upCast.get_collider() as TileMap
@@ -84,36 +106,22 @@ func _physics_process(delta: float) -> void:
 			print("disable")
 			disable_raycasts()
 		
-		_second_jump = _second_jump or on_floor
-		# Jump
-		if Input.is_action_just_pressed("jump"):
-			if on_floor:
-				linear_vel.y = -JUMPFORCE
-			elif _second_jump:
-				linear_vel.y = -JUMPFORCE
-				_second_jump = false
-		
-		if Input.is_action_pressed("left") and not Input.is_action_pressed("right") and _facing_right and direction_timer.is_stopped():
-			_facing_right = false
-		if Input.is_action_pressed("right") and not Input.is_action_pressed("left") and not _facing_right and direction_timer.is_stopped():
-			_facing_right = true
-		
-		if _tangible and Input.is_action_just_pressed("punch"):
+		if can_action and Input.is_action_just_pressed("punch"):
 			punching = true
 		
-		crouching = Input.is_action_pressed("crouch")
+		crouching = Input.is_action_pressed("crouch") and not _stunned
 		
 #		if Input.is_action_just_pressed("punch"):
 #			rpc("_on_Punch_body_entered", player)
 		
 		# Throw a potion
-		if Input.is_action_just_pressed("throw") and not throwing and _tangible:
+		if Input.is_action_just_pressed("throw") and not throwing and can_action:
 			var potion_name = get_name() + str(potion_index)
 			potion_index += 1
 			potion_index = potion_index % 50 # rare to throw more than 50 potions at a time
 			rpc("throw", potion_name, get_global_mouse_position(), get_tree().get_network_unique_id())
 		
-		if _tangible and Input.is_action_just_pressed("drink"):
+		if can_action and Input.is_action_just_pressed("drink"):
 			var potion_name = get_name() + str(potion_index)
 			potion_index += 1
 			potion_index = potion_index % 50
@@ -213,9 +221,10 @@ remotesync func punch():
 master func damaged(_by_who, dmg:int, dmg_pos: float) -> void:
 	if invinsible:
 		return
+	recover()
 	var dir = sign(global_position.x - dmg_pos)
 	linear_vel.x = dir*HIT_SPEED
-	print(linear_vel.x)
+	print(dmg)
 	rpc("get_hurt", dmg)
 
 # func that gets executed on every client
@@ -259,6 +268,18 @@ master func make_tangible()->void:
 	_tangible = true
 	rpc("make_opaque")
 
+master func empower_basics(amount: int)->void:
+	punch_attack = min(punch_attack + amount, ATTACK_BUFF_CAP)
+
+master func weaken_basics(amount: int)->void:
+	punch_attack = max(BASICATTACK, punch_attack - amount)
+
+master func stun()->void:
+	_stunned = true
+
+master func recover()->void:
+	_stunned = false
+
 remotesync func make_transparent()->void:
 	modulate.a = 0.5
 	set_collision_layer_bit(0, 0)
@@ -287,5 +308,5 @@ master func pick_up_plant(params: Dictionary) -> void:
 
 remotesync func _on_Punch_body_entered(body):
 	if body and body.is_in_group("player") and body != self:
-		body.damaged(self, self.BASICATTACK, global_position.x)
+		body.damaged(self, self.punch_attack, global_position.x)
 
