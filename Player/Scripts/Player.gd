@@ -27,6 +27,7 @@ onready var nameNode = $DirectionNode/NameNode
 onready var hpBar = $HPBar
 onready var upCast: RayCast2D = $UpCast
 onready var downCast: RayCast2D = $DownCast
+onready var stunParticles: Particles2D = $DirectionNode/StunParticles
 
 var potions_inventory: PotionsInventoryResource
 var plants_inventory: PlantsInventoryResource
@@ -38,7 +39,7 @@ puppet var on_floor: bool = true
 puppet var puppet_pos: Vector2
 puppet var puppet_crouching: bool = false
 puppet var puppet_punching: bool = false
-puppet var puppet_tangible: bool = true
+puppet var puppet_stunned: bool = false
 puppet var _equipped
 export(bool) puppet var throwing = false
 
@@ -61,6 +62,7 @@ func _ready() -> void:
 		potions_inventory = PotionsInventoryResource.new()
 		plants_inventory = PlantsInventoryResource.new()
 	$AnimationTree.active = true
+	$DirectionNode/Punch/CollisionShape2D.disabled = true
 	direction_timer.connect("timeout", self, "on_direction_timeout")
 	puppet_pos = position
 	_equipped = BoxingPotion
@@ -132,6 +134,7 @@ func _physics_process(delta: float) -> void:
 		rset_unreliable("_facing_right", _facing_right)
 		rset_unreliable("on_floor", on_floor)
 		rset_unreliable("puppet_crouching", crouching)
+		rset_unreliable("puppet_stunned", _stunned)
 		rset("puppet_punching", punching)
 		
 	else:
@@ -139,6 +142,7 @@ func _physics_process(delta: float) -> void:
 		linear_vel = puppet_vel
 		crouching = puppet_crouching
 		punching = puppet_punching
+		_stunned = puppet_stunned
 	
 	directionNode.scale.x = 1 if _facing_right else -1
 	nameNode.scale.x = directionNode.scale.x
@@ -150,6 +154,9 @@ func _physics_process(delta: float) -> void:
 	
 	
 	if on_floor:
+		if _stunned:
+			playback.travel("stunned")
+			return
 		if punching:
 			playback.travel("basic_attack")
 			return
@@ -167,6 +174,9 @@ func _physics_process(delta: float) -> void:
 			else:
 				playback.travel("idle")
 	else:
+		if _stunned:
+			playback.travel("air_stunned")
+			return
 		if punching:
 			playback.travel("air_punch")
 			return
@@ -276,9 +286,11 @@ master func weaken_basics(amount: int)->void:
 
 master func stun()->void:
 	_stunned = true
+	rpc("enable_stun_particle")
 
 master func recover()->void:
 	_stunned = false
+	rpc("disable_stun_particle")
 
 remotesync func make_transparent()->void:
 	modulate.a = 0.5
@@ -295,6 +307,12 @@ remotesync func make_opaque()->void:
 	set_collision_mask_bit(0, 1)
 	set_collision_mask_bit(2, 1)
 	set_collision_mask_bit(3, 1)
+
+remotesync func enable_stun_particle()->void:
+	stunParticles.emitting = true
+
+remotesync func disable_stun_particle()->void:
+	stunParticles.emitting = false
 
 master func pick_up_plant(params: Dictionary) -> void:
 	var node_name = params.node_name
