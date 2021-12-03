@@ -56,7 +56,7 @@ func enable() -> void:
 	_disabled = false
 
 func _destroy():
-	print("Destroy Potion")
+	print("Destroy potion")
 	queue_free()
 
 # Signal callbacks
@@ -68,6 +68,7 @@ func _on_body_entered(body: Node) -> void:
 		des = damage_enemy(body)
 	elif body.is_in_group("platform"):
 		des = env_effect(body)
+	print("Des: ", des)
 	if des:
 		_destroy()
 

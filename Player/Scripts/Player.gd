@@ -13,12 +13,15 @@ const BASICATTACK = 5
 const HIT_SPEED = 250
 const ATTACK_BUFF_CAP = 25
 const JUMP_BUFF_CAP = 400
+const UPPER_SPEED_CAP = 500
+const LOWER_SPEED_CAP = 150
 
 # classes
 var Potion = preload("res://Items/Potions/Scenes/Potion.tscn")
 var SpacePotion = preload("res://Items/Potions/Scenes/SpacePotion.tscn")
 var BoxingPotion = load("res://Items/Potions/Scenes/BoxingPotion.tscn")
 var GravityPotion = preload("res://Items/Potions/Scenes/GravityPotion.tscn")
+var TimePotion = preload("res://Items/Potions/Scenes/TimePotion.tscn")
 
 var JumpParticles = preload("res://Particles/JumpParticles.tscn")
 
@@ -29,6 +32,7 @@ onready var playback: AnimationNodeStateMachinePlayback = $AnimationTree["parame
 onready var directionNode = $DirectionNode
 onready var nameNode = $DirectionNode/NameNode
 onready var hpBar = $HPBar
+onready var characterSprite: Sprite = $DirectionNode/Sprite
 onready var upCast: RayCast2D = $UpCast
 onready var downCast: RayCast2D = $DownCast
 onready var stunParticles: Particles2D = $DirectionNode/StunParticles
@@ -60,6 +64,7 @@ var _tangible = true
 var _stunned = false
 var punch_attack = BASICATTACK
 var modified_jump_force = JUMPFORCE
+var modified_speed = SPEED
 var jump_buffed = false
 var potion_index = 0
 var particle_index = 0
@@ -74,7 +79,7 @@ func _ready() -> void:
 	$DirectionNode/Punch/CollisionShape2D.disabled = true
 	direction_timer.connect("timeout", self, "on_direction_timeout")
 	puppet_pos = position
-	_equipped = GravityPotion
+	_equipped = TimePotion
 
 func _physics_process(delta: float) -> void:
 	if is_network_master():
@@ -85,7 +90,7 @@ func _physics_process(delta: float) -> void:
 		var target_vel = Input.get_action_strength("right") - Input.get_action_strength("left")
 		target_vel = target_vel if not _stunned else 0
 		
-		linear_vel.x = move_toward(linear_vel.x, target_vel * SPEED, ACCELERATION)
+		linear_vel.x = move_toward(linear_vel.x, target_vel * modified_speed, ACCELERATION)
 		linear_vel.y += GRAVITY * delta
 		if not _stunned:
 			
@@ -315,6 +320,19 @@ master func heavy_body(modifier: int)->void:
 	modified_jump_force = max(modified_jump_force - modifier, JUMPFORCE)
 	jump_buffed = false
 
+master func make_faster(amount: int)->void:
+	var old_speed = modified_speed
+	modified_speed = min(modified_speed + amount, UPPER_SPEED_CAP)
+	print(modified_speed)
+	if old_speed < SPEED and modified_speed >= SPEED:
+		rpc("make_normal_color")
+
+master func make_slower(amount: int)->void:
+	modified_speed = max(modified_speed - amount, LOWER_SPEED_CAP)
+	print(modified_speed)
+	if modified_speed < SPEED:
+		rpc("make_blue")
+
 remotesync func make_transparent()->void:
 	modulate.a = 0.5
 	set_collision_layer_bit(0, 0)
@@ -336,7 +354,17 @@ remotesync func enable_stun_particle()->void:
 
 remotesync func disable_stun_particle()->void:
 	stunParticles.emitting = false
-	
+
+remotesync func make_blue()->void:
+	characterSprite.modulate.r = 0.7
+	characterSprite.modulate.g = 0.7
+	characterSprite.modulate.b = 1
+
+remotesync func make_normal_color()->void:
+	characterSprite.modulate.r = 1
+	characterSprite.modulate.g = 1
+	characterSprite.modulate.b = 1
+
 func spawn_jump_particles()->void:
 	var particles = JumpParticles.instance()
 	particles.position = jumpSpawn.global_position
