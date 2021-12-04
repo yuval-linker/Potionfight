@@ -11,7 +11,7 @@
 [ext_resource path="res://Player/Assets/Chick-Boy_Full_Pack/Chick-Boy Full Pack/ChikBoy_ducking.png" type="Texture" id=9]
 [ext_resource path="res://UI/Scenes/HPBar.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Player/Assets/Chick-Boy_Full_Pack/Chick-Boy Full Pack/ChikBoy_attack_2.png" type="Texture" id=11]
-[ext_resource path="res://Particles/StunParticles.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Particles/Scenes/StunParticles.tscn" type="PackedScene" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3.39188, 2.66383 )
@@ -1172,11 +1172,14 @@ __meta__ = {
 }
 
 [node name="StunParticles" parent="DirectionNode" instance=ExtResource( 12 )]
-position = Vector2( 0, -21.4188 )
+position = Vector2( 0, -22.5795 )
 emitting = false
 
 [node name="JumpParticleSpawn" type="Position2D" parent="DirectionNode"]
 position = Vector2( 0, 16.9834 )
+
+[node name="HeartSpawn" type="Position2D" parent="DirectionNode"]
+position = Vector2( 0, -13.4974 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.495378, 4.13849 )

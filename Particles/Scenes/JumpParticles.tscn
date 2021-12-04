@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Particles/Scripts/OneShot.gd" type="Script" id=1]
+[ext_resource path="res://Particles/Textures/kenney-particles/addons/kenney_particle_pack/slash_02.png" type="Texture" id=2]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.52795, 1 )
+colors = PoolColorArray( 0, 0.0588235, 0.8, 1, 0, 0.964844, 1, 1, 0, 0.0588235, 0.8, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 2
+emission_box_extents = Vector3( 5, 1, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 10, 0 )
+spread = 0.0
+gravity = Vector3( 0, 100, 0 )
+initial_velocity = 20.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 100.0
+scale = 0.1
+color = Color( 0.00784314, 0.921569, 0.819608, 1 )
+color_ramp = SubResource( 3 )
+
+[node name="JumpParticles" type="Particles2D"]
+amount = 1
+lifetime = 0.7
+explosiveness = 1.0
+process_material = SubResource( 1 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )

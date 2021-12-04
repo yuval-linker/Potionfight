@@ -22,8 +22,10 @@ var SpacePotion = preload("res://Items/Potions/Scenes/SpacePotion.tscn")
 var BoxingPotion = load("res://Items/Potions/Scenes/BoxingPotion.tscn")
 var GravityPotion = preload("res://Items/Potions/Scenes/GravityPotion.tscn")
 var TimePotion = preload("res://Items/Potions/Scenes/TimePotion.tscn")
+var YingYangPotion = preload("res://Items/Potions/Scenes/YingYangPotion.tscn")
 
-var JumpParticles = preload("res://Particles/JumpParticles.tscn")
+var JumpParticles = preload("res://Particles/Scenes/JumpParticles.tscn")
+var HeartParticles = preload("res://Particles/Scenes/LifeParticles.tscn")
 
 # onready vars
 onready var direction_timer = $DirecitonTimer
@@ -37,6 +39,7 @@ onready var upCast: RayCast2D = $UpCast
 onready var downCast: RayCast2D = $DownCast
 onready var stunParticles: Particles2D = $DirectionNode/StunParticles
 onready var jumpSpawn: Position2D = $DirectionNode/JumpParticleSpawn
+onready var heartsSpawn: Position2D = $DirectionNode/HeartSpawn
 
 var potions_inventory: PotionsInventoryResource
 var plants_inventory: PlantsInventoryResource
@@ -50,6 +53,7 @@ puppet var puppet_crouching: bool = false
 puppet var puppet_punching: bool = false
 puppet var puppet_stunned: bool = false
 puppet var puppet_jump_buffed: bool = false
+puppet var puppet_just_jumped: bool = false
 puppet var _equipped
 export(bool) puppet var throwing = false
 
@@ -66,6 +70,7 @@ var punch_attack = BASICATTACK
 var modified_jump_force = JUMPFORCE
 var modified_speed = SPEED
 var jump_buffed = false
+var just_jumped = false
 var potion_index = 0
 var particle_index = 0
 
@@ -79,7 +84,7 @@ func _ready() -> void:
 	$DirectionNode/Punch/CollisionShape2D.disabled = true
 	direction_timer.connect("timeout", self, "on_direction_timeout")
 	puppet_pos = position
-	_equipped = TimePotion
+	_equipped = GravityPotion
 
 func _physics_process(delta: float) -> void:
 	if is_network_master():
@@ -101,9 +106,13 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_just_pressed("jump"):
 				if on_floor:
 					linear_vel.y = -modified_jump_force
+					just_jumped = true
 				elif _second_jump:
 					linear_vel.y = -modified_jump_force
 					_second_jump = false
+					just_jumped = true
+			else:
+				just_jumped = false
 			
 			if Input.is_action_pressed("left") and not Input.is_action_pressed("right") and _facing_right and direction_timer.is_stopped():
 				_facing_right = false
@@ -152,6 +161,7 @@ func _physics_process(delta: float) -> void:
 		rset_unreliable("puppet_crouching", crouching)
 		rset_unreliable("puppet_stunned", _stunned)
 		rset_unreliable("puppet_jump_buffed", jump_buffed)
+		rset_unreliable("puppet_just_jumped", just_jumped)
 		rset("puppet_punching", punching)
 		
 	else:
@@ -161,6 +171,7 @@ func _physics_process(delta: float) -> void:
 		punching = puppet_punching
 		_stunned = puppet_stunned
 		jump_buffed = puppet_jump_buffed
+		just_jumped = puppet_just_jumped
 	
 	directionNode.scale.x = 1 if _facing_right else -1
 	nameNode.scale.x = directionNode.scale.x
@@ -170,6 +181,8 @@ func _physics_process(delta: float) -> void:
 	if throwing or invinsible:
 		return
 	
+	if jump_buffed and just_jumped:
+		spawn_jump_particles()
 	
 	if on_floor:
 		if _stunned:
@@ -200,8 +213,6 @@ func _physics_process(delta: float) -> void:
 			return
 		if linear_vel.y <= 0:
 			playback.travel("jumping")
-			if jump_buffed:
-				spawn_jump_particles()
 		else:
 			playback.travel("falling")
 
@@ -254,17 +265,26 @@ master func damaged(_by_who, dmg:int, dmg_pos: float, hit_speed: int = HIT_SPEED
 	recover()
 	var dir = sign(global_position.x - dmg_pos)
 	linear_vel.x = dir*hit_speed
-	print(dmg)
 	rpc("get_hurt", dmg)
+
+master func healed(amount: int)->void:
+	rpc("get_healed", amount)
+
+remotesync func get_healed(amount: int)->void:
+	health = min(health + amount, MAXHEALTH)
+	hpBar.set_hp_value(health)
+	var hearts = HeartParticles.instance()
+	hearts.position = heartsSpawn.position
+	directionNode.add_child(hearts)
 
 # func that gets executed on every client
 # it updates the health and plays the animation
-remotesync func get_hurt(dmg: int) -> void:
+remote func get_hurt(dmg: int) -> void:
 	invinsible = true
 	if health > 0:
 		health -= dmg
 		# here we can emit a signal that health has changed
-		hpBar.set_hp_value(health - dmg)
+		hpBar.set_hp_value(health)
 		if on_floor:
 			playback.travel("hit")
 		else:

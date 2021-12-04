@@ -20,7 +20,7 @@ func _ready() -> void:
 # warning-ignore:return_value_discarded
 	cooldown.connect("timeout", self, "_on_cooldown_finished")
 # warning-ignore:return_value_discarded
-	visibility_notify.connect("screen_exited", self, "_on_screen_exited")
+#	visibility_notify.connect("screen_exited", self, "_on_screen_exited")
 
 func _physics_process(delta: float) -> void:
 	position += linear_vel * delta
@@ -37,7 +37,6 @@ func drink() -> void:
 # Override this function to apply an effect while damaging an enemy
 func damage_enemy(enemy) -> bool:
 	enemy.damaged(player, damage, throw_origin.x)
-	print("Parent damage")
 	return true
 
 # Override this function to do a special effect
@@ -56,7 +55,6 @@ func enable() -> void:
 	_disabled = false
 
 func _destroy():
-	print("Destroy potion")
 	queue_free()
 
 # Signal callbacks
@@ -68,13 +66,13 @@ func _on_body_entered(body: Node) -> void:
 		des = damage_enemy(body)
 	elif body.is_in_group("platform"):
 		des = env_effect(body)
-	print("Des: ", des)
 	if des:
 		_destroy()
 
-func _on_screen_exited() -> void:
-	if not _disabled:
-		_destroy()
+#func _on_screen_exited() -> void:
+#	if not _disabled:
+#		_destroy()
 
 func _on_cooldown_finished() -> void:
+	print("Cooldown finished")
 	_destroy()
