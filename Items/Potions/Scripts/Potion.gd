@@ -10,7 +10,6 @@ var throw_origin: Vector2
 export(int) var damage = 10
 
 onready var cooldown: Timer = $CooldownTimer
-onready var visibility_notify: VisibilityNotifier2D = $VisibilityNotifier2D
 onready var sprite: Sprite = $Sprite
 onready var collision: CollisionShape2D = $CollisionShape2D
 
@@ -19,8 +18,6 @@ func _ready() -> void:
 	connect("body_entered", self, "_on_body_entered")
 # warning-ignore:return_value_discarded
 	cooldown.connect("timeout", self, "_on_cooldown_finished")
-# warning-ignore:return_value_discarded
-#	visibility_notify.connect("screen_exited", self, "_on_screen_exited")
 
 func _physics_process(delta: float) -> void:
 	position += linear_vel * delta
@@ -68,10 +65,6 @@ func _on_body_entered(body: Node) -> void:
 		des = env_effect(body)
 	if des:
 		_destroy()
-
-#func _on_screen_exited() -> void:
-#	if not _disabled:
-#		_destroy()
 
 func _on_cooldown_finished() -> void:
 	print("Cooldown finished")

@@ -170,6 +170,7 @@ change={
 2d_physics/layer_4="plants"
 2d_physics/layer_5="dmg_area"
 2d_physics/layer_6="intangible"
+2d_physics/layer_7="boundary"
 
 [physics]
 

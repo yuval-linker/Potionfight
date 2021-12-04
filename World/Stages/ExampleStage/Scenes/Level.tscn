@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://World/Stages/ExampleStage/Assets/Grassy_Mountains_Parallax_Background-vnitti/layers/sky.png" type="Texture" id=1]
 [ext_resource path="res://World/CommonScripts/Camera/Camera.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://World/Stages/ExampleStage/Assets/Magic-Cliffs-Environment/Magic-Cliffs-Environment/PNG/tileset.png" type="Texture" id=10]
 [ext_resource path="res://Items/Plants/Scenes/VoidPlant.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Items/Plants/Scenes/SandClockPlant.tscn" type="PackedScene" id=12]
+[ext_resource path="res://World/CommonScripts/Boundaries/Boundary.gd" type="Script" id=13]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 32, 0, 32, 0, 16, 16, 16 )
@@ -447,6 +448,12 @@ points = PoolVector2Array( 16, 32, 0, 32, 0, 16, 32, 16 )
 } ]
 17/z_index = 0
 
+[sub_resource type="RectangleShape2D" id=20]
+extents = Vector2( 22, 302.5 )
+
+[sub_resource type="RectangleShape2D" id=21]
+extents = Vector2( 22, 562.719 )
+
 [node name="Level" type="Node2D"]
 
 [node name="SpawnPoints" type="Node" parent="."]
@@ -586,3 +593,63 @@ anchor_right = 0.5
 margin_left = -178.0
 margin_top = -62.0
 margin_right = 178.0
+
+[node name="Boundaries" type="Node" parent="."]
+
+[node name="Left" type="Area2D" parent="Boundaries"]
+collision_layer = 64
+collision_mask = 13
+monitorable = false
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Left"]
+position = Vector2( -22.1591, 302.343 )
+shape = SubResource( 20 )
+
+[node name="Right" type="Area2D" parent="Boundaries"]
+collision_layer = 64
+collision_mask = 13
+monitorable = false
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Right"]
+position = Vector2( 1058.76, 302.598 )
+shape = SubResource( 20 )
+
+[node name="Down" type="Area2D" parent="Boundaries"]
+collision_layer = 64
+collision_mask = 13
+monitorable = false
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Down"]
+position = Vector2( 518.466, 627.035 )
+rotation = 1.57133
+shape = SubResource( 21 )
+
+[node name="Up" type="Area2D" parent="Boundaries"]
+collision_layer = 64
+collision_mask = 13
+monitorable = false
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Up"]
+position = Vector2( 517.824, -22.2845 )
+rotation = 1.57133
+shape = SubResource( 21 )
