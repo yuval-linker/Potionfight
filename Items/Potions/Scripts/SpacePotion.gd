@@ -1,16 +1,21 @@
-extends "res://Items/Potions/Scripts/Potion.gd"
+class_name SpacePotion
+extends Potion
 
-signal teleport(position)
 
 func drink() -> void:
 	.drink()
+	player.make_intangible()
 	# Make player intangible with collision layers and masks
 
-func _on_body_entered(body: Node) -> void:
-	if body.is_in_group("platforms"):
-		player.position = global_position
-		queue_free()
+# Teleport player to position
+func env_effect(platform)->bool:
+	player.enable_raycasts()
+	player.position = position
+	player.position.y -= 16
+	return true
+	
 
 func _on_cooldown_finished() -> void:
 	# Make player go tangible
+	player.make_tangible()
 	._on_cooldown_finished()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://World/Stages/ExampleStage/Assets/Grassy_Mountains_Parallax_Background-vnitti/layers/sky.png" type="Texture" id=1]
 [ext_resource path="res://World/CommonScripts/Camera/Camera.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://World/Stages/ExampleStage/Assets/Magic-Cliffs-Environment/Magic-Cliffs-Environment/PNG/tileset.png" type="Texture" id=10]
 [ext_resource path="res://Items/Plants/Scenes/VoidPlant.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Items/Plants/Scenes/SandClockPlant.tscn" type="PackedScene" id=12]
+[ext_resource path="res://World/CommonScripts/Boundaries/Boundary.gd" type="Script" id=13]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 32, 0, 32, 0, 16, 16, 16 )
@@ -100,11 +101,11 @@ points = PoolVector2Array( 16, 32, 0, 32, 0, 16, 32, 16 )
 1/shape_offset = Vector2( 0, 0 )
 1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 1/shape = SubResource( 2 )
-1/shape_one_way = false
+1/shape_one_way = true
 1/shape_one_way_margin = 1.0
 1/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 2 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -121,11 +122,11 @@ points = PoolVector2Array( 16, 32, 0, 32, 0, 16, 32, 16 )
 2/shape_offset = Vector2( 0, 0 )
 2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 2/shape = SubResource( 11 )
-2/shape_one_way = false
+2/shape_one_way = true
 2/shape_one_way_margin = 1.0
 2/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 11 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -205,11 +206,11 @@ points = PoolVector2Array( 16, 32, 0, 32, 0, 16, 32, 16 )
 6/shape_offset = Vector2( 0, 0 )
 6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 6/shape = SubResource( 15 )
-6/shape_one_way = false
+6/shape_one_way = true
 6/shape_one_way_margin = 1.0
 6/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 15 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -226,11 +227,11 @@ points = PoolVector2Array( 16, 32, 0, 32, 0, 16, 32, 16 )
 7/shape_offset = Vector2( 0, 0 )
 7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 7/shape = SubResource( 16 )
-7/shape_one_way = false
+7/shape_one_way = true
 7/shape_one_way_margin = 1.0
 7/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 16 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -310,11 +311,11 @@ points = PoolVector2Array( 16, 32, 0, 32, 0, 16, 32, 16 )
 11/shape_offset = Vector2( 0, 0 )
 11/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 11/shape = SubResource( 4 )
-11/shape_one_way = false
+11/shape_one_way = true
 11/shape_one_way_margin = 1.0
 11/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 4 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -352,11 +353,11 @@ points = PoolVector2Array( 16, 32, 0, 32, 0, 16, 32, 16 )
 13/shape_offset = Vector2( 0, 0 )
 13/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 13/shape = SubResource( 6 )
-13/shape_one_way = false
+13/shape_one_way = true
 13/shape_one_way_margin = 1.0
 13/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 6 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -447,6 +448,12 @@ points = PoolVector2Array( 16, 32, 0, 32, 0, 16, 32, 16 )
 } ]
 17/z_index = 0
 
+[sub_resource type="RectangleShape2D" id=20]
+extents = Vector2( 22, 302.5 )
+
+[sub_resource type="RectangleShape2D" id=21]
+extents = Vector2( 22, 562.719 )
+
 [node name="Level" type="Node2D"]
 
 [node name="SpawnPoints" type="Node" parent="."]
@@ -472,6 +479,7 @@ smoothing_speed = 10.0
 editor_draw_limits = true
 script = ExtResource( 2 )
 MAX_ZOOM = 0.3
+MIN_ZOOM = 0.7
 
 [node name="Plants" type="Node2D" parent="."]
 
@@ -503,6 +511,8 @@ position = Vector2( 472, 280 )
 tile_set = SubResource( 19 )
 cell_size = Vector2( 16, 16 )
 show_collision = true
+collision_layer = 2
+collision_mask = 43
 format = 1
 tile_data = PoolIntArray( 917524, 17, 0, 917544, 17, 0, 1376273, 3, 0, 1376275, 8, 0, 1376277, 8, 0, 1376279, 8, 0, 1376281, 8, 0, 1376283, 0, 0, 1376284, 0, 0, 1376285, 0, 0, 1376286, 0, 0, 1376287, 0, 0, 1376288, 0, 0, 1376289, 0, 0, 1376290, 8, 0, 1376292, 8, 0, 1376294, 8, 0, 1376296, 8, 0, 1376298, 8, 0, 1376300, 8, 0, 1376302, 8, 0, 1376304, 9, 0, 1507345, 4, 0, 1507347, 7, 0, 1507349, 1, 0, 1507350, 1, 0, 1507351, 1, 0, 1507352, 1, 0, 1507353, 1, 0, 1507354, 1, 0, 1507355, 1, 0, 1507356, 1, 0, 1507357, 1, 0, 1507358, 1, 0, 1507359, 1, 0, 1507360, 1, 0, 1507361, 1, 0, 1507362, 1, 0, 1507363, 1, 0, 1507364, 1, 0, 1507365, 1, 0, 1507366, 1, 0, 1507367, 1, 0, 1507368, 1, 0, 1507369, 1, 0, 1507370, 1, 0, 1507371, 1, 0, 1507372, 1, 0, 1507373, 1, 0, 1507374, 11, 0, 1507376, 12, 0, 1638417, 5, 0, 1638419, 6, 0, 1638446, 13, 0, 1638448, 14, 0, 1703957, 2, 0, 1703958, 2, 0, 1703959, 2, 0, 1703960, 2, 0, 1703961, 2, 0, 1703962, 2, 0, 1703963, 2, 0, 1703964, 2, 0, 1703965, 2, 0, 1703966, 2, 0, 1703967, 2, 0, 1703968, 2, 0, 1703969, 2, 0, 1703970, 2, 0, 1703971, 2, 0, 1703972, 2, 0, 1703973, 2, 0, 1703974, 2, 0, 1703975, 2, 0, 1703976, 2, 0, 1703977, 2, 0, 1703978, 2, 0, 1703979, 2, 0, 1703980, 2, 0, 1703981, 2, 0 )
 
@@ -583,3 +593,63 @@ anchor_right = 0.5
 margin_left = -178.0
 margin_top = -62.0
 margin_right = 178.0
+
+[node name="Boundaries" type="Node" parent="."]
+
+[node name="Left" type="Area2D" parent="Boundaries"]
+collision_layer = 64
+collision_mask = 13
+monitorable = false
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Left"]
+position = Vector2( -22.1591, 302.343 )
+shape = SubResource( 20 )
+
+[node name="Right" type="Area2D" parent="Boundaries"]
+collision_layer = 64
+collision_mask = 13
+monitorable = false
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Right"]
+position = Vector2( 1058.76, 302.598 )
+shape = SubResource( 20 )
+
+[node name="Down" type="Area2D" parent="Boundaries"]
+collision_layer = 64
+collision_mask = 13
+monitorable = false
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Down"]
+position = Vector2( 518.466, 627.035 )
+rotation = 1.57133
+shape = SubResource( 21 )
+
+[node name="Up" type="Area2D" parent="Boundaries"]
+collision_layer = 64
+collision_mask = 13
+monitorable = false
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Up"]
+position = Vector2( 517.824, -22.2845 )
+rotation = 1.57133
+shape = SubResource( 21 )

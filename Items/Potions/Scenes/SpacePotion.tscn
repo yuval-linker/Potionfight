@@ -1,10 +1,30 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Items/Potions/Scenes/Potion.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Items/Potions/Assets/magical-potions-items-tileset.png" type="Texture" id=1]
 [ext_resource path="res://Items/Potions/Scripts/SpacePotion.gd" type="Script" id=2]
 
-[node name="SpacePotion" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 5.11964
+height = 3.07727
 
-[node name="Sprite" parent="." index="2"]
+[node name="SpacePotion" type="Area2D" groups=["potion"]]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -1.35784 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -2 )
+texture = ExtResource( 1 )
+hframes = 10
+vframes = 10
 frame = 23
+
+[node name="CooldownTimer" type="Timer" parent="."]
+wait_time = 5.0

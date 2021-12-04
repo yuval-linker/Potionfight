@@ -8,6 +8,8 @@ radius = 3.80684
 height = 4.01586
 
 [node name="DarknessPlant" type="Area2D"]
+collision_layer = 8
+collision_mask = 3
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
