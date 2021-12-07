@@ -33,7 +33,8 @@ func drink() -> void:
 
 # Override this function to apply an effect while damaging an enemy
 func damage_enemy(enemy) -> bool:
-	enemy.damaged(player, damage, throw_origin.x)
+	if enemy.is_network_master():
+		enemy.damaged(player, damage, throw_origin.x)
 	return true
 
 # Override this function to do a special effect
