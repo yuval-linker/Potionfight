@@ -4,14 +4,23 @@ const INDEX_CAP: int = 1028
 export(int) var LOWER_TIME_RANGE = 5
 export(int) var UPPER_TIME_RANGE = 20
 
-const IDENTIFIERS = [
-	"ApplePlant",
-	"ChiliPlant",
-	"DarknessPlant",
-	"GlovePlant",
-	"SandClockPlant",
-	"VoidPlant"
-]
+enum ItemTier {COMMON, RARE, EPIC, LEGENDARY}
+
+var identifiers = {
+	"COMMON": [], # 60%
+	"RARE": [], # 30%
+	"EPIC": [], # 10%
+	"LEGENDARY": []
+}
+
+#const IDENTIFIERS = [
+#	"ApplePlant",
+#	"ChiliPlant",
+#	"DarknessPlant",
+#	"GlovePlant",
+#	"SandClockPlant",
+#	"VoidPlant"
+#]
 
 onready var leftBoundary = $Left
 onready var rightBoundary = $Right
@@ -20,7 +29,8 @@ var plant_index: int = 0
 
 func _ready() -> void:
 	if get_tree().is_network_server():
-		print("Spawner ready")
+		poblate_identifiers()
+		print(identifiers)
 		randomize()
 		spawnTimer = Timer.new()
 		add_child(spawnTimer)
@@ -29,10 +39,25 @@ func _ready() -> void:
 		spawnTimer.one_shot = true
 		spawnTimer.start(time)
 
+func poblate_identifiers():
+	var plants = EntityDatabase.database["Plant"]
+	for p in plants:
+		print(p)
+		var tier: String = ItemTier.keys()[EntityDatabase.get_entity("Plant", p)["Resource"].tier]
+		identifiers[tier].append(p)
 
 func get_random_plant()->String:
-	var index = randi() % IDENTIFIERS.size()
-	return IDENTIFIERS[index]
+	var index: int = randi() % 100
+	var tier: String
+	if index < 60:
+		tier = "COMMON"
+	elif index < 90:
+		tier = "RARE"
+	else:
+		tier = "EPIC"
+	var arr: Array = identifiers[tier]
+	var new_index: int = randi() % arr.size()
+	return arr[new_index]
 
 remotesync func spawn_plant(plant: String, pos: Vector2)->void:
 	print("SPAWNING")

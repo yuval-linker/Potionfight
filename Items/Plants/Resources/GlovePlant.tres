@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource( 1 )
 name = "Glove plant"
-tier = 2
-stackable = false
-max_stack_size = 1
+tier = 1
+stackable = true
+max_stack_size = 4
 type = 0
 image = ExtResource( 2 )
