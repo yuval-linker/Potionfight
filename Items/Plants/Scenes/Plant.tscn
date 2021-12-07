@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Items/Plants/Scripts/Plant.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Shaders/Outline.gdshader" type="Shader" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 3 )
+shader_param/outline_width = 2.0
+shader_param/outline_color = null
 
 [node name="Area2D" type="Area2D"]
 collision_layer = 8
@@ -15,5 +21,6 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 3 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
