@@ -279,7 +279,7 @@ remotesync func get_healed(amount: int)->void:
 
 # func that gets executed on every client
 # it updates the health and plays the animation
-remote func get_hurt(dmg: int) -> void:
+remotesync func get_hurt(dmg: int) -> void:
 	invinsible = true
 	if health > 0:
 		health -= dmg

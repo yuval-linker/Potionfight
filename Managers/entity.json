@@ -21,7 +21,8 @@
 			"DarknessPlant",
 			"GlovePlant",
 			"SandClockPlant",
-			"VoidPlant"
+			"VoidPlant",
+			"LightPlant"
 		],
 		"Path": {
 			"Resource": ["res://Items/Plants/Resources", ".tres"],

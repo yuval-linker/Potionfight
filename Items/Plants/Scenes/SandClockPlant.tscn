@@ -1,11 +1,17 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Items/Plants/Scripts/SandClockPlant.gd" type="Script" id=1]
 [ext_resource path="res://Items/Plants/Assets/Alchemy Plants Vector Icons/PNG/shadow/46.png" type="Texture" id=2]
+[ext_resource path="res://Shaders/Outline.gdshader" type="Shader" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 5.35441
-height = 2.41854
+radius = 7.48236
+height = 5.67825
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 3 )
+shader_param/outline_width = 4.0
+shader_param/outline_color = null
 
 [node name="SandClockPlant" type="Area2D"]
 collision_layer = 8
@@ -16,5 +22,6 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.063, 0.063 )
+material = SubResource( 2 )
+scale = Vector2( 0.095, 0.095 )
 texture = ExtResource( 2 )

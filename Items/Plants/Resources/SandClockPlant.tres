@@ -8,6 +8,6 @@ script = ExtResource( 1 )
 name = "Sand clock plant"
 tier = 0
 stackable = true
-max_stack_size = 3
+max_stack_size = 6
 type = 0
 image = ExtResource( 2 )
