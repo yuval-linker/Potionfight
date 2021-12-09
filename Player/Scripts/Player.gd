@@ -15,6 +15,7 @@ const ATTACK_BUFF_CAP = 25
 const JUMP_BUFF_CAP = 400
 const UPPER_SPEED_CAP = 500
 const LOWER_SPEED_CAP = 150
+const MAXLIVES = 3
 
 # classes
 var Potion = preload("res://Items/Potions/Scenes/Potion.tscn")
@@ -61,7 +62,9 @@ var linear_vel: Vector2 = Vector2.ZERO
 var crouching: bool = false
 export(bool) var invinsible = false
 export(bool) var punching = false
+export(bool) var dead = false
 var health = MAXHEALTH
+var lives = MAXLIVES
 var player: KinematicBody2D
 var _second_jump = true
 var _tangible = true
@@ -262,6 +265,8 @@ remotesync func punch():
 master func damaged(_by_who, dmg:int, dmg_pos: float, hit_speed: int = HIT_SPEED) -> void:
 	if invinsible:
 		return
+	if dead:
+		return
 	recover()
 	var dir = sign(global_position.x - dmg_pos)
 	linear_vel.x = dir*hit_speed
@@ -281,17 +286,34 @@ remotesync func get_healed(amount: int)->void:
 # it updates the health and plays the animation
 remotesync func get_hurt(dmg: int) -> void:
 	invinsible = true
+	health -= dmg
+	hpBar.set_hp_value(health)
 	if health > 0:
-		health -= dmg
-		# here we can emit a signal that health has changed
-		hpBar.set_hp_value(health)
 		if on_floor:
 			playback.travel("hit")
 		else:
 			playback.travel("air_hit")
+		print(health)
 	else:
-		pass
-		#insert death animation
+		playback.travel("DEATH")
+		lives -= 1
+		print("current lives:" + str(lives))
+		if lives > 0:
+			yield(get_tree().create_timer(1.8), "timeout")
+			self.hide()
+			invinsible = false
+			health = MAXHEALTH
+			hpBar.set_hp_value(health)
+			self.show()
+			
+			
+			self.position = get_node("../../SpawnPoints/0").position
+		else:
+			dead = true
+			yield(get_tree().create_timer(5.0), "timeout")
+			Gamestate.end_game()
+			
+			#end the game
 
 func set_player_name(new_name: String) -> void:
 	$DirectionNode/NameNode/NameLabel.set_text(new_name)
@@ -407,3 +429,13 @@ remotesync func _on_Punch_body_entered(body):
 	if body and body.is_in_group("player") and body != self:
 		body.damaged(self, self.punch_attack, global_position.x)
 
+remotesync func _destroy():
+	if self.get_child_count() > 0:
+		self.get_child(0).queue_free()
+
+remotesync func _respawn():
+	print("current lives for" + str(lives))
+	yield(get_tree().create_timer(1.0), "timeout")
+	self.add_child(self)
+	self.position = get_node("../../SpawnPoints/0").position
+	
