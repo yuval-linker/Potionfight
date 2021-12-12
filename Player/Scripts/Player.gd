@@ -87,7 +87,7 @@ func _ready() -> void:
 	$DirectionNode/Punch/CollisionShape2D.disabled = true
 	direction_timer.connect("timeout", self, "on_direction_timeout")
 	puppet_pos = position
-	_equipped = GravityPotion
+	_equipped = YinYangPotion
 
 func _physics_process(delta: float) -> void:
 	if is_network_master():
@@ -139,10 +139,8 @@ func _physics_process(delta: float) -> void:
 		
 		crouching = Input.is_action_pressed("crouch") and not _stunned
 		
-		if Input.is_action_just_pressed("change"):
-			_equipped = Potion if _equipped == GravityPotion else GravityPotion
-#		if Input.is_action_just_pressed("punch"):
-#			rpc("_on_Punch_body_entered", player)
+#		if Input.is_action_just_pressed("change"):
+##			_equipped = Potion if _equipped == GravityPotion else GravityPotion
 		
 		# Throw a potion
 		if Input.is_action_just_pressed("throw") and not throwing and can_action:
@@ -260,14 +258,26 @@ master func drink(potion_name):
 remotesync func punch():
 	playback.travel("punch")
 
+func death()->void:
+	playback.travel("DEATH")
+	lives -= 1
+	print("current lives:" + str(lives))
+
+func revive()->void:
+	print("Reviving")
+	invinsible = false
+	health = MAXHEALTH
+	hpBar.set_hp_value(health)
+	self.position = get_node("../../SpawnPoints/0").position
+	self.show()
+
 # the master of the player is the one in charge to tell everyone
 # that he was hit
 master func damaged(_by_who, dmg:int, dmg_pos: float, hit_speed: int = HIT_SPEED) -> void:
-	if invinsible:
+	if invinsible or dead or health <= 0:
 		return
-	if dead:
-		return
-	recover()
+	if _stunned:
+		recover()
 	var dir = sign(global_position.x - dmg_pos)
 	linear_vel.x = dir*hit_speed
 	rpc("get_hurt", dmg)
@@ -288,26 +298,18 @@ remotesync func get_hurt(dmg: int) -> void:
 	invinsible = true
 	health -= dmg
 	hpBar.set_hp_value(health)
+	print(health)
 	if health > 0:
 		if on_floor:
 			playback.travel("hit")
 		else:
 			playback.travel("air_hit")
-		print(health)
 	else:
-		playback.travel("DEATH")
-		lives -= 1
-		print("current lives:" + str(lives))
+		death()
+		yield(get_tree().create_timer(2), "timeout")
+		self.hide()
 		if lives > 0:
-			yield(get_tree().create_timer(1.8), "timeout")
-			self.hide()
-			invinsible = false
-			health = MAXHEALTH
-			hpBar.set_hp_value(health)
-			self.show()
-			
-			
-			self.position = get_node("../../SpawnPoints/0").position
+			revive()
 		else:
 			dead = true
 			yield(get_tree().create_timer(5.0), "timeout")
@@ -452,15 +454,15 @@ master func craft_potion(potion_id: String) -> void:
 
 remotesync func _on_Punch_body_entered(body):
 	if body and body.is_in_group("player") and body != self:
-		body.damaged(self, self.punch_attack, global_position.x)
+		body.rpc("damaged", self, self.punch_attack, global_position.x)
 
-remotesync func _destroy():
-	if self.get_child_count() > 0:
-		self.get_child(0).queue_free()
-
-remotesync func _respawn():
-	print("current lives for" + str(lives))
-	yield(get_tree().create_timer(1.0), "timeout")
-	self.add_child(self)
-	self.position = get_node("../../SpawnPoints/0").position
+#remotesync func _destroy():
+#	if self.get_child_count() > 0:
+#		self.get_child(0).queue_free()
+#
+#remotesync func _respawn():
+#	print("current lives for" + str(lives))
+#	yield(get_tree().create_timer(1.0), "timeout")
+#	self.add_child(self)
+#	self.position = get_node("../../SpawnPoints/0").position
 	

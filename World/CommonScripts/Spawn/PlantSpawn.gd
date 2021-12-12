@@ -49,8 +49,6 @@ func get_random_plant()->String:
 	return arr[new_index]
 
 remotesync func spawn_plant(plant: String, pos: Vector2)->void:
-	print("SPAWNING")
-	print(multiplayer.get_rpc_sender_id())
 	var new_plant = EntityDatabase.get_entity("Plant", plant)["Scene"].instance()
 	new_plant.global_position = pos
 	new_plant.set_name(new_plant.get_name() + str(plant_index))
