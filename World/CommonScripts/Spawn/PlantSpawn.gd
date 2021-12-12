@@ -13,15 +13,6 @@ var identifiers = {
 	"LEGENDARY": []
 }
 
-#const IDENTIFIERS = [
-#	"ApplePlant",
-#	"ChiliPlant",
-#	"DarknessPlant",
-#	"GlovePlant",
-#	"SandClockPlant",
-#	"VoidPlant"
-#]
-
 onready var leftBoundary = $Left
 onready var rightBoundary = $Right
 var spawnTimer: Timer
@@ -30,7 +21,6 @@ var plant_index: int = 0
 func _ready() -> void:
 	if get_tree().is_network_server():
 		poblate_identifiers()
-		print(identifiers)
 		randomize()
 		spawnTimer = Timer.new()
 		add_child(spawnTimer)
@@ -42,7 +32,6 @@ func _ready() -> void:
 func poblate_identifiers():
 	var plants = EntityDatabase.database["Plant"]
 	for p in plants:
-		print(p)
 		var tier: String = ItemTier.keys()[EntityDatabase.get_entity("Plant", p)["Resource"].tier]
 		identifiers[tier].append(p)
 
