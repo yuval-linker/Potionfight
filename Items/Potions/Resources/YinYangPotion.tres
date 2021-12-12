@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Items/Scripts/Item.gd" type="Script" id=1]
+[ext_resource path="res://Items/Potions/Assets/yin_yang_potion.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "Yin yang potion"
+type = 1
+tier = 3
+description = "Drinking this potion instantly heals the player. Throwing it inflicts a big amount of damage to the first player it reaches."
+stackable = false
+max_stack_size = 1
+image = ExtResource( 2 )

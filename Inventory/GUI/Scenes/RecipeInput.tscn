@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Inventory/GUI/Assets/Fonts/matchup-pro-v1.1/MatchupPro.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Items/Plants/Assets/chili_plant.png" type="Texture" id=2]
+[ext_resource path="res://Inventory/GUI/Assets/PotionWheel/plant_q_container.png" type="Texture" id=3]
+[ext_resource path="res://Inventory/GUI/Scripts/RecipeInput.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[node name="Sprite" type="TextureRect"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 2 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bubble" type="TextureRect" parent="."]
+margin_left = 10.0
+margin_top = 12.0
+margin_right = 42.0
+margin_bottom = 44.0
+rect_scale = Vector2( 0.23, 0.23 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quantity" type="Label" parent="."]
+margin_left = 13.45
+margin_top = 13.6
+margin_right = 21.45
+margin_bottom = 27.6
+rect_scale = Vector2( 0.24, 0.24 )
+custom_fonts/font = SubResource( 1 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}

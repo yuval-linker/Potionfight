@@ -1,11 +1,14 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://Items/Scripts/Item.gd" type="Script" id=1]
+[ext_resource path="res://Items/Potions/Assets/gravity_potion.png" type="Texture" id=2]
 
 [resource]
 script = ExtResource( 1 )
 name = "Gravity potion"
+type = 1
 tier = 1
+description = "Drinking this potion makes the player jump higher. Throwing it pushes away the first player it reaches."
 stackable = true
 max_stack_size = 2
-type = 1
+image = ExtResource( 2 )

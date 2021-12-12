@@ -141,3 +141,4 @@ text = "Find your public IP address"
 margin_bottom = 58.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
+window_title = "¡Alerta!"

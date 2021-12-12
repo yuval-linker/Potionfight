@@ -1,11 +1,14 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://Items/Scripts/Item.gd" type="Script" id=1]
+[ext_resource path="res://Items/Potions/Assets/boxing_potion.png" type="Texture" id=2]
 
 [resource]
 script = ExtResource( 1 )
 name = "Boxing potion"
+type = 1
 tier = 2
+description = "Drinking this potion increases the damage of the basic attack. Throwing it stuns the first player it reaches."
 stackable = false
 max_stack_size = 1
-type = 1
+image = ExtResource( 2 )

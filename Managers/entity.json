@@ -6,7 +6,7 @@
 			"GravityPotion",
 			"SpacePotion",
 			"TimePotion",
-			"YingYangPotion"
+			"YinYangPotion"
 		],
 		"Path": {
 			"Resource": ["res://Items/Potions/Resources", ".tres"],

@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Inventory/GUI/Scripts/PotionWheelBubble.gd" type="Script" id=1]
+[ext_resource path="res://Inventory/GUI/Assets/Fonts/matchup-pro-v1.1/MatchupPro.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Inventory/GUI/Assets/PotionWheel/potion_q_container_empty.png" type="Texture" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[node name="PotionWheelBubble" type="Control"]
+margin_right = -1008.0
+margin_bottom = -584.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PotionQuantityBubble" type="TextureRect" parent="."]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PotionQuantity" type="Label" parent="."]
+margin_left = 6.0
+margin_top = 4.0
+margin_right = 12.0
+margin_bottom = 33.0
+rect_scale = Vector2( 0.75, 0.6 )
+custom_fonts/font = SubResource( 1 )
+text = "0
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}

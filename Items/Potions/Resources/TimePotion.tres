@@ -1,11 +1,14 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://Items/Scripts/Item.gd" type="Script" id=1]
+[ext_resource path="res://Items/Potions/Assets/time_potion.png" type="Texture" id=2]
 
 [resource]
 script = ExtResource( 1 )
 name = "Time potion"
+type = 1
 tier = 0
+description = "Drinking this potion increases the player time, making him speedy. Throwing it decreases the time of the first player it reaches, making him slower."
 stackable = true
 max_stack_size = 3
-type = 1
+image = ExtResource( 2 )

@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/slot_4_bitmap.png-c1286d0353af7ca5cfb747f3177ada7c.res"
+
+[deps]
+
+source_file="res://Inventory/GUI/Assets/PotionWheel/slot_4_bitmap.png"
+dest_files=[ "res://.import/slot_4_bitmap.png-c1286d0353af7ca5cfb747f3177ada7c.res" ]
+
+[params]
+
+create_from=0
+threshold=0.5

@@ -23,7 +23,7 @@ var SpacePotion = preload("res://Items/Potions/Scenes/SpacePotion.tscn")
 var BoxingPotion = load("res://Items/Potions/Scenes/BoxingPotion.tscn")
 var GravityPotion = preload("res://Items/Potions/Scenes/GravityPotion.tscn")
 var TimePotion = preload("res://Items/Potions/Scenes/TimePotion.tscn")
-var YingYangPotion = preload("res://Items/Potions/Scenes/YingYangPotion.tscn")
+var YinYangPotion = preload("res://Items/Potions/Scenes/YinYangPotion.tscn")
 
 var JumpParticles = preload("res://Particles/Scenes/JumpParticles.tscn")
 var HeartParticles = preload("res://Particles/Scenes/LifeParticles.tscn")
@@ -415,6 +415,10 @@ func spawn_jump_particles()->void:
 	particle_index += 1
 	particle_index = particle_index % 50
 
+# ------------------------------------------------------------------------------
+# Inventory related methods
+# ------------------------------------------------------------------------------
+
 master func pick_up_plant(params: Dictionary) -> void:
 	var node_name = params.node_name
 
@@ -424,6 +428,27 @@ master func pick_up_plant(params: Dictionary) -> void:
 	)
 	var plant_scene = get_node("/root/Level/Plants/%s" % node_name)
 	plant_scene.rpc_id(1, "handle_pick_up", remaining_q)
+
+master func craft_potion(potion_id: String) -> void:
+	var recipe : Dictionary = EntityDatabase.get_entity("Potion", potion_id)["Recipe"]
+	assert (potion_id == recipe.output_id)
+	assert (len(recipe.input_ids) == len(recipe.input_quantities))
+	
+	# first we check if the potion is craftable:
+	for i in range(0, len(recipe.input_ids)):
+		if plants_inventory.get_item_quantity(recipe.input_ids[i]) < recipe.input_quantities[i]:
+			print("Unable to craft '%s', not enought plants")
+			return
+
+	# then we consume the plants necessary to craft the potion
+	for i in range(0, len(recipe.input_ids)):
+		plants_inventory.consume_item(recipe.input_ids[i], recipe.input_quantities[i])
+	
+	# finally we add the potion to the potions inventory
+	# TODO: Drop the potions in the map.
+	var remaning_q = potions_inventory.add_item(recipe.output_id, recipe.output_quantity)
+	return
+# ------------------------------------------------------------------------------
 
 remotesync func _on_Punch_body_entered(body):
 	if body and body.is_in_group("player") and body != self:
