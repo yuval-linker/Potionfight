@@ -1,10 +1,24 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Items/Potions/Scripts/YingYangPotion.gd" type="Script" id=1]
 [ext_resource path="res://Items/Potions/Scenes/Potion.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Items/Potions/Assets/yin_yang_potion.png" type="Texture" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 5.0988
+height = 3.06874
 
 [node name="YingYangPotion" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
+damage = 25
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2( 0, -1.44623 )
+shape = SubResource( 1 )
 
 [node name="Sprite" parent="." index="1"]
-frame = 43
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+hframes = 1
+vframes = 1
+frame = 0

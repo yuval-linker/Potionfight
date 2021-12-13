@@ -9,10 +9,20 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area2D",
+"class": "Boundary",
+"language": "GDScript",
+"path": "res://World/CommonScripts/Boundaries/Boundary.gd"
+}, {
 "base": "Potion",
 "class": "BoxingPotion",
 "language": "GDScript",
 "path": "res://Items/Potions/Scripts/BoxingPotion.gd"
+}, {
+"base": "Control",
+"class": "CharacterSlot",
+"language": "GDScript",
+"path": "res://UI/Scripts/CharacterSlot.gd"
 }, {
 "base": "Resource",
 "class": "InventoryResource",
@@ -60,7 +70,9 @@ _global_script_classes=[ {
 "path": "res://Items/Potions/Scripts/SpacePotion.gd"
 } ]
 _global_script_class_icons={
+"Boundary": "",
 "BoxingPotion": "",
+"CharacterSlot": "",
 "InventoryResource": "",
 "ItemResource": "",
 "Plant": "",

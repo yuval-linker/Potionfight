@@ -1,5 +1,18 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Items/Potions/Scenes/Potion.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Items/Potions/Scripts/FirePotion.gd" type="Script" id=2]
+[ext_resource path="res://Items/Potions/Assets/fire_potion.png" type="Texture" id=3]
 
 [node name="FirePotion" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2( 0, -1.31894 )
+
+[node name="Sprite" parent="." index="1"]
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+hframes = 1
+vframes = 1
+frame = 0
