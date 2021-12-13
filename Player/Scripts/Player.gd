@@ -103,20 +103,20 @@ func _ready() -> void:
 	$DirectionNode/Punch/CollisionShape2D.disabled = true
 	direction_timer.connect("timeout", self, "on_direction_timeout")
 	puppet_pos = position
-	_equipped = YinYangPotion
+	_equipped = FirePotion
 
 func _physics_process(delta: float) -> void:
 	if is_network_master():
 		linear_vel = move_and_slide(linear_vel, Vector2.UP)
 		on_floor = is_on_floor()
 		
-		var can_action = not _stunned and _tangible
+		var can_action = not _stunned and _tangible and health > 0
 		var target_vel = Input.get_action_strength("right") - Input.get_action_strength("left")
-		target_vel = target_vel if not _stunned else 0
+		target_vel = target_vel if (not _stunned and health > 0) else 0
 		
 		linear_vel.x = move_toward(linear_vel.x, target_vel * modified_speed, ACCELERATION)
 		linear_vel.y += GRAVITY * delta
-		if not _stunned:
+		if not _stunned and health > 0:
 			
 			# Movement
 		
@@ -297,11 +297,12 @@ func death()->void:
 
 func revive()->void:
 	print("Reviving")
-	invinsible = false
 	health = MAXHEALTH
 	hpBar.set_hp_value(health)
+	rpc("make_normal_color")
 	self.position = get_node("../../SpawnPoints/0").position
 	self.show()
+	invinsible = false
 
 # the master of the player is the one in charge to tell everyone
 # that he was hit
@@ -318,12 +319,14 @@ master func damaged(_by_who, dmg:int, dmg_pos: float, hit_speed: int = HIT_SPEED
 
 # func that gets executed on every client
 # it updates the health and plays the animation
-remotesync func get_hurt(dmg: int) -> void:
-	invinsible = true
+remotesync func get_hurt(dmg: int, play_anim: bool = true) -> void:
+	invinsible = true and play_anim
 	health -= dmg
 	hpBar.set_hp_value(health)
 	print(health)
 	if health > 0:
+		if not play_anim:
+			return
 		if on_floor:
 			playback.travel("hit")
 		else:
@@ -408,7 +411,7 @@ remotesync func get_healed(amount: int)->void:
 remotesync func dot_tick(dmg: float)->void:
 	print("DOT tick: ", dmg)
 	tick_time = 0.5
-	get_hurt(dmg)
+	get_hurt(dmg, false)
 
 func ablaze_punches(dmg, time)->void:
 	fire_punches_tick = float(dmg)/(2*time)
