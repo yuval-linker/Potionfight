@@ -35,7 +35,6 @@ onready var spawner = $DirectionNode/PotionSpawn
 onready var playback: AnimationNodeStateMachinePlayback = $AnimationTree["parameters/playback"]
 onready var directionNode = $DirectionNode
 onready var nameNode = $DirectionNode/NameNode
-onready var hpBar = $HPBar
 onready var characterSprite: Sprite = $DirectionNode/Sprite
 onready var upCast: RayCast2D = $UpCast
 onready var downCast: RayCast2D = $DownCast
@@ -45,6 +44,7 @@ onready var heartsSpawn: Position2D = $DirectionNode/HeartSpawn
 
 var potions_inventory: PotionsInventoryResource
 var plants_inventory: PlantsInventoryResource
+var gui_slot: CharacterSlot
 
 # puppet vars
 puppet var puppet_vel: Vector2 = Vector2.ZERO
@@ -291,18 +291,21 @@ remotesync func punch():
 
 func death()->void:
 	playback.travel("DEATH")
+	_tangible = false
 	lives -= 1
+	gui_slot.set_stock_lives(lives)
 	dot_time = 0
 	print("current lives:" + str(lives))
 
 func revive()->void:
 	print("Reviving")
 	health = MAXHEALTH
-	hpBar.set_hp_value(health)
+	gui_slot.set_hp_value(health)
 	rpc("make_normal_color")
 	self.position = get_node("../../SpawnPoints/0").position
 	self.show()
 	invinsible = false
+	_tangible = true
 
 # the master of the player is the one in charge to tell everyone
 # that he was hit
@@ -322,7 +325,7 @@ master func damaged(_by_who, dmg:int, dmg_pos: float, hit_speed: int = HIT_SPEED
 remotesync func get_hurt(dmg: int, play_anim: bool = true) -> void:
 	invinsible = true and play_anim
 	health -= dmg
-	hpBar.set_hp_value(health)
+	gui_slot.set_hp_value(health)
 	print(health)
 	if health > 0:
 		if not play_anim:
@@ -403,7 +406,7 @@ master func dot(total_dmg: int, time: float)->void:
 
 remotesync func get_healed(amount: int)->void:
 	health = min(health + amount, MAXHEALTH)
-	hpBar.set_hp_value(health)
+	gui_slot.set_hp_value(health)
 	var hearts = HeartParticles.instance()
 	hearts.position = heartsSpawn.position
 	directionNode.add_child(hearts)
@@ -518,6 +521,10 @@ master func craft_potion(potion_id: String) -> void:
 
 func set_player_name(new_name: String) -> void:
 	$DirectionNode/NameNode/NameLabel.set_text(new_name)
+
+func set_gui_slot(slot: CharacterSlot)->void:
+	gui_slot = slot
+	slot.set_name($DirectionNode/NameNode/NameLabel.text)
 
 master func on_direction_timeout() -> void:
 	if Input.is_action_pressed("right") and not _facing_right:

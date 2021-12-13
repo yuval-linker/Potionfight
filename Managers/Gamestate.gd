@@ -68,6 +68,7 @@ remote func pre_start_game(spawn_points):
 	
 	# Player Scene
 	var player_scene = load("res://Player/Scenes/Player.tscn")
+	var gui_slot_scene = load("res://UI/Scenes/CharacterSlot.tscn")
 	
 	for p_id in spawn_points:
 		var spawn_pos = level.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
@@ -83,6 +84,9 @@ remote func pre_start_game(spawn_points):
 			player.set_player_name(players[p_id])
 			
 		player_nodes[p_id] = player
+		var gui_slot = gui_slot_scene.instance()
+		level.get_node("GUI/Slots").add_child(gui_slot)
+		player.set_gui_slot(gui_slot)
 		level.get_node("Players").add_child(player)
 	
 	var inventory = level.get_node("GUI/Inventory")

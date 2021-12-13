@@ -570,12 +570,27 @@ centered = false
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="Inventory" parent="GUI" instance=ExtResource( 9 )]
+visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 margin_left = -178.0
 margin_top = -62.0
 margin_right = 178.0
+
+[node name="Slots" type="HBoxContainer" parent="GUI"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -138.461
+margin_top = -106.278
+margin_right = -138.461
+margin_bottom = -35.2777
+custom_constants/separation = 300
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Boundaries" type="Node" parent="."]
 
