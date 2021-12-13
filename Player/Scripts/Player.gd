@@ -24,6 +24,7 @@ var BoxingPotion = load("res://Items/Potions/Scenes/BoxingPotion.tscn")
 var GravityPotion = preload("res://Items/Potions/Scenes/GravityPotion.tscn")
 var TimePotion = preload("res://Items/Potions/Scenes/TimePotion.tscn")
 var YinYangPotion = preload("res://Items/Potions/Scenes/YinYangPotion.tscn")
+var FirePotion = preload("res://Items/Potions/Scenes/FirePotion.tscn")
 
 var JumpParticles = preload("res://Particles/Scenes/JumpParticles.tscn")
 var HeartParticles = preload("res://Particles/Scenes/LifeParticles.tscn")
@@ -58,22 +59,37 @@ puppet var puppet_just_jumped: bool = false
 puppet var _equipped
 export(bool) puppet var throwing = false
 
+# Movement vars
 var linear_vel: Vector2 = Vector2.ZERO
 var crouching: bool = false
+var _second_jump = true
+var just_jumped = false
+
+# State vars
 export(bool) var invinsible = false
 export(bool) var punching = false
 export(bool) var dead = false
-var health = MAXHEALTH
-var lives = MAXLIVES
-var player: KinematicBody2D
-var _second_jump = true
+var jump_buffed = false
 var _tangible = true
 var _stunned = false
+var fire_punches = false
+
+# Stats vars
+var health = MAXHEALTH
+var lives = MAXLIVES
 var punch_attack = BASICATTACK
 var modified_jump_force = JUMPFORCE
 var modified_speed = SPEED
-var jump_buffed = false
-var just_jumped = false
+
+# DOT vars
+var tick_dmg = 0
+var tick_time = 0.0
+var dot_time = 0.0
+var fire_punches_tick = 0.0
+var fire_punch_time = 0.0
+
+# Other vars
+var player: KinematicBody2D
 var potion_index = 0
 var particle_index = 0
 
@@ -155,6 +171,16 @@ func _physics_process(delta: float) -> void:
 			potion_index = potion_index % 50
 			drink(potion_name)
 		
+		# DOT damage
+		if dot_time > 0 and health > 0:
+			tick_time -= delta
+			rpc("on_fire", tick_time)
+			if tick_time <= 0:
+				rpc("dot_tick", tick_dmg)
+			dot_time -= delta
+			if dot_time <= 0:
+				rpc("make_normal_color")
+		
 		rset_unreliable("puppet_pos", position)
 		rset_unreliable("puppet_vel", linear_vel)
 		rset_unreliable("_facing_right", _facing_right)
@@ -218,6 +244,11 @@ func _physics_process(delta: float) -> void:
 			playback.travel("falling")
 
 
+# ------------------------------------------------------------------------------
+# Action related methods
+# ------------------------------------------------------------------------------
+
+
 # throws a potion
 # potion_name is a unique potion name (nodes need unique names)
 # spawn_pos is the spawn position
@@ -261,6 +292,7 @@ remotesync func punch():
 func death()->void:
 	playback.travel("DEATH")
 	lives -= 1
+	dot_time = 0
 	print("current lives:" + str(lives))
 
 func revive()->void:
@@ -282,15 +314,7 @@ master func damaged(_by_who, dmg:int, dmg_pos: float, hit_speed: int = HIT_SPEED
 	linear_vel.x = dir*hit_speed
 	rpc("get_hurt", dmg)
 
-master func healed(amount: int)->void:
-	rpc("get_healed", amount)
 
-remotesync func get_healed(amount: int)->void:
-	health = min(health + amount, MAXHEALTH)
-	hpBar.set_hp_value(health)
-	var hearts = HeartParticles.instance()
-	hearts.position = heartsSpawn.position
-	directionNode.add_child(hearts)
 
 # func that gets executed on every client
 # it updates the health and plays the animation
@@ -317,22 +341,14 @@ remotesync func get_hurt(dmg: int) -> void:
 			
 			#end the game
 
-func set_player_name(new_name: String) -> void:
-	$DirectionNode/NameNode/NameLabel.set_text(new_name)
 
-master func on_direction_timeout() -> void:
-	if Input.is_action_pressed("right") and not _facing_right:
-		_facing_right = true
-	if Input.is_action_pressed("left") and _facing_right:
-		_facing_right = false
 
-master func enable_raycasts() -> void:
-	upCast.enabled = true
-	downCast.enabled = true
+# ------------------------------------------------------------------------------
+# Potion effects methods
+# ------------------------------------------------------------------------------
 
-master func disable_raycasts() -> void:
-	upCast.enabled = false
-	downCast.enabled = false
+master func healed(amount: int)->void:
+	rpc("get_healed", amount)
 
 master func make_intangible()->void:
 	_tangible = false
@@ -367,7 +383,6 @@ master func heavy_body(modifier: int)->void:
 master func make_faster(amount: int)->void:
 	var old_speed = modified_speed
 	modified_speed = min(modified_speed + amount, UPPER_SPEED_CAP)
-	print(modified_speed)
 	if old_speed < SPEED and modified_speed >= SPEED:
 		rpc("make_normal_color")
 
@@ -377,8 +392,41 @@ master func make_slower(amount: int)->void:
 	if modified_speed < SPEED:
 		rpc("make_blue")
 
+master func dot(total_dmg: int, time: float)->void:
+	if health >= 0:
+		dot_time = time
+		tick_dmg = total_dmg/(2*time)
+		tick_time = 0.5
+
+remotesync func get_healed(amount: int)->void:
+	health = min(health + amount, MAXHEALTH)
+	hpBar.set_hp_value(health)
+	var hearts = HeartParticles.instance()
+	hearts.position = heartsSpawn.position
+	directionNode.add_child(hearts)
+
+remotesync func dot_tick(dmg: float)->void:
+	print("DOT tick: ", dmg)
+	tick_time = 0.5
+	get_hurt(dmg)
+
+func ablaze_punches(dmg, time)->void:
+	fire_punches_tick = float(dmg)/(2*time)
+	fire_punch_time = time
+	fire_punches = true
+
+func normal_punches()->void:
+	fire_punches = false
+
+# ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
+# Visual methods
+# ------------------------------------------------------------------------------
+
 remotesync func make_transparent()->void:
-	modulate.a = 0.5
+	characterSprite.modulate.a = 0.5
 	set_collision_layer_bit(0, 0)
 	set_collision_layer_bit(5, 1)
 	set_collision_mask_bit(0, 0)
@@ -386,7 +434,7 @@ remotesync func make_transparent()->void:
 	set_collision_mask_bit(3, 0)
 
 remotesync func make_opaque()->void:
-	modulate.a = 1
+	characterSprite.modulate.a = 1
 	set_collision_layer_bit(0, 1)
 	set_collision_layer_bit(5, 0)
 	set_collision_mask_bit(0, 1)
@@ -400,14 +448,20 @@ remotesync func disable_stun_particle()->void:
 	stunParticles.emitting = false
 
 remotesync func make_blue()->void:
-	characterSprite.modulate.r = 0.7
-	characterSprite.modulate.g = 0.7
-	characterSprite.modulate.b = 1
+	if characterSprite.modulate == Color(1, 1, 1):
+		characterSprite.modulate.r = 0.7
+		characterSprite.modulate.g = 0.7
+		characterSprite.modulate.b = 1
 
 remotesync func make_normal_color()->void:
 	characterSprite.modulate.r = 1
 	characterSprite.modulate.g = 1
 	characterSprite.modulate.b = 1
+
+remotesync func on_fire(tick_time: float)->void:
+	if characterSprite.modulate.r == 1:
+		characterSprite.modulate.g = 0.3 + tick_time
+		characterSprite.modulate.b = 0.3 + tick_time
 
 func spawn_jump_particles()->void:
 	var particles = JumpParticles.instance()
@@ -416,6 +470,8 @@ func spawn_jump_particles()->void:
 	get_node("../..").add_child(particles)
 	particle_index += 1
 	particle_index = particle_index % 50
+
+# ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
 # Inventory related methods
@@ -452,17 +508,30 @@ master func craft_potion(potion_id: String) -> void:
 	return
 # ------------------------------------------------------------------------------
 
+
+# ------------------------------------------------------------------------------
+# Movement and other methods
+# ------------------------------------------------------------------------------
+
+func set_player_name(new_name: String) -> void:
+	$DirectionNode/NameNode/NameLabel.set_text(new_name)
+
+master func on_direction_timeout() -> void:
+	if Input.is_action_pressed("right") and not _facing_right:
+		_facing_right = true
+	if Input.is_action_pressed("left") and _facing_right:
+		_facing_right = false
+
+master func enable_raycasts() -> void:
+	upCast.enabled = true
+	downCast.enabled = true
+
+master func disable_raycasts() -> void:
+	upCast.enabled = false
+	downCast.enabled = false
+
 remotesync func _on_Punch_body_entered(body):
 	if body and body.is_in_group("player") and body != self:
 		body.rpc("damaged", self, self.punch_attack, global_position.x)
-
-#remotesync func _destroy():
-#	if self.get_child_count() > 0:
-#		self.get_child(0).queue_free()
-#
-#remotesync func _respawn():
-#	print("current lives for" + str(lives))
-#	yield(get_tree().create_timer(1.0), "timeout")
-#	self.add_child(self)
-#	self.position = get_node("../../SpawnPoints/0").position
-	
+		if fire_punches:
+			body.rpc("dot", self.fire_punches_tick, self.fire_punch_time)

@@ -4,18 +4,21 @@ extends Potion
 
 func drink() -> void:
 	.drink()
-	player.make_intangible()
-	# Make player intangible with collision layers and masks
+	if player.is_network_master():
+		# Make player intangible with collision layers and masks
+		player.make_intangible()
 
 # Teleport player to position
 func env_effect(platform)->bool:
-	player.enable_raycasts()
-	player.position = position
-	player.position.y -= 16
+	if player.is_network_master():
+		player.enable_raycasts()
+		player.position = position
+		player.position.y -= 16
 	return true
 	
 
 func _on_cooldown_finished() -> void:
 	# Make player go tangible
-	player.make_tangible()
+	if player.is_network_master():
+		player.make_tangible()
 	._on_cooldown_finished()

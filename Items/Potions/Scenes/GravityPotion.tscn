@@ -1,13 +1,26 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Items/Potions/Scenes/Potion.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Items/Potions/Scripts/GravityPotion.gd" type="Script" id=2]
+[ext_resource path="res://Items/Potions/Assets/gravity_potion.png" type="Texture" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 4.96234
+height = 3.18359
 
 [node name="GravityPotion" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="Sprite" parent="." index="2"]
-frame = 13
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2( 0, -1.51462 )
+shape = SubResource( 1 )
 
-[node name="CooldownTimer" parent="." index="3"]
+[node name="Sprite" parent="." index="1"]
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+hframes = 1
+vframes = 1
+frame = 0
+
+[node name="CooldownTimer" parent="." index="2"]
 wait_time = 10.0
