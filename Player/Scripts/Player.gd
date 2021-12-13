@@ -297,13 +297,22 @@ func death()->void:
 	dot_time = 0
 	print("current lives:" + str(lives))
 
+func out_of_bounds()->void:
+	hide()
+	_tangible = false
+	lives -= 1
+	health = 0
+	gui_slot.set_hp_value(health)
+	gui_slot.set_stock_lives(lives)
+	dot_time = 0
+
 func revive()->void:
 	print("Reviving")
-	health = MAXHEALTH
-	gui_slot.set_hp_value(health)
 	rpc("make_normal_color")
 	self.position = get_node("../../SpawnPoints/0").position
 	self.show()
+	health = MAXHEALTH
+	gui_slot.set_hp_value(health)
 	invinsible = false
 	_tangible = true
 
