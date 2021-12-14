@@ -87,6 +87,7 @@ var potion_index = 0
 var particle_index = 0
 var _showing_inv = false
 
+# warning-ignore:unused_signal
 signal continue_throwing
 
 func _ready() -> void:
@@ -163,14 +164,14 @@ func _physics_process(delta: float) -> void:
 			var potion_name = get_name() + str(potion_index)
 			potion_index += 1
 			potion_index = potion_index % 50 # rare to throw more than 50 potions at a time
-			potions_inventory.consume_item(_equipped_id, 1)
+			var _ret = potions_inventory.consume_item(_equipped_id, 1)
 			rpc("throw", potion_name, get_global_mouse_position(), get_tree().get_network_unique_id())
 		
 		if can_action and Input.is_action_just_pressed("drink") and _equipped_id and consume_cond:
 			var potion_name = get_name() + str(potion_index)
 			potion_index += 1
 			potion_index = potion_index % 50
-			potions_inventory.consume_item(_equipped_id, 1)
+			var _ret = potions_inventory.consume_item(_equipped_id, 1)
 			drink(potion_name)
 		
 		if can_action and Input.is_action_just_pressed("craft") and _equipped_id:
@@ -333,6 +334,7 @@ func revive()->void:
 	print("Reviving")
 	rpc("make_normal_color")
 	self.position = get_node("../../SpawnPoints/0").position
+	dot_time = 0
 	self.show()
 	health = MAXHEALTH
 	gui_slot.set_hp_value(health)
@@ -352,7 +354,7 @@ master func damaged(_by_who, dmg:int, dmg_pos: float, hit_speed: int = HIT_SPEED
 
 # func that gets executed on every client
 # it updates the health and plays the animation
-remotesync func get_hurt(dmg: int, play_anim: bool = true) -> void:
+remotesync func get_hurt(dmg: float, play_anim: bool = true) -> void:
 	invinsible = true and play_anim
 	health -= dmg
 	gui_slot.set_hp_value(health)
@@ -498,10 +500,10 @@ remotesync func make_normal_color()->void:
 	characterSprite.modulate.g = 1
 	characterSprite.modulate.b = 1
 
-remotesync func on_fire(tick_time: float)->void:
+remotesync func on_fire(current_tick_time: float)->void:
 	if characterSprite.modulate.r == 1:
-		characterSprite.modulate.g = 0.3 + tick_time
-		characterSprite.modulate.b = 0.3 + tick_time
+		characterSprite.modulate.g = 0.3 + current_tick_time
+		characterSprite.modulate.b = 0.3 + current_tick_time
 
 func spawn_jump_particles()->void:
 	var particles = JumpParticles.instance()
@@ -542,11 +544,11 @@ master func craft_potion(potion_id: String) -> void:
 
 	# then we consume the plants necessary to craft the potion
 	for i in range(0, len(recipe.input_ids)):
-		plants_inventory.consume_item(recipe.input_ids[i], recipe.input_quantities[i])
+		var _ret = plants_inventory.consume_item(recipe.input_ids[i], recipe.input_quantities[i])
 	
 	# finally we add the potion to the potions inventory
 	# TODO: Drop the potions in the map.
-	var remaning_q = potions_inventory.add_item(recipe.output_id, recipe.output_quantity)
+	var _remaning_q = potions_inventory.add_item(recipe.output_id, recipe.output_quantity)
 	return
 # ------------------------------------------------------------------------------
 

@@ -119,13 +119,13 @@ remote func ready_to_start(id):
 func host_game(new_player_name):
 	player_name = new_player_name
 	peer = NetworkedMultiplayerENet.new()
-	var error = peer.create_server(DEFAULT_PORT, MAX_PEERS)
+	var _error = peer.create_server(DEFAULT_PORT, MAX_PEERS)
 	get_tree().set_network_peer(peer)
 
 func join_game(ip, new_player_name):
 	player_name = new_player_name
 	peer = NetworkedMultiplayerENet.new()
-	peer.create_client(ip, DEFAULT_PORT)
+	var _error = peer.create_client(ip, DEFAULT_PORT)
 	get_tree().set_network_peer(peer)
 
 func get_player_list():
@@ -156,10 +156,10 @@ func end_screen():
 		child.hide()
 	if not player_nodes[get_tree().get_network_unique_id()].dead:
 		# show victory screen
-		get_tree().change_scene("res://UI/Scenes/VictoryScreen.tscn")
+		var _err = get_tree().change_scene("res://UI/Scenes/VictoryScreen.tscn")
 	else:
 		# show defeat screen
-		get_tree().change_scene("res://UI/Scenes/DefeatScreen.tscn")
+		var _err = get_tree().change_scene("res://UI/Scenes/DefeatScreen.tscn")
 	get_tree().set_pause(true)
 	if get_tree().is_network_server():
 		close_server()

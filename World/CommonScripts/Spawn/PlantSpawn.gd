@@ -24,7 +24,7 @@ func _ready() -> void:
 		randomize()
 		spawnTimer = Timer.new()
 		add_child(spawnTimer)
-		spawnTimer.connect("timeout", self, "_on_spawn_timeout")
+		var _ret = spawnTimer.connect("timeout", self, "_on_spawn_timeout")
 		var time = LOWER_TIME_RANGE + randi() % UPPER_TIME_RANGE
 		spawnTimer.one_shot = true
 		spawnTimer.start(time)

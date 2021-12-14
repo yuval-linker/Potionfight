@@ -13,7 +13,7 @@ func _on_mouse_exited() -> void:
 func set_player(new_player: Player):
 	player = new_player
 	playerPotionsInv = player.potions_inventory
-	playerPotionsInv.connect("potions_inventory_changed", self, "_on_potions_inv_change")
+	var _ret = playerPotionsInv.connect("potions_inventory_changed", self, "_on_potions_inv_change")
 
 func hide_inv_gui() -> void:
 	center.hide_info()

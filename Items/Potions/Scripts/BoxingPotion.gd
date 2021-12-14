@@ -7,7 +7,7 @@ onready var stun_timer: Timer = $StunTimer
 const BASICS_BUFF: int = 10
 
 func _ready() -> void:
-	stun_timer.connect("timeout", self, "_on_stun_timeout")
+	var _err = stun_timer.connect("timeout", self, "_on_stun_timeout")
 
 func drink():
 	if player.is_network_master():

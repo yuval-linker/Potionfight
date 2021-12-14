@@ -9,8 +9,8 @@ var y_offset = 0
 var anim_offset = Vector2.ZERO
 
 func _ready() -> void:
-	connect("body_entered", self, "_on_body_entered")
-	connect("area_entered", self, "_on_area_entered")
+	var _ret = connect("body_entered", self, "_on_body_entered")
+	_ret = connect("area_entered", self, "_on_area_entered")
 
 func _on_area_entered(area)->void:
 	if area.is_in_group("potion"):
