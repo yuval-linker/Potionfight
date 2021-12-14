@@ -14,7 +14,7 @@ func drink()->void:
 
 func damage_enemy(enemy)->bool:
 	if is_network_master():
-		.damage_enemy(enemy)
+		var _ret = .damage_enemy(enemy)
 		damaged_enemy = enemy
 		enemy.rpc("dot", total_dot_damage, dot_damage_time)
 	return true

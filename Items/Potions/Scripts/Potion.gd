@@ -39,6 +39,7 @@ func damage_enemy(enemy) -> bool:
 
 # Override this function to do a special effect
 # when colliding with a platform
+# warning-ignore:unused_argument
 func env_effect(platform) -> bool:
 	return true
 

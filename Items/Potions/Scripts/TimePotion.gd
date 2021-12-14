@@ -18,7 +18,7 @@ func drink()->void:
 		_destroy()
 
 func damage_enemy(enemy)->bool:
-	.damage_enemy(enemy)
+	var _ret = .damage_enemy(enemy)
 	damaged_player = enemy
 	if is_network_master():
 		damaged_player.rpc("make_slower", SPEED_DEBUFF)

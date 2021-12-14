@@ -8,7 +8,7 @@ var player: Player
 func set_player(new_player: Player):
 	player = new_player
 	playerPlantInv = player.plants_inventory
-	playerPlantInv.connect("plants_inventory_changed", self, "on_plant_inv_change")
+	var _ret = playerPlantInv.connect("plants_inventory_changed", self, "on_plant_inv_change")
 
 func on_plant_inv_change():
 	var plants: Array = playerPlantInv.get_items()

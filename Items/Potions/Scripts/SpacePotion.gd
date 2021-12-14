@@ -9,7 +9,7 @@ func drink() -> void:
 		player.make_intangible()
 
 # Teleport player to position
-func env_effect(platform)->bool:
+func env_effect(_platform)->bool:
 	if player.is_network_master():
 		player.enable_raycasts()
 		player.position = position

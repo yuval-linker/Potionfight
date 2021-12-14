@@ -1,0 +1,9 @@
+[gd_resource type="DynamicFont" load_steps=2 format=2]
+
+[ext_resource path="res://UI/Assets/Fonts/hf-free-complete/matchup-pro-v1.1/MatchupPro.otf" type="DynamicFontData" id=1]
+
+[resource]
+size = 128
+outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )

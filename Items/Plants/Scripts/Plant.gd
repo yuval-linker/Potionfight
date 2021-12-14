@@ -16,11 +16,11 @@ onready var collision_shape = $CollisionShape2D
 var lifetime_timer: Timer
 
 func _ready() -> void:
-	connect("body_entered", self, "_on_body_entered")
+	var _ret = connect("body_entered", self, "_on_body_entered")
 	if get_tree().is_network_server():
 		lifetime_timer = Timer.new()
 		add_child(lifetime_timer)
-		lifetime_timer.connect("timeout", self, "_on_lifetime_ended")
+		_ret = lifetime_timer.connect("timeout", self, "_on_lifetime_ended")
 		lifetime_timer.start(LIFETIME)
 
 func _physics_process(delta: float) -> void:

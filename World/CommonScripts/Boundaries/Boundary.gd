@@ -9,8 +9,8 @@ var y_offset = 0
 var anim_offset = Vector2.ZERO
 
 func _ready() -> void:
-	connect("body_entered", self, "_on_body_entered")
-	connect("area_entered", self, "_on_area_entered")
+	var _ret = connect("body_entered", self, "_on_body_entered")
+	_ret = connect("area_entered", self, "_on_area_entered")
 
 func _on_area_entered(area)->void:
 	if area.is_in_group("potion"):
@@ -38,7 +38,8 @@ func _on_animation_finished(animation, player)->void:
 	animation.queue_free()
 	yield(get_tree().create_timer(2.0), "timeout")
 	if player.lives == 0:
-		Gamestate.end_game()
+		player.dead = true
+		Gamestate.end_screen()
 		return
 	player.set_physics_process(true)
 	player.revive()
