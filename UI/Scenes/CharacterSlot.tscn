@@ -241,3 +241,6 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CraftedSpawn" type="Position2D" parent="."]
+position = Vector2( 30.736, -4.36406 )

@@ -9,6 +9,7 @@ const BORDERCOLOR = {
 	3: Color("#FF8000"),
 }
 
+const CraftedPopup = preload("res://UI/Scenes/CraftedPopup.tscn")
 
 onready var hpBar = $HpBar
 onready var label = $Label
@@ -16,6 +17,7 @@ onready var lives = $Lives
 onready var potionSprite = $EquippedPanel/Equipped/Control/PotionSprite
 onready var potionLabel = $EquippedPanel/Label
 onready var equippedPanel = $EquippedPanel
+onready var craftedSpawn = $CraftedSpawn
 
 func set_name(name: String):
 	if name.length() > 20:
@@ -30,6 +32,11 @@ func set_stock_lives(number: int):
 	if number < lives.get_child_count() and number >= 0:
 		for n in range(number, lives.get_child_count()):
 			lives.get_child(n).queue_free()
+
+func potion_popup()->void:
+	var new_popup = CraftedPopup.instance()
+	new_popup.position = craftedSpawn.position
+	add_child(new_popup)
 
 func set_equipped_potion(potion_id: String)->void:
 	var resource = EntityDatabase.get_entity("Potion", potion_id)["Resource"]

@@ -531,8 +531,6 @@ master func pick_up_plant(params: Dictionary) -> void:
 
 master func craft_potion(potion_id: String) -> void:
 	var recipe = EntityDatabase.get_entity("Potion", potion_id)["Recipe"]
-	print(potion_id)
-	print(recipe.output_id)
 	assert (potion_id == recipe.output_id)
 	assert (len(recipe.input_ids) == len(recipe.input_quantities))
 	
@@ -549,7 +547,12 @@ master func craft_potion(potion_id: String) -> void:
 	# finally we add the potion to the potions inventory
 	# TODO: Drop the potions in the map.
 	var _remaning_q = potions_inventory.add_item(recipe.output_id, recipe.output_quantity)
+	rpc("crafted_popup")
 	return
+
+remotesync func crafted_popup()->void:
+	gui_slot.potion_popup()
+
 # ------------------------------------------------------------------------------
 
 
