@@ -19,3 +19,8 @@ func on_plant_inv_change():
 			slot.add_plant(plants[i])
 		else:
 			slot.empty()
+func hide_inv_gui() -> void:
+	self.hide()
+
+func show_inv_gui() -> void:
+	self.show()

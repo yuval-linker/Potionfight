@@ -18,14 +18,6 @@ const LOWER_SPEED_CAP = 150
 const MAXLIVES = 3
 
 # classes
-var Potion = preload("res://Items/Potions/Scenes/Potion.tscn")
-var SpacePotion = preload("res://Items/Potions/Scenes/SpacePotion.tscn")
-var BoxingPotion = load("res://Items/Potions/Scenes/BoxingPotion.tscn")
-var GravityPotion = preload("res://Items/Potions/Scenes/GravityPotion.tscn")
-var TimePotion = preload("res://Items/Potions/Scenes/TimePotion.tscn")
-var YinYangPotion = preload("res://Items/Potions/Scenes/YinYangPotion.tscn")
-var FirePotion = preload("res://Items/Potions/Scenes/FirePotion.tscn")
-
 var JumpParticles = preload("res://Particles/Scenes/JumpParticles.tscn")
 var HeartParticles = preload("res://Particles/Scenes/LifeParticles.tscn")
 
@@ -56,8 +48,9 @@ puppet var puppet_punching: bool = false
 puppet var puppet_stunned: bool = false
 puppet var puppet_jump_buffed: bool = false
 puppet var puppet_just_jumped: bool = false
-puppet var _equipped
 export(bool) puppet var throwing = false
+
+puppetsync var _equipped_id = null
 
 # Movement vars
 var linear_vel: Vector2 = Vector2.ZERO
@@ -92,6 +85,7 @@ var fire_punch_time = 0.0
 var player: KinematicBody2D
 var potion_index = 0
 var particle_index = 0
+var _showing_inv = false
 
 signal continue_throwing
 
@@ -103,19 +97,26 @@ func _ready() -> void:
 	$DirectionNode/Punch/CollisionShape2D.disabled = true
 	direction_timer.connect("timeout", self, "on_direction_timeout")
 	puppet_pos = position
-	_equipped = FirePotion
 
 func _physics_process(delta: float) -> void:
 	if is_network_master():
 		linear_vel = move_and_slide(linear_vel, Vector2.UP)
 		on_floor = is_on_floor()
 		
-		var can_action = not _stunned and _tangible and health > 0
+		var can_action = not _stunned and _tangible and health > 0 and not _showing_inv
 		var target_vel = Input.get_action_strength("right") - Input.get_action_strength("left")
 		target_vel = target_vel if (not _stunned and health > 0) else 0
 		
 		linear_vel.x = move_toward(linear_vel.x, target_vel * modified_speed, ACCELERATION)
 		linear_vel.y += GRAVITY * delta
+		
+		# GUI Inventories
+		if Input.is_action_just_pressed("open_inventory"):
+			if _showing_inv:
+				hide_inv()
+			else:
+				show_inv()
+		
 		if not _stunned and health > 0:
 			
 			# Movement
@@ -150,26 +151,29 @@ func _physics_process(delta: float) -> void:
 			print("disable")
 			disable_raycasts()
 		
-		if can_action and Input.is_action_just_pressed("punch"):
+		if can_action and Input.is_action_just_pressed("punch") :
 			punching = true
 		
 		crouching = Input.is_action_pressed("crouch") and not _stunned
 		
-#		if Input.is_action_just_pressed("change"):
-##			_equipped = Potion if _equipped == GravityPotion else GravityPotion
+		var consume_cond = _equipped_id and potions_inventory.get_item_quantity(_equipped_id) > 0 
 		
 		# Throw a potion
-		if Input.is_action_just_pressed("throw") and not throwing and can_action:
+		if Input.is_action_just_pressed("throw") and not throwing and can_action and consume_cond:
 			var potion_name = get_name() + str(potion_index)
 			potion_index += 1
 			potion_index = potion_index % 50 # rare to throw more than 50 potions at a time
+			potions_inventory.consume_item(_equipped_id, 1)
 			rpc("throw", potion_name, get_global_mouse_position(), get_tree().get_network_unique_id())
 		
-		if can_action and Input.is_action_just_pressed("drink"):
+		if can_action and Input.is_action_just_pressed("drink") and _equipped_id and consume_cond:
 			var potion_name = get_name() + str(potion_index)
 			potion_index += 1
 			potion_index = potion_index % 50
 			drink(potion_name)
+		
+		if can_action and Input.is_action_just_pressed("craft") and _equipped_id:
+			craft_potion(_equipped_id)
 		
 		# DOT damage
 		if dot_time > 0 and health > 0:
@@ -243,6 +247,23 @@ func _physics_process(delta: float) -> void:
 		else:
 			playback.travel("falling")
 
+func hide_inv() -> void:
+	var gui_inventories = get_tree().get_nodes_in_group("gui_inventories")
+	var gui_char_slots = get_tree().get_nodes_in_group("gui_char_slot")
+	for inv in gui_inventories:
+		inv.hide_inv_gui()
+	for slot in gui_char_slots:
+		slot.show()
+	_showing_inv = not _showing_inv
+	
+func show_inv() -> void:
+	var gui_inventories = get_tree().get_nodes_in_group("gui_inventories")
+	var gui_char_slots = get_tree().get_nodes_in_group("gui_char_slot")
+	for slot in gui_char_slots:
+		slot.hide()
+	for inv in gui_inventories:
+		inv.show_inv_gui()
+	_showing_inv = not _showing_inv
 
 # ------------------------------------------------------------------------------
 # Action related methods
@@ -260,7 +281,7 @@ remotesync func throw(potion_name: String, cursor_pos: Vector2, by_who: int):
 		playback.travel("throw")
 	else:
 		playback.travel("air_throw")
-	var potion = _equipped.instance()
+	var potion = EntityDatabase.get_entity("Potion", _equipped_id)["Scene"].instance()
 	potion.set_name(potion_name)
 	potion.player = get_node("../" + str(by_who))
 	yield(self, "continue_throwing")
@@ -277,9 +298,10 @@ remotesync func throw(potion_name: String, cursor_pos: Vector2, by_who: int):
 	var force = (cursor_pos - spawn_pos).normalized() * THROWFORCE
 	get_node("../..").add_child(potion)
 	potion.throw(force)
+	
 
 master func drink(potion_name):
-	var potion = _equipped.instance()
+	var potion = EntityDatabase.get_entity("Potion", _equipped_id)["Scene"].instance()
 	potion.player = self
 	potion.set_name(potion_name)
 	get_node("../..").add_child(potion)
@@ -327,8 +349,6 @@ master func damaged(_by_who, dmg:int, dmg_pos: float, hit_speed: int = HIT_SPEED
 	linear_vel.x = dir*hit_speed
 	rpc("get_hurt", dmg)
 
-
-
 # func that gets executed on every client
 # it updates the health and plays the animation
 remotesync func get_hurt(dmg: int, play_anim: bool = true) -> void:
@@ -356,7 +376,8 @@ remotesync func get_hurt(dmg: int, play_anim: bool = true) -> void:
 			
 			#end the game
 
-
+func equip_potion(potion_id: String) -> void:
+	rset("_equipped_id", potion_id)
 
 # ------------------------------------------------------------------------------
 # Potion effects methods
@@ -503,7 +524,9 @@ master func pick_up_plant(params: Dictionary) -> void:
 	plant_scene.rpc_id(1, "handle_pick_up", remaining_q)
 
 master func craft_potion(potion_id: String) -> void:
-	var recipe : Dictionary = EntityDatabase.get_entity("Potion", potion_id)["Recipe"]
+	var recipe = EntityDatabase.get_entity("Potion", potion_id)["Recipe"]
+	print(potion_id)
+	print(recipe.output_id)
 	assert (potion_id == recipe.output_id)
 	assert (len(recipe.input_ids) == len(recipe.input_quantities))
 	

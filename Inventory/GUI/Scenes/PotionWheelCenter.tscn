@@ -16,7 +16,7 @@ __meta__ = {
 }
 
 [node name="Center" type="TextureRect" parent="."]
-margin_right = 95.0
+margin_right = 64.0
 margin_bottom = 64.0
 rect_scale = Vector2( 1.25, 1.25 )
 texture = ExtResource( 1 )
@@ -25,10 +25,10 @@ __meta__ = {
 }
 
 [node name="PotionName" type="Label" parent="."]
-margin_left = 17.0
+margin_left = 16.0
 margin_top = 16.0
 margin_right = 112.0
-margin_bottom = 29.0
+margin_bottom = 33.0
 rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = SubResource( 1 )
 align = 1
@@ -36,23 +36,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PotionDescription" type="Label" parent="."]
-margin_left = 14.0
-margin_top = 27.0
-margin_right = 238.0
-margin_bottom = 91.0
-rect_scale = Vector2( 0.25, 0.25 )
-custom_fonts/font = SubResource( 1 )
-align = 1
-autowrap = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="RecipeContainer" type="HBoxContainer" parent="."]
-margin_left = 16.0
-margin_top = 48.0
-margin_right = 64.0
+margin_left = 8.0
+margin_top = 40.0
+margin_right = 72.0
 margin_bottom = 64.0
 alignment = 1
 __meta__ = {

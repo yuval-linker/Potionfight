@@ -19,3 +19,9 @@ func add_item(item_id: String, quantity: int) -> int:
 	var remaining_q = .add_item(item_id, quantity)
 	emit_signal("potions_inventory_changed")
 	return remaining_q
+
+func consume_item(item_id: String, quantity: int) -> int:
+	var remaining_q = .consume_item(item_id, quantity)
+	if remaining_q != quantity:
+		emit_signal("potions_inventory_changed")
+	return remaining_q

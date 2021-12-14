@@ -92,6 +92,9 @@ remote func pre_start_game(spawn_points):
 	var inventory = level.get_node("GUI/Inventory")
 	inventory.set_player(player_nodes[get_tree().get_network_unique_id()])
 	
+	var potion_wheel = level.get_node("GUI/PotionWheel")
+	potion_wheel.set_player(player_nodes[get_tree().get_network_unique_id()])
+	
 	# Tell server we are ready to start
 	if not get_tree().is_network_server():
 		rpc_id(1, "ready_to_start", get_tree().get_network_unique_id())

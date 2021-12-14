@@ -37,7 +37,7 @@ default_font = SubResource( 5 )
 atlas = ExtResource( 2 )
 region = Rect2( 3.243, 0.657, 23, 18 )
 
-[node name="CharacterSlot" type="Control"]
+[node name="CharacterSlot" type="Control" groups=["gui_char_slot"]]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -824.0
