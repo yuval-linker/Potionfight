@@ -4,7 +4,7 @@ const DEFAULT_PORT = 10567 # We can change it
 const MAX_PEERS = 2 # Only 1v1
 
 # Network peer
-var peer = null
+var peer: NetworkedMultiplayerENet = null
 
 # Name for player
 var player_name = "This Player"
@@ -103,6 +103,7 @@ remote func pre_start_game(spawn_points):
 
 remote func post_start_game():
 	get_tree().set_pause(false)
+	players_ready.clear()
 
 remote func ready_to_start(id):
 	assert(get_tree().is_network_server())
@@ -118,7 +119,7 @@ remote func ready_to_start(id):
 func host_game(new_player_name):
 	player_name = new_player_name
 	peer = NetworkedMultiplayerENet.new()
-	peer.create_server(DEFAULT_PORT, MAX_PEERS)
+	var error = peer.create_server(DEFAULT_PORT, MAX_PEERS)
 	get_tree().set_network_peer(peer)
 
 func join_game(ip, new_player_name):
@@ -149,12 +150,39 @@ func begin_game():
 	
 	pre_start_game(spawn_points)
 
+func end_screen():
+	get_node("/root/Level/Camera2D").current = false
+	for child in get_node("/root/Level/GUI").get_children():
+		child.hide()
+	if not player_nodes[get_tree().get_network_unique_id()].dead:
+		# show victory screen
+		get_tree().change_scene("res://UI/Scenes/VictoryScreen.tscn")
+	else:
+		# show defeat screen
+		get_tree().change_scene("res://UI/Scenes/DefeatScreen.tscn")
+	get_tree().set_pause(true)
+	if get_tree().is_network_server():
+		close_server()
+	else:
+		get_tree().set_network_peer(null)
+#	peer.close_connection()
+
+func close_server():
+	for player in players:
+		if player != 1:
+			peer.disconnect_peer(player)
+	
+	peer.close_connection()
+	get_tree().set_network_peer(null)
+	print("SERVER CLOSED")
+
 func end_game():
 	if has_node("/root/Level"):
 		get_node("/root/Level").queue_free()
 	
 	emit_signal("game_ended")
 	players.clear()
+	player_nodes.clear()
 
 
 func _ready() -> void:

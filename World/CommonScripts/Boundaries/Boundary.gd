@@ -38,7 +38,8 @@ func _on_animation_finished(animation, player)->void:
 	animation.queue_free()
 	yield(get_tree().create_timer(2.0), "timeout")
 	if player.lives == 0:
-		Gamestate.end_game()
+		player.dead = true
+		Gamestate.end_screen()
 		return
 	player.set_physics_process(true)
 	player.revive()

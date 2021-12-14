@@ -170,6 +170,7 @@ func _physics_process(delta: float) -> void:
 			var potion_name = get_name() + str(potion_index)
 			potion_index += 1
 			potion_index = potion_index % 50
+			potions_inventory.consume_item(_equipped_id, 1)
 			drink(potion_name)
 		
 		if can_action and Input.is_action_just_pressed("craft") and _equipped_id:
@@ -372,12 +373,15 @@ remotesync func get_hurt(dmg: int, play_anim: bool = true) -> void:
 		else:
 			dead = true
 			yield(get_tree().create_timer(5.0), "timeout")
-			Gamestate.end_game()
-			
+			Gamestate.end_screen()
 			#end the game
 
 func equip_potion(potion_id: String) -> void:
 	rset("_equipped_id", potion_id)
+	rpc("set_gui_potion", potion_id)
+
+remotesync func set_gui_potion(potion_id: String)->void:
+	gui_slot.set_equipped_potion(potion_id)
 
 # ------------------------------------------------------------------------------
 # Potion effects methods

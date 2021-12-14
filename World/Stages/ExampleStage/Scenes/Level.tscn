@@ -585,13 +585,14 @@ margin_top = -62.0
 margin_right = 178.0
 
 [node name="Slots" type="HBoxContainer" parent="GUI"]
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -138.461
-margin_top = -106.278
-margin_right = -138.461
-margin_bottom = -35.2777
+margin_left = -612.308
+margin_top = -125.327
+margin_right = 411.692
+margin_bottom = -54.3265
 custom_constants/separation = 300
 alignment = 1
 __meta__ = {
