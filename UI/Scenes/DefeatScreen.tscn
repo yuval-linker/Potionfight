@@ -118,7 +118,7 @@ __meta__ = {
 position = Vector2( 21.1893, -50.8542 )
 scale = Vector2( 3.53032, 3.40026 )
 frames = SubResource( 8 )
-frame = 5
+frame = 2
 playing = true
 
 [node name="Button" type="Control" parent="."]
@@ -145,6 +145,9 @@ rect_min_size = Vector2( 100, 100 )
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 3 )
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="Button"]
 anchor_left = 0.5

@@ -8,5 +8,5 @@ func _ready() -> void:
 	camera.current = true
 
 func _on_back_pressed():
-	get_tree().change_scene("res://UI/Scenes/Lobby.tscn")
+	get_tree().change_scene("res://UI/Scenes/Main.tscn")
 	Gamestate.end_game()

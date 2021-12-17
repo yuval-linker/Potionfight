@@ -9,35 +9,35 @@
 [ext_resource path="res://UI/Scripts/EndScreen.gd" type="Script" id=7]
 [ext_resource path="res://UI/Assets/Fonts/EndScreenTitle.tres" type="DynamicFont" id=8]
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
 region = Rect2( 36, 19, 105, 84 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 32, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 64, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 96, 32, 32 )
 
-[sub_resource type="SpriteFrames" id=7]
+[sub_resource type="SpriteFrames" id=6]
 animations = [ {
-"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 5 ), SubResource( 4 ), SubResource( 3 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 4 ), SubResource( 3 ), SubResource( 2 ) ],
 "loop": true,
 "name": "default",
 "speed": 15.0
 } ]
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=7]
 size = 32
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
@@ -93,7 +93,7 @@ margin_left = -108.0
 margin_top = -41.725
 margin_right = 107.0
 margin_bottom = 123.275
-texture = SubResource( 2 )
+texture = SubResource( 1 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -115,8 +115,8 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Chicken"]
 position = Vector2( 21.1893, -50.8542 )
 scale = Vector2( 3.53032, 3.40026 )
-frames = SubResource( 7 )
-frame = 5
+frames = SubResource( 6 )
+frame = 2
 playing = true
 
 [node name="Button" type="Control" parent="."]
@@ -151,7 +151,7 @@ margin_left = -81.0
 margin_top = -20.0
 margin_right = 79.0
 margin_bottom = 16.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
 text = "Back to Menu"
 align = 1
 valign = 1
