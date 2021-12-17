@@ -1,0 +1,442 @@
+[gd_scene load_steps=48 format=2]
+
+[ext_resource path="res://UI/Assets/Fonts/EndScreenTitle.tres" type="DynamicFont" id=1]
+[ext_resource path="res://UI/Assets/skyes/nightbackgroundwithmoon.png" type="Texture" id=2]
+[ext_resource path="res://UI/Assets/Fonts/hf-free-complete/matchup-pro-v1.1/MatchupPro.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://Player/Assets/Chick-Boy_Full_Pack/Chick-Boy Full Pack/ChikBoy_double_jump.png" type="Texture" id=4]
+[ext_resource path="res://Player/Assets/Chick-Boy_Full_Pack/Chick-Boy Full Pack/ChikBoy_attack_3.png" type="Texture" id=5]
+[ext_resource path="res://Player/Assets/Chick-Boy_Full_Pack/Chick-Boy Full Pack/ChikBoy_floor_slide.png" type="Texture" id=6]
+[ext_resource path="res://UI/Scripts/Controllers.gd" type="Script" id=7]
+[ext_resource path="res://UI/Assets/components/Buttons/buttonpress.png" type="Texture" id=8]
+[ext_resource path="res://UI/Assets/components/Buttons/button.png" type="Texture" id=9]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 64
+outline_size = 2
+outline_color = Color( 0.0862745, 0.0392157, 0.0392157, 1 )
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+outline_color = Color( 0.0901961, 0.0666667, 0.0666667, 1 )
+font_data = ExtResource( 3 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 128, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 160, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 192, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 224, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 256, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 288, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 320, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 352, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 384, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 416, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 448, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 480, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 512, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 544, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 576, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=23]
+animations = [ {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
+"loop": true,
+"name": "default",
+"speed": 13.0
+} ]
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 128, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 160, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 192, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=31]
+animations = [ {
+"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
+"loop": true,
+"name": "default",
+"speed": 7.0
+} ]
+
+[sub_resource type="DynamicFont" id=32]
+size = 32
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 3 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 96, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=37]
+animations = [ {
+"frames": [ SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="DynamicFont" id=38]
+size = 32
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 3 )
+
+[node name="Control" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -0.554321
+margin_top = -168.783
+margin_right = 1023.45
+margin_bottom = 599.217
+rect_pivot_offset = Vector2( 118.554, 652.783 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+margin_left = 262.289
+margin_top = 16.1497
+margin_right = 1205.29
+margin_bottom = 243.15
+custom_fonts/font = ExtResource( 1 )
+text = "Controllers"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Movement controls" type="Label" parent="."]
+margin_left = 75.9376
+margin_top = 182.134
+margin_right = 423.938
+margin_bottom = 449.134
+rect_pivot_offset = Vector2( -596.267, -176.739 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "W/Space - Jump / Second jump
+A - Move left
+S - Crouch
+D - Move right
+"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Movement" type="Label" parent="."]
+margin_left = 10.8911
+margin_top = 141.47
+margin_right = 458.891
+margin_bottom = 348.47
+rect_pivot_offset = Vector2( 298.166, 86.574 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Movement
+"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Craft" type="Label" parent="."]
+margin_left = 485.989
+margin_top = 334.347
+margin_right = 973.989
+margin_bottom = 541.347
+rect_pivot_offset = Vector2( 298.166, 86.574 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Crafting / Inventory
+"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Attack" type="Label" parent="."]
+margin_left = 470.203
+margin_top = 92.6707
+margin_right = 958.203
+margin_bottom = 299.671
+rect_pivot_offset = Vector2( 298.166, 86.574 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "
+Attack"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Attack controls" type="Label" parent="."]
+margin_left = 570.192
+margin_top = 247.755
+margin_right = 874.192
+margin_bottom = 331.755
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Right Click - Basic attack
+Left Click - Potion throw
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control3" type="Control" parent="."]
+margin_left = 159.141
+margin_top = 166.192
+margin_right = 199.141
+margin_bottom = 206.192
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Control3"]
+position = Vector2( 67.0375, 13.3836 )
+scale = Vector2( 2.5555, 2.26293 )
+frames = SubResource( 23 )
+frame = 4
+playing = true
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
+position = Vector2( 725.31, 182.817 )
+scale = Vector2( 2.18815, 2.26137 )
+frames = SubResource( 31 )
+frame = 1
+playing = true
+
+[node name="Movement controls2" type="Label" parent="."]
+margin_left = 569.27
+margin_top = 376.313
+margin_right = 949.27
+margin_bottom = 643.313
+rect_pivot_offset = Vector2( 298.166, 86.574 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Q - Inventory
+Hold mouse to select potion
+R - Craft selected potion
+E - Drink selected potion
+"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -389.389
+margin_top = -72.787
+margin_right = -289.389
+margin_bottom = 27.213
+rect_min_size = Vector2( 100, 100 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" type="TextureButton" parent="Button"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -100.0
+margin_top = -74.5
+margin_right = 100.0
+margin_bottom = 75.5
+rect_min_size = Vector2( 100, 100 )
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Button"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -81.0
+margin_top = -20.0
+margin_right = 79.0
+margin_bottom = 16.0
+custom_fonts/font = SubResource( 32 )
+text = "Back to Menu"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control2" type="Control" parent="."]
+margin_left = 159.141
+margin_top = 166.192
+margin_right = 199.141
+margin_bottom = 206.192
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Control2"]
+position = Vector2( 641.893, 203.683 )
+scale = Vector2( 2.57131, 2.30685 )
+frames = SubResource( 37 )
+frame = 3
+playing = true
+
+[node name="Button2" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -396.164
+margin_top = -188.346
+margin_right = -296.164
+margin_bottom = -88.3457
+rect_min_size = Vector2( 100, 100 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PotionButton" type="TextureButton" parent="Button2"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -94.1875
+margin_top = -69.7432
+margin_right = 105.813
+margin_bottom = 80.2568
+rect_min_size = Vector2( 100, 100 )
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Button2"]
+anchor_left = 0.524
+anchor_right = 0.524
+margin_left = -77.7656
+margin_top = -15.3977
+margin_right = 82.2344
+margin_bottom = 20.6023
+custom_fonts/font = SubResource( 38 )
+text = "Potions"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

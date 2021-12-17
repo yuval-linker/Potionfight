@@ -1,0 +1,509 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://UI/Assets/Fonts/hf-free-complete/matchup-pro-v1.1/MatchupPro.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://UI/Assets/Fonts/EndScreenTitle.tres" type="DynamicFont" id=2]
+[ext_resource path="res://UI/Assets/skyes/istockphoto-1279840158-170667a.jpg" type="Texture" id=3]
+[ext_resource path="res://Items/Potions/Assets/time_potion.png" type="Texture" id=4]
+[ext_resource path="res://Items/Potions/Assets/space_potion.png" type="Texture" id=5]
+[ext_resource path="res://Items/Potions/Assets/boxing_potion.png" type="Texture" id=6]
+[ext_resource path="res://Items/Potions/Assets/fire_potion.png" type="Texture" id=7]
+[ext_resource path="res://Items/Potions/Assets/gravity_potion.png" type="Texture" id=8]
+[ext_resource path="res://Items/Potions/Assets/yin_yang_potion.png" type="Texture" id=9]
+[ext_resource path="res://Items/Plants/Assets/void_plant.png" type="Texture" id=10]
+[ext_resource path="res://Items/Plants/Assets/newton_apple.png" type="Texture" id=11]
+[ext_resource path="res://Items/Plants/Assets/chili_plant.png" type="Texture" id=12]
+[ext_resource path="res://Items/Plants/Assets/darkness_plant.png" type="Texture" id=13]
+[ext_resource path="res://Items/Plants/Assets/glove_plant.png" type="Texture" id=14]
+[ext_resource path="res://Items/Plants/Assets/light_plant.png" type="Texture" id=15]
+[ext_resource path="res://Items/Plants/Assets/sandclock_plant.png" type="Texture" id=16]
+[ext_resource path="res://UI/Assets/components/Buttons/buttonpress.png" type="Texture" id=17]
+[ext_resource path="res://UI/Assets/components/Buttons/button.png" type="Texture" id=18]
+[ext_resource path="res://UI/Scripts/PotionMenu.gd" type="Script" id=19]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+outline_size = 2
+outline_color = Color( 0.0862745, 0.0392157, 0.0392157, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+outline_color = Color( 0.0901961, 0.0666667, 0.0666667, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 1025.0
+margin_bottom = 599.0
+rect_pivot_offset = Vector2( 224.113, 262.848 )
+texture = ExtResource( 3 )
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+margin_left = 303.342
+margin_top = 35.8483
+margin_right = 1246.34
+margin_bottom = 262.848
+rect_pivot_offset = Vector2( 675.198, 200.568 )
+custom_fonts/font = ExtResource( 2 )
+text = "POTIONS
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Movement2" type="Label" parent="."]
+margin_left = 424.254
+margin_top = 193.958
+margin_right = 584.254
+margin_bottom = 298.958
+rect_pivot_offset = Vector2( 298.166, 86.574 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Boxing
+"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Movement" type="Label" parent="."]
+margin_left = 282.336
+margin_top = 329.17
+margin_right = 730.336
+margin_bottom = 536.17
+rect_pivot_offset = Vector2( 298.166, 86.574 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Gravity
+"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Movement3" type="Label" parent="."]
+margin_left = 79.1675
+margin_top = 382.618
+margin_right = 211.168
+margin_bottom = 487.618
+rect_pivot_offset = Vector2( 298.166, 86.574 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Space
+"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Movement4" type="Label" parent="."]
+margin_left = -80.9106
+margin_top = 153.956
+margin_right = 367.089
+margin_bottom = 360.956
+rect_pivot_offset = Vector2( 298.166, 86.574 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Time
+"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Movement5" type="Label" parent="."]
+margin_left = 753.119
+margin_top = 196.252
+margin_right = 969.119
+margin_bottom = 301.252
+rect_pivot_offset = Vector2( 298.166, 86.574 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "YingYang
+"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Movement6" type="Label" parent="."]
+margin_left = 643.421
+margin_top = 306.315
+margin_right = 1091.42
+margin_bottom = 513.315
+rect_pivot_offset = Vector2( 298.166, 86.574 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Fire"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Space" type="Label" parent="."]
+margin_left = 38.4978
+margin_top = 267.529
+margin_right = 342.498
+margin_bottom = 380.529
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Recipe - 1 x
+Drink - Speedy
+Throw -  Slowness
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Attack controls5" type="Label" parent="."]
+margin_left = 722.294
+margin_top = 445.585
+margin_right = 1034.3
+margin_bottom = 616.585
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Recipe -  1 x
+Drink - Fire fist
+Throw - Inflict burning
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Attack controls6" type="Label" parent="."]
+margin_left = 379.427
+margin_top = 447.847
+margin_right = 715.427
+margin_bottom = 560.847
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Recipe -  1 x 
+Drink - Zero Gravity
+Throw - Knockback
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Attack controls7" type="Label" parent="."]
+margin_left = 36.8193
+margin_top = 447.883
+margin_right = 340.819
+margin_bottom = 589.883
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Recipe -  1 x
+Drink - Intangible
+Throw - Teleport to 
+          location
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Attack controls8" type="Label" parent="."]
+margin_left = 719.356
+margin_top = 257.153
+margin_right = 1023.35
+margin_bottom = 399.153
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Recipe - 1x     1x
+Drink -  Instant healing
+Throw - Deals tons 
+          of damage
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Attack controls9" type="Label" parent="."]
+margin_left = 379.068
+margin_top = 253.477
+margin_right = 691.068
+margin_bottom = 395.477
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Recipe - 1 x
+Drink -  Basic attack
+          hits harder
+Throw - Stun
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+margin_left = 2.12256
+margin_top = 375.244
+margin_right = 66.1226
+margin_bottom = 439.244
+rect_pivot_offset = Vector2( 44.3887, 170.94 )
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+margin_left = 237.302
+margin_top = 378.178
+margin_right = 301.302
+margin_bottom = 442.178
+rect_pivot_offset = Vector2( 41.8731, 48.1407 )
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect20" type="TextureRect" parent="."]
+margin_left = 599.499
+margin_top = 186.962
+margin_right = 663.499
+margin_bottom = 250.962
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+margin_left = 338.48
+margin_top = 187.707
+margin_right = 402.48
+margin_bottom = 251.707
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect5" type="TextureRect" parent="."]
+margin_left = 694.398
+margin_top = 185.631
+margin_right = 758.398
+margin_bottom = 249.631
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect6" type="TextureRect" parent="."]
+margin_left = 960.181
+margin_top = 186.522
+margin_right = 1024.18
+margin_bottom = 250.522
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect7" type="TextureRect" parent="."]
+margin_left = 2.20834
+margin_top = 191.092
+margin_right = 66.2083
+margin_bottom = 255.092
+rect_pivot_offset = Vector2( 58.3368, 32 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect8" type="TextureRect" parent="."]
+margin_left = 233.037
+margin_top = 192.462
+margin_right = 297.037
+margin_bottom = 256.462
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect10" type="TextureRect" parent="."]
+margin_left = 345.783
+margin_top = 373.77
+margin_right = 409.783
+margin_bottom = 437.77
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect11" type="TextureRect" parent="."]
+margin_left = 602.191
+margin_top = 378.309
+margin_right = 666.191
+margin_bottom = 442.309
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect12" type="TextureRect" parent="."]
+pause_mode = 2
+margin_left = 724.777
+margin_top = 379.479
+margin_right = 788.777
+margin_bottom = 443.479
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect13" type="TextureRect" parent="."]
+margin_left = 932.298
+margin_top = 379.734
+margin_right = 996.298
+margin_bottom = 443.734
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect9" type="TextureRect" parent="."]
+margin_left = 202.667
+margin_top = 263.464
+margin_right = 246.667
+margin_bottom = 302.464
+rect_pivot_offset = Vector2( 30.3616, 19.5 )
+texture = ExtResource( 16 )
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect14" type="TextureRect" parent="."]
+margin_left = 546.412
+margin_top = 254.571
+margin_right = 590.412
+margin_bottom = 293.571
+rect_pivot_offset = Vector2( 30.3616, 19.5 )
+texture = ExtResource( 14 )
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect15" type="TextureRect" parent="."]
+margin_left = 934.684
+margin_top = 250.067
+margin_right = 978.684
+margin_bottom = 289.067
+rect_pivot_offset = Vector2( 30.3616, 19.5 )
+texture = ExtResource( 13 )
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect16" type="TextureRect" parent="."]
+margin_left = 856.423
+margin_top = 251.424
+margin_right = 900.423
+margin_bottom = 290.424
+rect_pivot_offset = Vector2( 30.3616, 19.5 )
+texture = ExtResource( 15 )
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect17" type="TextureRect" parent="."]
+margin_left = 208.895
+margin_top = 441.065
+margin_right = 252.895
+margin_bottom = 480.065
+rect_pivot_offset = Vector2( 30.3616, 19.5 )
+texture = ExtResource( 10 )
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect18" type="TextureRect" parent="."]
+margin_left = 886.95
+margin_top = 440.341
+margin_right = 930.95
+margin_bottom = 479.341
+rect_pivot_offset = Vector2( 30.3616, 19.5 )
+texture = ExtResource( 12 )
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect19" type="TextureRect" parent="."]
+margin_left = 544.68
+margin_top = 442.649
+margin_right = 588.68
+margin_bottom = 481.649
+rect_pivot_offset = Vector2( 30.3616, 19.5 )
+texture = ExtResource( 11 )
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -406.495
+margin_top = -508.572
+margin_right = -306.495
+margin_bottom = -408.572
+rect_min_size = Vector2( 100, 100 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" type="TextureButton" parent="Button"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -100.0
+margin_top = -74.5
+margin_right = 100.0
+margin_bottom = 75.5
+rect_min_size = Vector2( 100, 100 )
+texture_normal = ExtResource( 18 )
+texture_pressed = ExtResource( 17 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Button"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -81.0
+margin_top = -20.0
+margin_right = 79.0
+margin_bottom = 16.0
+custom_fonts/font = SubResource( 3 )
+text = "Back to Menu"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

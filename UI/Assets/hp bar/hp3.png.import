@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hp3.png-8f021da9d0f92578fd20ace8969fd0aa.stex"
+path="res://.import/hp3.png-6fb4992fd4ad4cce1925341882f4d022.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Assets/hp3.png"
-dest_files=[ "res://.import/hp3.png-8f021da9d0f92578fd20ace8969fd0aa.stex" ]
+source_file="res://UI/Assets/hp bar/hp3.png"
+dest_files=[ "res://.import/hp3.png-6fb4992fd4ad4cce1925341882f4d022.stex" ]
 
 [params]
 
@@ -28,7 +28,6 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
-process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false
