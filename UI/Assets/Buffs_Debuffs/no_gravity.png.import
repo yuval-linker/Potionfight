@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/no_gravity.png-ea177a173b16c5f65c2e177ed3fdc302.stex"
+path="res://.import/no_gravity.png-8bf6bfa3b7e50e1aa0d4b4621929ccfa.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Assets/no_gravity.png"
-dest_files=[ "res://.import/no_gravity.png-ea177a173b16c5f65c2e177ed3fdc302.stex" ]
+source_file="res://UI/Assets/Buffs_Debuffs/no_gravity.png"
+dest_files=[ "res://.import/no_gravity.png-8bf6bfa3b7e50e1aa0d4b4621929ccfa.stex" ]
 
 [params]
 

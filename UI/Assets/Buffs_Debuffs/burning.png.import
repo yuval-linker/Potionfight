@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/slow.png-1b955eff929d173d987b0469d10c6eb9.stex"
+path="res://.import/burning.png-09df4379fce1d925327b989632176be7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Assets/slow.png"
-dest_files=[ "res://.import/slow.png-1b955eff929d173d987b0469d10c6eb9.stex" ]
+source_file="res://UI/Assets/Buffs_Debuffs/burning.png"
+dest_files=[ "res://.import/burning.png-09df4379fce1d925327b989632176be7.stex" ]
 
 [params]
 

@@ -186,6 +186,7 @@ func _physics_process(delta: float) -> void:
 			dot_time -= delta
 			if dot_time <= 0:
 				rpc("make_normal_color")
+				rpc("hide_effect", "Burning")
 		
 		rset_unreliable("puppet_pos", position)
 		rset_unreliable("puppet_vel", linear_vel)
@@ -338,6 +339,7 @@ func revive()->void:
 	self.show()
 	health = MAXHEALTH
 	gui_slot.set_hp_value(health)
+	gui_slot.clear_effects()
 	invinsible = false
 	_tangible = true
 
@@ -395,10 +397,12 @@ master func healed(amount: int)->void:
 master func make_intangible()->void:
 	_tangible = false
 	rpc("make_transparent")
+	rpc("display_effect", "Intangible")
 
 master func make_tangible()->void:
 	_tangible = true
 	rpc("make_opaque")
+	rpc("hide_effect", "Intangible")
 
 master func empower_basics(amount: int)->void:
 	punch_attack = min(punch_attack + amount, ATTACK_BUFF_CAP)
@@ -409,36 +413,51 @@ master func weaken_basics(amount: int)->void:
 master func stun()->void:
 	_stunned = true
 	rpc("enable_stun_particle")
+	rpc("display_effect", "Stunned")
 
 master func recover()->void:
 	_stunned = false
 	rpc("disable_stun_particle")
+	rpc("hide_effect", "Stunned")
 
 master func light_body(modifier: int)->void:
 	modified_jump_force = min(modified_jump_force + modifier, JUMP_BUFF_CAP)
 	jump_buffed = true
+	rpc("display_effect", "NoGravity")
 
 master func heavy_body(modifier: int)->void:
 	modified_jump_force = max(modified_jump_force - modifier, JUMPFORCE)
 	jump_buffed = false
+	rpc("hide_effect", "NoGravity")
 
 master func make_faster(amount: int)->void:
 	var old_speed = modified_speed
 	modified_speed = min(modified_speed + amount, UPPER_SPEED_CAP)
-	if old_speed < SPEED and modified_speed >= SPEED:
+	if old_speed < SPEED and modified_speed > SPEED:
 		rpc("make_normal_color")
+		rpc("display_effect", "Fast")
+	elif modified_speed > SPEED:
+		rpc("display_effect", "Fast")
+	elif modified_speed == SPEED:
+		rpc("make_normal_color")
+		rpc("hide_effect", "Fast")
+		rpc("hide_effect", "Slow")
 
 master func make_slower(amount: int)->void:
 	modified_speed = max(modified_speed - amount, LOWER_SPEED_CAP)
-	print(modified_speed)
-	if modified_speed < SPEED:
+	if modified_speed == SPEED:
+		rpc("hide_effect", "Fast")
+		rpc("hide_effect", "Slow")
+	elif modified_speed < SPEED:
 		rpc("make_blue")
+		rpc("display_effect", "Slow")
 
 master func dot(total_dmg: int, time: float)->void:
 	if health >= 0:
 		dot_time = time
 		tick_dmg = total_dmg/(2*time)
 		tick_time = 0.5
+		rpc("display_effect", "Burning")
 
 remotesync func get_healed(amount: int)->void:
 	health = min(health + amount, MAXHEALTH)
@@ -448,7 +467,6 @@ remotesync func get_healed(amount: int)->void:
 	directionNode.add_child(hearts)
 
 remotesync func dot_tick(dmg: float)->void:
-	print("DOT tick: ", dmg)
 	tick_time = 0.5
 	get_hurt(dmg, false)
 
@@ -456,11 +474,25 @@ func ablaze_punches(dmg, time)->void:
 	fire_punches_tick = float(dmg)/(2*time)
 	fire_punch_time = time
 	fire_punches = true
+	rpc("display_effect", "FireFist")
 
 func normal_punches()->void:
 	fire_punches = false
+	rpc("hide_effect", "FireFist")
 
 # ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
+# Character Slot Methods
+# ------------------------------------------------------------------------------
+
+remotesync func display_effect(effect: String) -> void:
+	print("display effect called")
+	gui_slot.add_effect(effect)
+
+remotesync func hide_effect(effect: String) -> void:
+	gui_slot.remove_effect(effect)
 
 
 # ------------------------------------------------------------------------------
