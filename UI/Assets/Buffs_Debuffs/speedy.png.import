@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wallpaperflare.com_wallpaper.jpg-736d375620d4646df6837346da50e79b.stex"
+path="res://.import/speedy.png-9cdede6f8abaf70c62da782d86c171cf.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Assets/menu background/wallpaperflare.com_wallpaper.jpg"
-dest_files=[ "res://.import/wallpaperflare.com_wallpaper.jpg-736d375620d4646df6837346da50e79b.stex" ]
+source_file="res://UI/Assets/Buffs_Debuffs/speedy.png"
+dest_files=[ "res://.import/speedy.png-9cdede6f8abaf70c62da782d86c171cf.stex" ]
 
 [params]
 

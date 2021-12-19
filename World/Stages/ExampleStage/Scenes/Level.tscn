@@ -495,9 +495,7 @@ position = Vector2( 304, 100 )
 [node name="Right" type="Position2D" parent="Plants"]
 position = Vector2( 768, 100 )
 
-[node name="TileMap" type="TileMap" parent="." groups=[
-"platform",
-]]
+[node name="TileMap" type="TileMap" parent="." groups=["platform"]]
 z_index = -1
 tile_set = SubResource( 19 )
 cell_size = Vector2( 16, 16 )
@@ -616,9 +614,9 @@ rect_scale = Vector2( 3.8, 3.8 )
 [node name="Boundaries" type="Node" parent="."]
 
 [node name="Left" type="Area2D" parent="Boundaries"]
-monitorable = false
 collision_layer = 64
 collision_mask = 13
+monitorable = false
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true,
@@ -630,9 +628,9 @@ position = Vector2( -22.1591, 302.343 )
 shape = SubResource( 20 )
 
 [node name="Right" type="Area2D" parent="Boundaries"]
-monitorable = false
 collision_layer = 64
 collision_mask = 13
+monitorable = false
 script = ExtResource( 11 )
 __meta__ = {
 "_edit_group_": true,
@@ -644,9 +642,9 @@ position = Vector2( 1058.76, 302.598 )
 shape = SubResource( 20 )
 
 [node name="Down" type="Area2D" parent="Boundaries"]
-monitorable = false
 collision_layer = 64
 collision_mask = 13
+monitorable = false
 script = ExtResource( 13 )
 __meta__ = {
 "_edit_group_": true,
@@ -659,9 +657,9 @@ rotation = 1.57133
 shape = SubResource( 21 )
 
 [node name="Up" type="Area2D" parent="Boundaries"]
-monitorable = false
 collision_layer = 64
 collision_mask = 13
+monitorable = false
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true

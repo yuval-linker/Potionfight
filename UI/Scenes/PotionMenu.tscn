@@ -74,8 +74,8 @@ margin_top = 193.958
 margin_right = 584.254
 margin_bottom = 298.958
 rect_pivot_offset = Vector2( 298.166, 86.574 )
-custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
 text = "Boxing
 "
 align = 1
@@ -90,8 +90,8 @@ margin_top = 329.17
 margin_right = 730.336
 margin_bottom = 536.17
 rect_pivot_offset = Vector2( 298.166, 86.574 )
-custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
 text = "Gravity
 "
 align = 1
@@ -106,8 +106,8 @@ margin_top = 382.618
 margin_right = 211.168
 margin_bottom = 487.618
 rect_pivot_offset = Vector2( 298.166, 86.574 )
-custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
 text = "Space
 "
 align = 1
@@ -122,8 +122,8 @@ margin_top = 153.956
 margin_right = 367.089
 margin_bottom = 360.956
 rect_pivot_offset = Vector2( 298.166, 86.574 )
-custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
 text = "Time
 "
 align = 1
@@ -138,8 +138,8 @@ margin_top = 196.252
 margin_right = 969.119
 margin_bottom = 301.252
 rect_pivot_offset = Vector2( 298.166, 86.574 )
-custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
 text = "YingYang
 "
 align = 1
@@ -154,8 +154,8 @@ margin_top = 306.315
 margin_right = 1091.42
 margin_bottom = 513.315
 rect_pivot_offset = Vector2( 298.166, 86.574 )
-custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
 text = "Fire"
 align = 1
 valign = 1
@@ -168,8 +168,8 @@ margin_left = 38.4978
 margin_top = 267.529
 margin_right = 342.498
 margin_bottom = 380.529
-custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Recipe - 1 x
 Drink - Speedy
 Throw -  Slowness
@@ -183,8 +183,8 @@ margin_left = 722.294
 margin_top = 445.585
 margin_right = 1034.3
 margin_bottom = 616.585
-custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Recipe -  1 x
 Drink - Fire fist
 Throw - Inflict burning
@@ -198,8 +198,8 @@ margin_left = 379.427
 margin_top = 447.847
 margin_right = 715.427
 margin_bottom = 560.847
-custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Recipe -  1 x 
 Drink - Zero Gravity
 Throw - Knockback
@@ -213,8 +213,8 @@ margin_left = 36.8193
 margin_top = 447.883
 margin_right = 340.819
 margin_bottom = 589.883
-custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Recipe -  1 x
 Drink - Intangible
 Throw - Teleport to 
@@ -229,8 +229,8 @@ margin_left = 719.356
 margin_top = 257.153
 margin_right = 1023.35
 margin_bottom = 399.153
-custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Recipe - 1x     1x
 Drink -  Instant healing
 Throw - Deals tons 
@@ -245,8 +245,8 @@ margin_left = 379.068
 margin_top = 253.477
 margin_right = 691.068
 margin_bottom = 395.477
-custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Recipe - 1 x
 Drink -  Basic attack
           hits harder
@@ -486,6 +486,7 @@ margin_top = -74.5
 margin_right = 100.0
 margin_bottom = 75.5
 rect_min_size = Vector2( 100, 100 )
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 18 )
 texture_pressed = ExtResource( 17 )
 expand = true
