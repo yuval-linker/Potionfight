@@ -1,14 +1,23 @@
 extends Control
 
-onready var connect = $Connect
+onready var connectPanel = $Connect
 onready var playersPanel = $Players
+onready var goBackButton = $Players/BackButton
 onready var errorLabel = $Connect/ErrorLabel
-onready var host = $Connect/HostButton
-onready var join = $Connect/JoinButton
-onready var nameText = $Connect/Name
+onready var buttonsNode = $Connect/ButtonsNode
+onready var host = $Connect/ButtonsNode/HostNode/HostButton
+onready var join = $Connect/ButtonsNode/JoinNode/JoinButton
+onready var nameText = $Connect/NameNode/HBoxContainer/Name
 onready var errorDialog = $ErrorDialog
 onready var playerList = $Players/List
+onready var ipNode = $Connect/IPNode
+onready var ipAdress = $Connect/IPNode/IPAddress
+onready var connectButton = $Connect/IPNode/ConnectNode/ConnectButton
+onready var cancelButton = $Connect/IPNode/CancelNode/CancelButton
+onready var popup = $Connect/ConnectingPopup
+onready var popupAnim = $Connect/ConnectingPopup/AnimationPlayer
 
+var candidate_name: String = ""
 
 func _ready() -> void:
 # warning-ignore:return_value_discarded
@@ -24,6 +33,9 @@ func _ready() -> void:
 	
 	host.connect("pressed", self, "_on_host_pressed")
 	join.connect("pressed", self, "_on_join_pressed")
+	connectButton.connect("pressed", self, "_on_connect_pressed")
+	cancelButton.connect("pressed", self, "_on_cancel_pressed")
+	goBackButton.connect("pressed", self, "_on_exit_lobby_pressed")
 # warning-ignore:return_value_discarded
 	$Players/StartButton.connect("pressed", self, "_on_start_pressed")
 # warning-ignore:return_value_discarded
@@ -36,12 +48,12 @@ func _ready() -> void:
 		nameText.text = desktop_path[desktop_path.size() - 2]
 
 func _on_host_pressed():
-	var candidate_name = nameText.text.strip_edges()
+	candidate_name = nameText.text.strip_edges()
 	if  candidate_name == "":
 		errorLabel.text = "Invalid name!"
 		return
 	
-	connect.hide()
+	connectPanel.hide()
 	playersPanel.show()
 	errorLabel.text = ""
 	
@@ -50,35 +62,56 @@ func _on_host_pressed():
 	refresh_lobby()
 
 func _on_join_pressed():
-	var candidate_name = nameText.text.strip_edges()
+	candidate_name = nameText.text.strip_edges()
 	if  candidate_name == "":
 		errorLabel.text = "Invalid name!"
 		return
 	
-	var ip = $Connect/IPAddress.text
+	errorLabel.text = ""
+	connectButton.disabled = false
+	cancelButton.disabled = false
+	buttonsNode.hide()
+	ipNode.show()
+
+func _on_connect_pressed():
+	var ip = ipAdress.text
 	if not ip.is_valid_ip_address():
 		errorLabel.text = "Invalid IP address"
+		ipNode.hide()
 		return
 	
 	errorLabel.text = ""
-	host.disabled = true
-	join.disabled = true
+	connectButton.disabled = true
+	cancelButton.disabled = true
 	
 	var player_name = candidate_name
+	popup.popup_centered_ratio(0.5)
+	popupAnim.play("joining")
 	Gamestate.join_game(ip, player_name)
 
+func _on_cancel_pressed():
+	ipNode.hide()
+	buttonsNode.show()
+	
+
 func _on_connection_success():
-	connect.hide()
+	popup.hide()
+	popupAnim.stop()
+	connectPanel.hide()
 	playersPanel.show()
 
 func _on_connection_failed():
 	host.disabled = false
 	join.disabled = false
+	ipNode.hide()
+	buttonsNode.show()
+	popup.hide()
+	popupAnim.stop()
 	errorLabel.set_text("Connection failed.")
 
 func _on_game_ended():
 	show()
-	connect.show()
+	connectPanel.show()
 	playersPanel.hide()
 	host.disabled = false
 	join.disabled = false
@@ -90,6 +123,14 @@ func _on_game_error(errtxt):
 	host.disabled = false
 	join.disabled = false
 
+func _on_exit_lobby_pressed():
+	Gamestate.cancel_connection()
+	playersPanel.hide()
+	host.disabled = false
+	join.disabled = false
+	buttonsNode.show()
+	ipNode.hide()
+	connectPanel.show()
 
 func refresh_lobby():
 	var players = Gamestate.get_player_list()

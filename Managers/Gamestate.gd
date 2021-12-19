@@ -128,6 +128,11 @@ func join_game(ip, new_player_name):
 	var _error = peer.create_client(ip, DEFAULT_PORT)
 	get_tree().set_network_peer(peer)
 
+func cancel_connection():
+	peer.close_connection()
+	get_tree().set_network_peer(null)
+	players.clear()
+
 func get_player_list():
 	return players.values()
 
@@ -165,7 +170,6 @@ func end_screen():
 		close_server()
 	else:
 		get_tree().set_network_peer(null)
-#	peer.close_connection()
 
 func close_server():
 	for player in players:

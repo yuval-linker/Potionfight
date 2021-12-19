@@ -1,6 +1,208 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://UI/Scripts/Lobby.gd" type="Script" id=1]
+[ext_resource path="res://UI/Assets/Fonts/hf-free-complete/matchup-pro-v1.1/MatchupPro.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://UI/Assets/Fonts/hf-free-complete/expression-pro-v1.1/ExpressionPro.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://UI/Assets/menu background/landscape-pixel-art-rainforest-wallpaper-preview.jpg" type="Texture" id=4]
+[ext_resource path="res://UI/Assets/components/Buttons/button.png" type="Texture" id=5]
+[ext_resource path="res://UI/Assets/components/Buttons/buttonpress.png" type="Texture" id=6]
+[ext_resource path="res://UI/Assets/Fonts/hf-free-complete/equipment-pro-v1.1/EquipmentPro.otf" type="DynamicFontData" id=7]
+[ext_resource path="res://Inventory/GUI/Assets/WenrexaAssetsUI_SciFI/PNG/Button11.png" type="Texture" id=8]
+[ext_resource path="res://UI/Assets/Fonts/hf-free-complete/compass-pro-v1.1/CompassPro.otf" type="DynamicFontData" id=9]
+[ext_resource path="res://UI/Assets/Fonts/hf-free-complete/futile-pro-v1/FutilePro.otf" type="DynamicFontData" id=10]
+[ext_resource path="res://UI/Assets/nameBorder.tres" type="StyleBox" id=11]
+[ext_resource path="res://Inventory/GUI/Assets/WenrexaAssetsUI_SciFI/PNG/MainPanel03.png" type="Texture" id=12]
+[ext_resource path="res://Inventory/GUI/Assets/WenrexaAssetsUI_SciFI/PNG/MainPanel01.png" type="Texture" id=13]
+[ext_resource path="res://Inventory/GUI/Assets/WenrexaAssetsUI_SciFI/PNG/SelectPanel01.png" type="Texture" id=14]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.6, 0.6, 0.6, 0.576471 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
+outline_size = 2
+outline_color = Color( 0.294118, 0.0117647, 0.0117647, 1 )
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 32
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 32
+outline_size = 4
+outline_color = Color( 0.152941, 0.101961, 0.101961, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=7]
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 10 )
+
+[sub_resource type="StyleBoxTexture" id=8]
+texture = ExtResource( 8 )
+region_rect = Rect2( 0, 0, 105, 21 )
+expand_margin_left = 6.0
+
+[sub_resource type="StyleBoxTexture" id=10]
+texture = ExtResource( 12 )
+region_rect = Rect2( 0, 0, 302, 143 )
+
+[sub_resource type="Animation" id=11]
+resource_name = "joining"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ "Joining Game", "Joining Game.", "Joining Game..", "Joining Game..." ]
+}
+
+[sub_resource type="DynamicFont" id=12]
+size = 32
+font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxTexture" id=13]
+texture = ExtResource( 13 )
+region_rect = Rect2( 0, 0, 852, 527 )
+
+[sub_resource type="DynamicFont" id=14]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxFlat" id=20]
+bg_color = Color( 0.0235294, 0.0901961, 0.368627, 0.627451 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.0196078, 0.0784314, 0.329412, 0.909804 )
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id=21]
+bg_color = Color( 0, 0, 0, 0.627451 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.0196078, 0.0784314, 0.329412, 0.909804 )
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id=22]
+bg_color = Color( 0.0235294, 0.0901961, 0.368627, 0.627451 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.0196078, 0.0784314, 0.329412, 0.909804 )
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id=23]
+bg_color = Color( 0.223529, 0.231373, 0.278431, 0.627451 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.141176, 0.109804, 0.384314, 1 )
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0.0313726, 0.133333, 0.576471, 0.627451 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.0196078, 0.0784314, 0.329412, 0.909804 )
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="DynamicFont" id=16]
+font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxTexture" id=17]
+texture = ExtResource( 14 )
+region_rect = Rect2( 0, 0, 157, 339 )
+margin_left = 12.0
+margin_top = 20.0
+
+[sub_resource type="StyleBoxTexture" id=18]
+texture = ExtResource( 14 )
+region_rect = Rect2( 0, 0, 157, 339 )
+margin_left = 12.0
+margin_top = 20.0
+
+[sub_resource type="DynamicFont" id=19]
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=24]
+font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxFlat" id=25]
+bg_color = Color( 0.423529, 0.0117647, 0.0117647, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id=26]
+bg_color = Color( 0.694118, 0, 0, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id=27]
+bg_color = Color( 0.219608, 0.00392157, 0.00392157, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id=28]
+bg_color = Color( 0.219608, 0.00392157, 0.00392157, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="Lobby" type="Control"]
 pause_mode = 2
@@ -17,30 +219,55 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+expand = true
+
 [node name="Connect" type="Panel" parent="."]
-margin_left = 193.0
-margin_top = 19.0
-margin_right = 857.0
-margin_bottom = 577.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Name" type="LineEdit" parent="Connect"]
-margin_left = 247.0
-margin_top = 104.0
-margin_right = 531.0
-margin_bottom = 151.0
-text = "Your name"
+[node name="NameNode" type="Control" parent="Connect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -109.434
+margin_top = -72.2772
+margin_right = 112.566
+margin_bottom = -31.2772
 __meta__ = {
+"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="NameLabel" type="Label" parent="Connect"]
-margin_left = 113.416
-margin_top = 109.005
-margin_right = 236.416
-margin_bottom = 147.005
+[node name="HBoxContainer" type="HBoxContainer" parent="Connect/NameNode"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -27.5
+margin_right = 200.0
+margin_bottom = 27.5
+custom_constants/separation = 10
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="NameLabel" type="Label" parent="Connect/NameNode/HBoxContainer"]
+margin_top = 14.0
+margin_right = 78.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 2 )
 text = "Name:"
 align = 2
 valign = 1
@@ -48,58 +275,324 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="IpLabel" type="Label" parent="Connect"]
-margin_left = 100.477
-margin_top = 160.045
-margin_right = 237.477
-margin_bottom = 204.045
+[node name="Name" type="LineEdit" parent="Connect/NameNode/HBoxContainer"]
+margin_left = 88.0
+margin_right = 400.0
+margin_bottom = 55.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+custom_fonts/font = SubResource( 3 )
+custom_styles/focus = ExtResource( 11 )
+custom_styles/normal = ExtResource( 11 )
+text = "Your name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ErrorLabel" type="Label" parent="Connect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -221.0
+margin_top = -152.5
+margin_right = 221.0
+margin_bottom = -91.5
+custom_colors/font_color = Color( 0.917647, 0.0196078, 0.0196078, 1 )
+custom_fonts/font = SubResource( 5 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IPNode" type="Control" parent="Connect"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -233.0
+margin_top = -20.0
+margin_right = 331.0
+margin_bottom = 262.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ConnectNode" type="Control" parent="Connect/IPNode"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 16.002
+margin_top = -51.0
+margin_right = 216.002
+margin_bottom = 99.0
+rect_min_size = Vector2( 100, 100 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ConnectButton" type="TextureButton" parent="Connect/IPNode/ConnectNode"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -75.0
+margin_right = 100.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 100, 100 )
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Connect/IPNode/ConnectNode"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -60.0
+margin_top = -18.591
+margin_right = 60.0
+margin_bottom = 36.409
+custom_fonts/font = SubResource( 4 )
+text = "CONNECT
+"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CancelNode" type="Control" parent="Connect/IPNode"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -260.269
+margin_top = -51.0
+margin_right = -60.269
+margin_bottom = 99.0
+rect_min_size = Vector2( 100, 100 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="CancelButton" type="TextureButton" parent="Connect/IPNode/CancelNode"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -75.0
+margin_right = 100.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 100, 100 )
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Connect/IPNode/CancelNode"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -60.0
+margin_top = -18.591
+margin_right = 60.0
+margin_bottom = 36.409
+custom_fonts/font = SubResource( 4 )
+text = "CANCEL
+"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IpLabel" type="Label" parent="Connect/IPNode"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -311.215
+margin_top = -104.455
+margin_right = -173.215
+margin_bottom = -71.455
+custom_fonts/font = SubResource( 9 )
 text = "IP Address:"
 align = 2
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="IPAddress" type="LineEdit" parent="Connect"]
-margin_left = 247.068
-margin_top = 161.045
-margin_right = 534.068
-margin_bottom = 205.045
+[node name="IPAddress" type="LineEdit" parent="Connect/IPNode"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -155.109
+margin_top = -103.364
+margin_right = 152.891
+margin_bottom = -64.364
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/normal = SubResource( 8 )
 text = "127.0.0.1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="JoinButton" type="Button" parent="Connect"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -162.5
-margin_top = -134.749
-margin_right = 162.5
-margin_bottom = -64.749
-text = "JOIN GAME"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HostButton" type="Button" parent="Connect"]
+[node name="ButtonsNode" type="Control" parent="Connect"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -163.5
-margin_top = 25.749
-margin_right = 163.5
-margin_bottom = 103.749
-text = "HOST GAME"
+margin_left = -512.0
+margin_top = -300.0
+margin_right = -472.0
+margin_bottom = -260.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="ErrorLabel" type="Label" parent="Connect"]
-margin_left = 114.0
-margin_top = 221.0
-margin_right = 556.0
-margin_bottom = 282.0
-custom_colors/font_color = Color( 0.917647, 0.0196078, 0.0196078, 1 )
+[node name="HostNode" type="Control" parent="Connect/ButtonsNode"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 475.298
+margin_top = 325.137
+margin_right = 575.298
+margin_bottom = 425.137
+rect_min_size = Vector2( 100, 100 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="HostButton" type="TextureButton" parent="Connect/ButtonsNode/HostNode"]
+anchor_left = 0.5
+anchor_top = -2.505
+anchor_right = 0.5
+anchor_bottom = -2.505
+margin_left = -137.0
+margin_top = 190.0
+margin_right = 63.0
+margin_bottom = 340.0
+rect_min_size = Vector2( 100, 100 )
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Connect/ButtonsNode/HostNode"]
+anchor_left = 0.56
+anchor_top = 0.39
+anchor_right = 0.56
+anchor_bottom = 0.39
+margin_left = -123.0
+margin_top = -46.4455
+margin_right = 37.0
+margin_bottom = -10.4455
+custom_fonts/font = SubResource( 4 )
+text = "HOST GAME"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="JoinNode" type="Control" parent="Connect/ButtonsNode"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 473.0
+margin_top = 443.0
+margin_right = 573.0
+margin_bottom = 543.0
+rect_min_size = Vector2( 100, 100 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="JoinButton" type="TextureButton" parent="Connect/ButtonsNode/JoinNode"]
+anchor_left = 0.5
+anchor_top = -2.505
+anchor_right = 0.5
+anchor_bottom = -2.505
+margin_left = -137.0
+margin_top = 190.0
+margin_right = 63.0
+margin_bottom = 340.0
+rect_min_size = Vector2( 100, 100 )
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Connect/ButtonsNode/JoinNode"]
+anchor_left = 0.56
+anchor_top = 0.39
+anchor_right = 0.56
+anchor_bottom = 0.39
+margin_left = -123.0
+margin_top = -46.4455
+margin_right = 37.0
+margin_bottom = -10.4455
+custom_fonts/font = SubResource( 4 )
+text = "JOIN GAME"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ConnectingPopup" type="PopupDialog" parent="Connect"]
+margin_right = 238.0
+margin_bottom = 117.0
+custom_styles/panel = SubResource( 10 )
+popup_exclusive = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Connect/ConnectingPopup"]
+anims/joining = SubResource( 11 )
+
+[node name="Label" type="Label" parent="Connect/ConnectingPopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 12 )
+text = "Joining Game."
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Players" type="Panel" parent="."]
 visible = false
@@ -107,23 +600,32 @@ margin_left = 189.0
 margin_top = 18.0
 margin_right = 864.0
 margin_bottom = 576.0
+custom_styles/panel = SubResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="StartButton" type="Button" parent="Players"]
 margin_left = 255.159
-margin_top = 499.681
+margin_top = 480.081
 margin_right = 407.159
-margin_bottom = 542.681
+margin_bottom = 523.081
+mouse_default_cursor_shape = 2
+custom_fonts/font = SubResource( 14 )
+custom_styles/hover = SubResource( 20 )
+custom_styles/pressed = SubResource( 21 )
+custom_styles/focus = SubResource( 22 )
+custom_styles/disabled = SubResource( 23 )
+custom_styles/normal = SubResource( 15 )
 text = "Start!"
 
 [node name="Label" type="Label" parent="Players"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -145.0
+margin_top = -17.4617
 margin_right = 145.0
-margin_bottom = 62.0
+margin_bottom = 44.5383
 text = "Waiting for opponents..."
 align = 1
 valign = 1
@@ -133,6 +635,10 @@ margin_left = 28.0
 margin_top = 62.0
 margin_right = 221.0
 margin_bottom = 493.0
+custom_fonts/font = SubResource( 16 )
+custom_styles/bg_focus = SubResource( 17 )
+custom_styles/bg = SubResource( 18 )
+icon_mode = 0
 
 [node name="LinkButton" type="LinkButton" parent="Players"]
 anchor_left = 1.0
@@ -140,12 +646,30 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -231.0
-margin_top = -47.0
-margin_bottom = -9.0
+margin_top = -64.8181
+margin_bottom = -26.8181
+custom_fonts/font = SubResource( 19 )
 text = "Find your public IP address"
+
+[node name="BackButton" type="Button" parent="Players"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 198.943
+margin_top = -247.85
+margin_right = 298.943
+margin_bottom = -217.85
+mouse_default_cursor_shape = 2
+custom_fonts/font = SubResource( 24 )
+custom_styles/hover = SubResource( 25 )
+custom_styles/pressed = SubResource( 26 )
+custom_styles/focus = SubResource( 27 )
+custom_styles/normal = SubResource( 28 )
+text = "EXIT LOBBY"
 
 [node name="ErrorDialog" type="AcceptDialog" parent="."]
 margin_bottom = 58.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-window_title = "¡Alerta!"
+window_title = "Uh Oh!"
