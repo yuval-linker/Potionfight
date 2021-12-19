@@ -218,8 +218,8 @@ margin_top = 182.134
 margin_right = 423.938
 margin_bottom = 449.134
 rect_pivot_offset = Vector2( -596.267, -176.739 )
-custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
 text = "W/Space - Jump / Second jump
 A - Move left
 S - Crouch
@@ -236,8 +236,8 @@ margin_top = 141.47
 margin_right = 458.891
 margin_bottom = 348.47
 rect_pivot_offset = Vector2( 298.166, 86.574 )
-custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Movement
 "
 align = 1
@@ -252,8 +252,8 @@ margin_top = 334.347
 margin_right = 973.989
 margin_bottom = 541.347
 rect_pivot_offset = Vector2( 298.166, 86.574 )
-custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Crafting / Inventory
 "
 align = 1
@@ -268,8 +268,8 @@ margin_top = 92.6707
 margin_right = 958.203
 margin_bottom = 299.671
 rect_pivot_offset = Vector2( 298.166, 86.574 )
-custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
 text = "
 Attack"
 align = 1
@@ -283,8 +283,8 @@ margin_left = 570.192
 margin_top = 247.755
 margin_right = 874.192
 margin_bottom = 331.755
-custom_fonts/font = SubResource( 3 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 3 )
 text = "Right Click - Basic attack
 Left Click - Potion throw
 "
@@ -305,7 +305,7 @@ __meta__ = {
 position = Vector2( 67.0375, 13.3836 )
 scale = Vector2( 2.5555, 2.26293 )
 frames = SubResource( 23 )
-frame = 4
+frame = 5
 playing = true
 
 [node name="Control" type="Control" parent="."]
@@ -319,7 +319,7 @@ __meta__ = {
 position = Vector2( 725.31, 182.817 )
 scale = Vector2( 2.18815, 2.26137 )
 frames = SubResource( 31 )
-frame = 1
+frame = 4
 playing = true
 
 [node name="Movement controls2" type="Label" parent="."]
@@ -328,8 +328,8 @@ margin_top = 376.313
 margin_right = 949.27
 margin_bottom = 643.313
 rect_pivot_offset = Vector2( 298.166, 86.574 )
-custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
 text = "Q - Inventory
 Hold mouse to select potion
 R - Craft selected potion
@@ -362,6 +362,7 @@ margin_top = -74.5
 margin_right = 100.0
 margin_bottom = 75.5
 rect_min_size = Vector2( 100, 100 )
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 9 )
 texture_pressed = ExtResource( 8 )
 expand = true
@@ -394,7 +395,7 @@ margin_bottom = 206.192
 position = Vector2( 641.893, 203.683 )
 scale = Vector2( 2.57131, 2.30685 )
 frames = SubResource( 37 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="Button2" type="Control" parent="."]
@@ -419,6 +420,7 @@ margin_top = -69.7432
 margin_right = 105.813
 margin_bottom = 80.2568
 rect_min_size = Vector2( 100, 100 )
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 9 )
 texture_pressed = ExtResource( 8 )
 expand = true

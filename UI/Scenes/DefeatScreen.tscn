@@ -118,7 +118,7 @@ __meta__ = {
 position = Vector2( 21.1893, -50.8542 )
 scale = Vector2( 3.53032, 3.40026 )
 frames = SubResource( 8 )
-frame = 2
+frame = 5
 playing = true
 
 [node name="Button" type="Control" parent="."]
@@ -142,6 +142,7 @@ margin_top = -74.5
 margin_right = 100.0
 margin_bottom = 75.5
 rect_min_size = Vector2( 100, 100 )
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 3 )
 expand = true
