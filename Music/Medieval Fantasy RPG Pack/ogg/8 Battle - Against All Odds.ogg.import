@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/8 Battle - Against All Odds.ogg-c88265d64378097b8b398fea5d94e9d4.oggstr"
+
+[deps]
+
+source_file="res://Music/Medieval Fantasy RPG Pack/ogg/8 Battle - Against All Odds.ogg"
+dest_files=[ "res://.import/8 Battle - Against All Odds.ogg-c88265d64378097b8b398fea5d94e9d4.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

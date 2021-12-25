@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/1up 3 - Sound effects Pack 2.ogg-c4a3829d0d7275e6c0523c9ed9beb849.oggstr"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/1up/OGG/1up 3 - Sound effects Pack 2.ogg"
+dest_files=[ "res://.import/1up 3 - Sound effects Pack 2.ogg-c4a3829d0d7275e6c0523c9ed9beb849.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

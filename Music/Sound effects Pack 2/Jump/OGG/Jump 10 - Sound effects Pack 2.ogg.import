@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Jump 10 - Sound effects Pack 2.ogg-0af1e2fdcca86fcdbeea61605cc9660b.oggstr"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Jump/OGG/Jump 10 - Sound effects Pack 2.ogg"
+dest_files=[ "res://.import/Jump 10 - Sound effects Pack 2.ogg-0af1e2fdcca86fcdbeea61605cc9660b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

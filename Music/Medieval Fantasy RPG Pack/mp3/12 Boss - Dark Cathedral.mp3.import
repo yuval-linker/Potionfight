@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/12 Boss - Dark Cathedral.mp3-81befa91b417916fc9ff959a182a73af.mp3str"
+
+[deps]
+
+source_file="res://Music/Medieval Fantasy RPG Pack/mp3/12 Boss - Dark Cathedral.mp3"
+dest_files=[ "res://.import/12 Boss - Dark Cathedral.mp3-81befa91b417916fc9ff959a182a73af.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

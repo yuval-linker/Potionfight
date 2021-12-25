@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Random 2 - Sound effects Pack 2.mp3-a699f779ef16d10dc89ada823541e9c2.mp3str"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Random/MP3/Random 2 - Sound effects Pack 2.mp3"
+dest_files=[ "res://.import/Random 2 - Sound effects Pack 2.mp3-a699f779ef16d10dc89ada823541e9c2.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

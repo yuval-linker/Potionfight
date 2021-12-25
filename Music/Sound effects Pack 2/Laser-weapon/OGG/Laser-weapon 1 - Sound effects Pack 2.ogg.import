@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Laser-weapon 1 - Sound effects Pack 2.ogg-533194b6f2b26749388dc9866a8c9f7f.oggstr"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Laser-weapon/OGG/Laser-weapon 1 - Sound effects Pack 2.ogg"
+dest_files=[ "res://.import/Laser-weapon 1 - Sound effects Pack 2.ogg-533194b6f2b26749388dc9866a8c9f7f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

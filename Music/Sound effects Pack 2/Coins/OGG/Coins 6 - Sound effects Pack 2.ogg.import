@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Coins 6 - Sound effects Pack 2.ogg-8baca8b6f9f5035bb1b1b59f7e08e9c2.oggstr"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Coins/OGG/Coins 6 - Sound effects Pack 2.ogg"
+dest_files=[ "res://.import/Coins 6 - Sound effects Pack 2.ogg-8baca8b6f9f5035bb1b1b59f7e08e9c2.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

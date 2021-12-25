@@ -33,6 +33,7 @@ onready var downCast: RayCast2D = $DownCast
 onready var stunParticles: Particles2D = $DirectionNode/StunParticles
 onready var jumpSpawn: Position2D = $DirectionNode/JumpParticleSpawn
 onready var heartsSpawn: Position2D = $DirectionNode/HeartSpawn
+onready var audioEffects: AudioStreamPlayer = $AudioStreamPlayer
 
 var potions_inventory: PotionsInventoryResource
 var plants_inventory: PlantsInventoryResource
@@ -94,6 +95,7 @@ func _ready() -> void:
 	if self.is_network_master():
 		potions_inventory = PotionsInventoryResource.new()
 		plants_inventory = PlantsInventoryResource.new()
+		audioEffects.stream.loop = false
 	$AnimationTree.active = true
 	$DirectionNode/Punch/CollisionShape2D.disabled = true
 	direction_timer.connect("timeout", self, "on_direction_timeout")
@@ -160,19 +162,27 @@ func _physics_process(delta: float) -> void:
 		var consume_cond = _equipped_id and potions_inventory.get_item_quantity(_equipped_id) > 0 
 		
 		# Throw a potion
-		if Input.is_action_just_pressed("throw") and not throwing and can_action and consume_cond:
-			var potion_name = get_name() + str(potion_index)
-			potion_index += 1
-			potion_index = potion_index % 50 # rare to throw more than 50 potions at a time
-			var _ret = potions_inventory.consume_item(_equipped_id, 1)
-			rpc("throw", potion_name, get_global_mouse_position(), get_tree().get_network_unique_id())
+		if Input.is_action_just_pressed("throw") and not throwing and can_action:
+			if consume_cond:
+				var potion_name = get_name() + str(potion_index)
+				potion_index += 1
+				potion_index = potion_index % 50 # rare to throw more than 50 potions at a time
+				var _ret = potions_inventory.consume_item(_equipped_id, 1)
+				rpc("throw", potion_name, get_global_mouse_position(), get_tree().get_network_unique_id())
+			else:
+				audioEffects.play()
+				gui_slot.potion_popup("No potion!")
 		
-		if can_action and Input.is_action_just_pressed("drink") and _equipped_id and consume_cond:
-			var potion_name = get_name() + str(potion_index)
-			potion_index += 1
-			potion_index = potion_index % 50
-			var _ret = potions_inventory.consume_item(_equipped_id, 1)
-			drink(potion_name)
+		if can_action and Input.is_action_just_pressed("drink"):
+			if consume_cond and _equipped_id:
+				var potion_name = get_name() + str(potion_index)
+				potion_index += 1
+				potion_index = potion_index % 50
+				var _ret = potions_inventory.consume_item(_equipped_id, 1)
+				drink(potion_name)
+			else:
+				audioEffects.play()
+				gui_slot.potion_popup("No potion!")
 		
 		if can_action and Input.is_action_just_pressed("craft") and _equipped_id:
 			craft_potion(_equipped_id)
@@ -406,9 +416,13 @@ master func make_tangible()->void:
 
 master func empower_basics(amount: int)->void:
 	punch_attack = min(punch_attack + amount, ATTACK_BUFF_CAP)
+	if punch_attack > BASICATTACK:
+		rpc("display_effect", "PoweredPunch")
 
 master func weaken_basics(amount: int)->void:
 	punch_attack = max(BASICATTACK, punch_attack - amount)
+	if punch_attack == BASICATTACK:
+		rpc("hide_effect", "PoweredPunch")
 
 master func stun()->void:
 	_stunned = true
@@ -570,6 +584,8 @@ master func craft_potion(potion_id: String) -> void:
 	for i in range(0, len(recipe.input_ids)):
 		if plants_inventory.get_item_quantity(recipe.input_ids[i]) < recipe.input_quantities[i]:
 			print("Unable to craft '%s', not enought plants")
+			audioEffects.play()
+			gui_slot.potion_popup("Not enogugh plants!")
 			return
 
 	# then we consume the plants necessary to craft the potion
@@ -583,7 +599,7 @@ master func craft_potion(potion_id: String) -> void:
 	return
 
 remotesync func crafted_popup()->void:
-	gui_slot.potion_popup()
+	gui_slot.potion_popup("Crafted!")
 
 # ------------------------------------------------------------------------------
 

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/1up 6 - Sound effects Pack 2.mp3-a11e38b982a73ac0a9f5463944f51f28.mp3str"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/1up/MP3/1up 6 - Sound effects Pack 2.mp3"
+dest_files=[ "res://.import/1up 6 - Sound effects Pack 2.mp3-a11e38b982a73ac0a9f5463944f51f28.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

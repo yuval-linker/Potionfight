@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/14 Emotional - Nocturne.mp3-6ae989d3eded9cbc119fa2c1cb8c8cf0.mp3str"
+
+[deps]
+
+source_file="res://Music/Medieval Fantasy RPG Pack/mp3/14 Emotional - Nocturne.mp3"
+dest_files=[ "res://.import/14 Emotional - Nocturne.mp3-6ae989d3eded9cbc119fa2c1cb8c8cf0.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

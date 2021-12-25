@@ -3,6 +3,7 @@ extends Control
 onready var connectPanel = $Connect
 onready var playersPanel = $Players
 onready var goBackButton = $Players/BackButton
+onready var toMenuButton = $Connect/ToMenuNode/ToMenuButton
 onready var errorLabel = $Connect/ErrorLabel
 onready var buttonsNode = $Connect/ButtonsNode
 onready var host = $Connect/ButtonsNode/HostNode/HostButton
@@ -36,6 +37,7 @@ func _ready() -> void:
 	connectButton.connect("pressed", self, "_on_connect_pressed")
 	cancelButton.connect("pressed", self, "_on_cancel_pressed")
 	goBackButton.connect("pressed", self, "_on_exit_lobby_pressed")
+	toMenuButton.connect("pressed", self, "_on_go_back_to_menu")
 # warning-ignore:return_value_discarded
 	$Players/StartButton.connect("pressed", self, "_on_start_pressed")
 # warning-ignore:return_value_discarded
@@ -131,6 +133,9 @@ func _on_exit_lobby_pressed():
 	buttonsNode.show()
 	ipNode.hide()
 	connectPanel.show()
+
+func _on_go_back_to_menu():
+	get_tree().change_scene("res://UI/Scenes/Main.tscn")
 
 func refresh_lobby():
 	var players = Gamestate.get_player_list()

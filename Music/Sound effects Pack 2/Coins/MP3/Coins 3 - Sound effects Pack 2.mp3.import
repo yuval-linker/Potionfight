@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Coins 3 - Sound effects Pack 2.mp3-00660e0b6fc9080ee9e9f17d9ec4e6df.mp3str"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Coins/MP3/Coins 3 - Sound effects Pack 2.mp3"
+dest_files=[ "res://.import/Coins 3 - Sound effects Pack 2.mp3-00660e0b6fc9080ee9e9f17d9ec4e6df.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

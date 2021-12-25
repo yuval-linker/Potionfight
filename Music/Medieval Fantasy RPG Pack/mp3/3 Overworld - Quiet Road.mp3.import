@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/3 Overworld - Quiet Road.mp3-6d93a47f89c36f950a9df11f391d2918.mp3str"
+
+[deps]
+
+source_file="res://Music/Medieval Fantasy RPG Pack/mp3/3 Overworld - Quiet Road.mp3"
+dest_files=[ "res://.import/3 Overworld - Quiet Road.mp3-6d93a47f89c36f950a9df11f391d2918.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

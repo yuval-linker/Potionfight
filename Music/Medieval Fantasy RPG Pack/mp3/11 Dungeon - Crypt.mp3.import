@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/11 Dungeon - Crypt.mp3-c23a09180edaf117bb2d7cc215211dac.mp3str"
+
+[deps]
+
+source_file="res://Music/Medieval Fantasy RPG Pack/mp3/11 Dungeon - Crypt.mp3"
+dest_files=[ "res://.import/11 Dungeon - Crypt.mp3-c23a09180edaf117bb2d7cc215211dac.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

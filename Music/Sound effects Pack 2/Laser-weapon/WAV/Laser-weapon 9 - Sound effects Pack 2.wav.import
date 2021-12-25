@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Laser-weapon 9 - Sound effects Pack 2.wav-0135771ea0ec1df3b40588cb143f30c7.sample"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Laser-weapon/WAV/Laser-weapon 9 - Sound effects Pack 2.wav"
+dest_files=[ "res://.import/Laser-weapon 9 - Sound effects Pack 2.wav-0135771ea0ec1df3b40588cb143f30c7.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Lose 5 - Sound effects Pack 2.wav-ab6edac192a83fb3815b0d515cc2001a.sample"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Lose/WAV/Lose 5 - Sound effects Pack 2.wav"
+dest_files=[ "res://.import/Lose 5 - Sound effects Pack 2.wav-ab6edac192a83fb3815b0d515cc2001a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

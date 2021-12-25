@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/5 Town - Village Green.mp3-ee2dd89c1e1ee31150c327db17c60bfd.mp3str"
+
+[deps]
+
+source_file="res://Music/Medieval Fantasy RPG Pack/mp3/5 Town - Village Green.mp3"
+dest_files=[ "res://.import/5 Town - Village Green.mp3-ee2dd89c1e1ee31150c327db17c60bfd.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://UI/Assets/skyes/noonbackground.png" type="Texture" id=1]
 [ext_resource path="res://World/Stages/ExampleStage/Assets/Magic-Cliffs-Environment/Magic-Cliffs-Environment/PNG/tileset.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://UI/Assets/components/Buttons/buttonpress.png" type="Texture" id=6]
 [ext_resource path="res://UI/Scripts/EndScreen.gd" type="Script" id=7]
 [ext_resource path="res://UI/Assets/Fonts/EndScreenTitle.tres" type="DynamicFont" id=8]
+[ext_resource path="res://Music/Of Far Different Nature - Victory Stats (CC-BY).ogg" type="AudioStream" id=9]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -116,7 +117,7 @@ __meta__ = {
 position = Vector2( 21.1893, -50.8542 )
 scale = Vector2( 3.53032, 3.40026 )
 frames = SubResource( 6 )
-frame = 4
+frame = 6
 playing = true
 
 [node name="Button" type="Control" parent="."]
@@ -159,3 +160,8 @@ valign = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+autoplay = true
+bus = "InGame"

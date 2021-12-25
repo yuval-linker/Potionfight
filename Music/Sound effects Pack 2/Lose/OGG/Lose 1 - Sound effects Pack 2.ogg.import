@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Lose 1 - Sound effects Pack 2.ogg-ed432ad65439456fba7c079d6c1a3097.oggstr"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Lose/OGG/Lose 1 - Sound effects Pack 2.ogg"
+dest_files=[ "res://.import/Lose 1 - Sound effects Pack 2.ogg-ed432ad65439456fba7c079d6c1a3097.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

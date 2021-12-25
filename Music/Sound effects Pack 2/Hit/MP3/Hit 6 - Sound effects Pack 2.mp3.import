@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Hit 6 - Sound effects Pack 2.mp3-a04ee05fa88dfbd23457a9f619c82d58.mp3str"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Hit/MP3/Hit 6 - Sound effects Pack 2.mp3"
+dest_files=[ "res://.import/Hit 6 - Sound effects Pack 2.mp3-a04ee05fa88dfbd23457a9f619c82d58.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

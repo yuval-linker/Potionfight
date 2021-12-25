@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/2 Main Theme - Winter Tale.ogg-922751d80d6abb5fac81521af877ab61.oggstr"
+
+[deps]
+
+source_file="res://Music/Medieval Fantasy RPG Pack/ogg/2 Main Theme - Winter Tale.ogg"
+dest_files=[ "res://.import/2 Main Theme - Winter Tale.ogg-922751d80d6abb5fac81521af877ab61.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

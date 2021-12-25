@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/10 Dungeon - The Cover of Darkness.mp3-12ee30a48ff266c4db1884acef26020e.mp3str"
+
+[deps]
+
+source_file="res://Music/Medieval Fantasy RPG Pack/mp3/10 Dungeon - The Cover of Darkness.mp3"
+dest_files=[ "res://.import/10 Dungeon - The Cover of Darkness.mp3-12ee30a48ff266c4db1884acef26020e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

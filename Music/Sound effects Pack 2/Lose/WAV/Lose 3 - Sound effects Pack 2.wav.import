@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Lose 3 - Sound effects Pack 2.wav-6f67c4a7cac8b47a53856887e728a291.sample"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Lose/WAV/Lose 3 - Sound effects Pack 2.wav"
+dest_files=[ "res://.import/Lose 3 - Sound effects Pack 2.wav-6f67c4a7cac8b47a53856887e728a291.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

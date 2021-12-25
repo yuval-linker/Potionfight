@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/10 Dungeon - The Cover of Darkness.wav-f12258bea0fd674b8a603dcdfe1a5f8a.sample"
+
+[deps]
+
+source_file="res://Music/Medieval Fantasy RPG Pack/wav/10 Dungeon - The Cover of Darkness.wav"
+dest_files=[ "res://.import/10 Dungeon - The Cover of Darkness.wav-f12258bea0fd674b8a603dcdfe1a5f8a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

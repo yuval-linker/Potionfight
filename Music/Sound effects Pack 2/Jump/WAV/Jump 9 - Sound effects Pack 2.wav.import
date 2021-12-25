@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Jump 9 - Sound effects Pack 2.wav-b1a5dc0d8d9fa78566ec9966e2d13122.sample"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Jump/WAV/Jump 9 - Sound effects Pack 2.wav"
+dest_files=[ "res://.import/Jump 9 - Sound effects Pack 2.wav-b1a5dc0d8d9fa78566ec9966e2d13122.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

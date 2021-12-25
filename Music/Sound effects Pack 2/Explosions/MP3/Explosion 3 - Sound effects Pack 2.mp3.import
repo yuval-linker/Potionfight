@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Explosion 3 - Sound effects Pack 2.mp3-489eceeb635466406d8bd7f62e7b66f9.mp3str"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Explosions/MP3/Explosion 3 - Sound effects Pack 2.mp3"
+dest_files=[ "res://.import/Explosion 3 - Sound effects Pack 2.mp3-489eceeb635466406d8bd7f62e7b66f9.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

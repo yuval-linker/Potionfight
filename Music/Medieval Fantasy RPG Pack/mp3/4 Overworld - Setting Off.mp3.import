@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/4 Overworld - Setting Off.mp3-695ae0c2ea098bdbbbd1533dcdacc511.mp3str"
+
+[deps]
+
+source_file="res://Music/Medieval Fantasy RPG Pack/mp3/4 Overworld - Setting Off.mp3"
+dest_files=[ "res://.import/4 Overworld - Setting Off.mp3-695ae0c2ea098bdbbbd1533dcdacc511.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

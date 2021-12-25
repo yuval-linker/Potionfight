@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Random 6 - Sound effects Pack 2.ogg-35b622af7791563b7e9df41879abb096.oggstr"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Random/OGG/Random 6 - Sound effects Pack 2.ogg"
+dest_files=[ "res://.import/Random 6 - Sound effects Pack 2.ogg-35b622af7791563b7e9df41879abb096.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

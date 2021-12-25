@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Teleport 4 - Sound effects Pack 2.wav-00e3225d18e1d57b9201ff968368ff04.sample"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Teleport/WAV/Teleport 4 - Sound effects Pack 2.wav"
+dest_files=[ "res://.import/Teleport 4 - Sound effects Pack 2.wav-00e3225d18e1d57b9201ff968368ff04.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -16,3 +16,6 @@ func _physics_process(delta: float) -> void:
 
 func _on_scale_completed()->void:
 	self.queue_free()
+
+func set_text(text: String) -> void:
+	label.text = text

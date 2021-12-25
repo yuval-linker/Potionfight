@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Blip 4 - Sound effects Pack 2.ogg-e279417aa52435b800145962237b62e1.oggstr"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Blip/OGG/Blip 4 - Sound effects Pack 2.ogg"
+dest_files=[ "res://.import/Blip 4 - Sound effects Pack 2.ogg-e279417aa52435b800145962237b62e1.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

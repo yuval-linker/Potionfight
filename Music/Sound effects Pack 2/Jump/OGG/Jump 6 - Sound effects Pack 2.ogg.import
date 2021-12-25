@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Jump 6 - Sound effects Pack 2.ogg-1fa64616664bb8575d27d4988bb95a78.oggstr"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Jump/OGG/Jump 6 - Sound effects Pack 2.ogg"
+dest_files=[ "res://.import/Jump 6 - Sound effects Pack 2.ogg-1fa64616664bb8575d27d4988bb95a78.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
