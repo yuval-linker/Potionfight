@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/15 Emotional - Farewell.wav-2236a69227833f7d1b5ae79a2a3b7991.sample"
+
+[deps]
+
+source_file="res://Music/Medieval Fantasy RPG Pack/wav/15 Emotional - Farewell.wav"
+dest_files=[ "res://.import/15 Emotional - Farewell.wav-2236a69227833f7d1b5ae79a2a3b7991.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

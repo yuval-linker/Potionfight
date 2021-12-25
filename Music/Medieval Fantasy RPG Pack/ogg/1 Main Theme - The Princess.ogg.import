@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/1 Main Theme - The Princess.ogg-111dc63c399e7625539b8f4ab69206ee.oggstr"
+
+[deps]
+
+source_file="res://Music/Medieval Fantasy RPG Pack/ogg/1 Main Theme - The Princess.ogg"
+dest_files=[ "res://.import/1 Main Theme - The Princess.ogg-111dc63c399e7625539b8f4ab69206ee.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

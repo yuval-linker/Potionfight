@@ -3,6 +3,9 @@ extends Node
 const DEFAULT_PORT = 10567 # We can change it
 const MAX_PEERS = 2 # Only 1v1
 
+# Music
+var background_music: AudioStreamPlayer
+
 # Network peer
 var peer: NetworkedMultiplayerENet = null
 
@@ -103,6 +106,7 @@ remote func pre_start_game(spawn_points):
 
 remote func post_start_game():
 	get_tree().set_pause(false)
+	background_music.playing = false
 	players_ready.clear()
 
 remote func ready_to_start(id):
@@ -159,6 +163,7 @@ func end_screen():
 	get_node("/root/Level/Camera2D").current = false
 	for child in get_node("/root/Level/GUI").get_children():
 		child.hide()
+	get_node("/root/Level/AudioStreamPlayer").stop()
 	if not player_nodes[get_tree().get_network_unique_id()].dead:
 		# show victory screen
 		var _err = get_tree().change_scene("res://UI/Scenes/VictoryScreen.tscn")
@@ -187,6 +192,9 @@ func end_game():
 	emit_signal("game_ended")
 	players.clear()
 	player_nodes.clear()
+	background_music.seek(0)
+	background_music.stream_paused = false
+	background_music.playing = true
 
 
 func _ready() -> void:
@@ -200,3 +208,9 @@ func _ready() -> void:
 	get_tree().connect("connection_failed", self, "_connected_fail")
 # warning-ignore:return_value_discarded
 	get_tree().connect("server_disconnected", self, "_server_disconnected")
+	
+	background_music = AudioStreamPlayer.new()
+	background_music.stream = load("res://Music/Medieval Fantasy RPG Pack/mp3/13 Boss - Apocalypse.mp3")
+	background_music.set_bus("Music")
+	add_child(background_music)
+	background_music.play()

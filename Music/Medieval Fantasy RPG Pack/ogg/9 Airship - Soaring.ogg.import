@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/9 Airship - Soaring.ogg-b589f029ce456d71aa19fec86373d699.oggstr"
+
+[deps]
+
+source_file="res://Music/Medieval Fantasy RPG Pack/ogg/9 Airship - Soaring.ogg"
+dest_files=[ "res://.import/9 Airship - Soaring.ogg-b589f029ce456d71aa19fec86373d699.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

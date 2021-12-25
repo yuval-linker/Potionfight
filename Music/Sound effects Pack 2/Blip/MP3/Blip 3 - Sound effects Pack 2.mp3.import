@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Blip 3 - Sound effects Pack 2.mp3-ac63499da75d5639eea889261327bf30.mp3str"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Blip/MP3/Blip 3 - Sound effects Pack 2.mp3"
+dest_files=[ "res://.import/Blip 3 - Sound effects Pack 2.mp3-ac63499da75d5639eea889261327bf30.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

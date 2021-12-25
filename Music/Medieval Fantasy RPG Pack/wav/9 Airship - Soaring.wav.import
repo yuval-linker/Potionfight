@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/9 Airship - Soaring.wav-2764d842b40b6818bf64d08074378ee6.sample"
+
+[deps]
+
+source_file="res://Music/Medieval Fantasy RPG Pack/wav/9 Airship - Soaring.wav"
+dest_files=[ "res://.import/9 Airship - Soaring.wav-2764d842b40b6818bf64d08074378ee6.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

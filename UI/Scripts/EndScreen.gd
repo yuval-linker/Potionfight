@@ -8,5 +8,6 @@ func _ready() -> void:
 	camera.current = true
 
 func _on_back_pressed():
+	$AudioStreamPlayer.stop()
 	get_tree().change_scene("res://UI/Scenes/Main.tscn")
 	Gamestate.end_game()

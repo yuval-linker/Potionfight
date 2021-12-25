@@ -7,10 +7,10 @@ export(int) var UPPER_TIME_RANGE = 20
 enum ItemTier {COMMON, RARE, EPIC, LEGENDARY}
 
 var identifiers = {
-	"COMMON": [], # 60%
-	"RARE": [], # 30%
-	"EPIC": [], # 10%
-	"LEGENDARY": []
+	"COMMON": [], # 50%
+	"RARE": [], # 25%
+	"EPIC": [], # 15%
+	"LEGENDARY": [] # 10%
 }
 
 onready var leftBoundary = $Left
@@ -38,12 +38,14 @@ func poblate_identifiers():
 func get_random_plant()->String:
 	var index: int = randi() % 100
 	var tier: String
-	if index < 60:
+	if index < 50:
 		tier = "COMMON"
-	elif index < 90:
+	elif index < 75:
 		tier = "RARE"
-	else:
+	elif index < 90:
 		tier = "EPIC"
+	else:
+		tier = "LEGENDARY"
 	var arr: Array = identifiers[tier]
 	var new_index: int = randi() % arr.size()
 	return arr[new_index]

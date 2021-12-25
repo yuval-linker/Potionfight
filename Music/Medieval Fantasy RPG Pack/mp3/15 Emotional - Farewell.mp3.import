@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/15 Emotional - Farewell.mp3-a54acf3f2d6d87fca952fe44abb427f9.mp3str"
+
+[deps]
+
+source_file="res://Music/Medieval Fantasy RPG Pack/mp3/15 Emotional - Farewell.mp3"
+dest_files=[ "res://.import/15 Emotional - Farewell.mp3-a54acf3f2d6d87fca952fe44abb427f9.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

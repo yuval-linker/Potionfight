@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/11 Dungeon - Crypt.ogg-cdb7cac0b2d4bbbe9ab8fa123e7e084e.oggstr"
+
+[deps]
+
+source_file="res://Music/Medieval Fantasy RPG Pack/ogg/11 Dungeon - Crypt.ogg"
+dest_files=[ "res://.import/11 Dungeon - Crypt.ogg-cdb7cac0b2d4bbbe9ab8fa123e7e084e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

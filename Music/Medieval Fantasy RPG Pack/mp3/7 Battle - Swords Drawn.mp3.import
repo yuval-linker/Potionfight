@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/7 Battle - Swords Drawn.mp3-ebd69f8a17bb419fb59c2d11efd3f261.mp3str"
+
+[deps]
+
+source_file="res://Music/Medieval Fantasy RPG Pack/mp3/7 Battle - Swords Drawn.mp3"
+dest_files=[ "res://.import/7 Battle - Swords Drawn.mp3-ebd69f8a17bb419fb59c2d11efd3f261.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

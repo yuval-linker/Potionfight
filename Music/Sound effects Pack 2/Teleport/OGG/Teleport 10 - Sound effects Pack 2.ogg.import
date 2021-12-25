@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Teleport 10 - Sound effects Pack 2.ogg-da15dae94eac6c6b1c5f3080abc9d1fe.oggstr"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Teleport/OGG/Teleport 10 - Sound effects Pack 2.ogg"
+dest_files=[ "res://.import/Teleport 10 - Sound effects Pack 2.ogg-da15dae94eac6c6b1c5f3080abc9d1fe.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

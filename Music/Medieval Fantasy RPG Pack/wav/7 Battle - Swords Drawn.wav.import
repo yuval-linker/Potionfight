@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/7 Battle - Swords Drawn.wav-b85668da61868866aea6ec9f4faeead8.sample"
+
+[deps]
+
+source_file="res://Music/Medieval Fantasy RPG Pack/wav/7 Battle - Swords Drawn.wav"
+dest_files=[ "res://.import/7 Battle - Swords Drawn.wav-b85668da61868866aea6ec9f4faeead8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

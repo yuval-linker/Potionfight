@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Laser-weapon 9 - Sound effects Pack 2.mp3-f44abc3067f8db7878572a3e645350d4.mp3str"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Laser-weapon/MP3/Laser-weapon 9 - Sound effects Pack 2.mp3"
+dest_files=[ "res://.import/Laser-weapon 9 - Sound effects Pack 2.mp3-f44abc3067f8db7878572a3e645350d4.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

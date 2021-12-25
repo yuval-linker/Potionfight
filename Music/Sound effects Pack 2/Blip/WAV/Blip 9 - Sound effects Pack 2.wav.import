@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Blip 9 - Sound effects Pack 2.wav-5e9adbd6d23aef4b40bac1ccf1a652fe.sample"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Blip/WAV/Blip 9 - Sound effects Pack 2.wav"
+dest_files=[ "res://.import/Blip 9 - Sound effects Pack 2.wav-5e9adbd6d23aef4b40bac1ccf1a652fe.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

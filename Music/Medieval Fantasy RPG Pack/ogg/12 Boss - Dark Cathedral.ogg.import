@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/12 Boss - Dark Cathedral.ogg-934f6c65a39bafc4c0a4dfadf5494612.oggstr"
+
+[deps]
+
+source_file="res://Music/Medieval Fantasy RPG Pack/ogg/12 Boss - Dark Cathedral.ogg"
+dest_files=[ "res://.import/12 Boss - Dark Cathedral.ogg-934f6c65a39bafc4c0a4dfadf5494612.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

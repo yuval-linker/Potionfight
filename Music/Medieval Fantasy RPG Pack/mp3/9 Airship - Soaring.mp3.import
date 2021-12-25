@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/9 Airship - Soaring.mp3-9dcd5b14b620da66d30991eadb2216b1.mp3str"
+
+[deps]
+
+source_file="res://Music/Medieval Fantasy RPG Pack/mp3/9 Airship - Soaring.mp3"
+dest_files=[ "res://.import/9 Airship - Soaring.mp3-9dcd5b14b620da66d30991eadb2216b1.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

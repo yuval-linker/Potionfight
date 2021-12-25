@@ -1,4 +1,4 @@
-[gd_scene load_steps=123 format=2]
+[gd_scene load_steps=124 format=2]
 
 [ext_resource path="res://Player/Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Assets/Chick-Boy_Full_Pack/Chick-Boy Full Pack/ChikBoy_jump.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Player/Assets/Chick-Boy_Full_Pack/Chick-Boy Full Pack/ChikBoy_attack_2.png" type="Texture" id=11]
 [ext_resource path="res://Particles/Scenes/StunParticles.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Player/Assets/Chick-Boy_Full_Pack/Chick-Boy Full Pack/ChikBoy_death_1.png" type="Texture" id=13]
+[ext_resource path="res://Music/Sound effects Pack 2/Blip/MP3/Blip 6 - Sound effects Pack 2.mp3" type="AudioStream" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3.39188, 2.66383 )
@@ -1497,6 +1498,10 @@ cast_to = Vector2( 0, -5 )
 
 [node name="DownCast" type="RayCast2D" parent="."]
 cast_to = Vector2( 0, 8 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+bus = "Effects"
 
 [connection signal="area_entered" from="DirectionNode/Punch" to="." method="_on_Punch_area_entered"]
 [connection signal="body_entered" from="DirectionNode/Punch" to="." method="_on_Punch_body_entered"]

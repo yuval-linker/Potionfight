@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Teleport 10 - Sound effects Pack 2.mp3-7065abd29a5c7c291d9b2968eb9e2704.mp3str"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Teleport/MP3/Teleport 10 - Sound effects Pack 2.mp3"
+dest_files=[ "res://.import/Teleport 10 - Sound effects Pack 2.mp3-7065abd29a5c7c291d9b2968eb9e2704.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

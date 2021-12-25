@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/7 Battle - Swords Drawn.ogg-bc02f378de56cf588268ddd6c28ef655.oggstr"
+
+[deps]
+
+source_file="res://Music/Medieval Fantasy RPG Pack/ogg/7 Battle - Swords Drawn.ogg"
+dest_files=[ "res://.import/7 Battle - Swords Drawn.ogg-bc02f378de56cf588268ddd6c28ef655.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/3 Overworld - Quiet Road.ogg-88f12f3e9135b684de9cbc274f26090e.oggstr"
+
+[deps]
+
+source_file="res://Music/Medieval Fantasy RPG Pack/ogg/3 Overworld - Quiet Road.ogg"
+dest_files=[ "res://.import/3 Overworld - Quiet Road.ogg-88f12f3e9135b684de9cbc274f26090e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

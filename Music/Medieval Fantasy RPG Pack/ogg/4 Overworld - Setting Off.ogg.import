@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/4 Overworld - Setting Off.ogg-28137914f01b6dfddf808d8626e442d1.oggstr"
+
+[deps]
+
+source_file="res://Music/Medieval Fantasy RPG Pack/ogg/4 Overworld - Setting Off.ogg"
+dest_files=[ "res://.import/4 Overworld - Setting Off.ogg-28137914f01b6dfddf808d8626e442d1.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

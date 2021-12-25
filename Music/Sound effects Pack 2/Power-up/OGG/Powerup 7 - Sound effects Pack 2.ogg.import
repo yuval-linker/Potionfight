@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Powerup 7 - Sound effects Pack 2.ogg-afbc60ebba6fe608ed25df2817111940.oggstr"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Power-up/OGG/Powerup 7 - Sound effects Pack 2.ogg"
+dest_files=[ "res://.import/Powerup 7 - Sound effects Pack 2.ogg-afbc60ebba6fe608ed25df2817111940.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

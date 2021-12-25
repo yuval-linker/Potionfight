@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Random 5 - Sound effects Pack 2.wav-3d25a7c69b2482d37060834466671eb3.sample"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Random/WAV/Random 5 - Sound effects Pack 2.wav"
+dest_files=[ "res://.import/Random 5 - Sound effects Pack 2.wav-3d25a7c69b2482d37060834466671eb3.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

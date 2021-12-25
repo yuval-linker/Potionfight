@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Lose 8 - Sound effects Pack 2.mp3-558071d87c1a2866fc8da6003fba4876.mp3str"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Lose/MP3/Lose 8 - Sound effects Pack 2.mp3"
+dest_files=[ "res://.import/Lose 8 - Sound effects Pack 2.mp3-558071d87c1a2866fc8da6003fba4876.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

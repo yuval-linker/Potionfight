@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Powerup 4 - Sound effects Pack 2.mp3-bb2b2420506d0c04d38ff4559b3c55be.mp3str"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Power-up/MP3/Powerup 4 - Sound effects Pack 2.mp3"
+dest_files=[ "res://.import/Powerup 4 - Sound effects Pack 2.mp3-bb2b2420506d0c04d38ff4559b3c55be.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

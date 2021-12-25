@@ -17,6 +17,7 @@ const EFFECTS = {
 	"Slow": preload("res://UI/Assets/Buffs_Debuffs/slow.png"),
 	"Fast": preload("res://UI/Assets/Buffs_Debuffs/speedy.png"),
 	"Stunned": preload("res://UI/Assets/Buffs_Debuffs/stun.png"),
+	"PoweredPunch": preload("res://UI/Assets/Buffs_Debuffs/powered_punch.png")
 }
 
 const EffectScene = preload("res://UI/Scenes/Effect.tscn")
@@ -30,6 +31,7 @@ const displayedEffects = {
 	"Slow": null,
 	"Fast": null,
 	"Stunned": null,
+	"PoweredPunch": null
 }
 
 onready var hpBar = $HpBar
@@ -55,10 +57,11 @@ func set_stock_lives(number: int):
 		for n in range(number, lives.get_child_count()):
 			lives.get_child(n).queue_free()
 
-func potion_popup()->void:
+func potion_popup(text: String)->void:
 	var new_popup = CraftedPopup.instance()
 	new_popup.position = craftedSpawn.position
 	add_child(new_popup)
+	new_popup.set_text(text)
 
 func set_equipped_potion(potion_id: String)->void:
 	var resource = EntityDatabase.get_entity("Potion", potion_id)["Resource"]

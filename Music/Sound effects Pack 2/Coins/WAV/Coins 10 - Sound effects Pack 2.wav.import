@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Coins 10 - Sound effects Pack 2.wav-3180ad689d7d612e7a3ef6fbc26ee09f.sample"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Coins/WAV/Coins 10 - Sound effects Pack 2.wav"
+dest_files=[ "res://.import/Coins 10 - Sound effects Pack 2.wav-3180ad689d7d612e7a3ef6fbc26ee09f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

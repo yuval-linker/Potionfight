@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/13 Boss - Apocalypse.wav-da8443973e409a5be1aae9ae21338e7f.sample"
+
+[deps]
+
+source_file="res://Music/Medieval Fantasy RPG Pack/wav/13 Boss - Apocalypse.wav"
+dest_files=[ "res://.import/13 Boss - Apocalypse.wav-da8443973e409a5be1aae9ae21338e7f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

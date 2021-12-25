@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Powerup 9 - Sound effects Pack 2.wav-aafe3218669baa7344d1d033ee8046f3.sample"
+
+[deps]
+
+source_file="res://Music/Sound effects Pack 2/Power-up/WAV/Powerup 9 - Sound effects Pack 2.wav"
+dest_files=[ "res://.import/Powerup 9 - Sound effects Pack 2.wav-aafe3218669baa7344d1d033ee8046f3.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
